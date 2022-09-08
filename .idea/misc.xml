@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Theo/Desktop/SC2006SCSEBuddy/app/src/main/res/layout/activity_main.xml" value="0.21557971014492755" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33106884057971014" />
       </map>
     </option>
@@ -13,5 +12,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.33106884057971014" />
+      </ProjectState>
+    </option>
   </component>
 </project>
