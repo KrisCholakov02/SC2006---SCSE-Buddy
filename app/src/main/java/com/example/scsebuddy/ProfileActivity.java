@@ -34,4 +34,8 @@ public class ProfileActivity extends AppCompatActivity {
         Intent intent = new Intent(v.getContext(),ProfileActivity.class);
         startActivity(intent);
     }
+    public void updateDetails (View v){
+        Intent intent = new Intent(v.getContext(),ChangeAccountDetailsActivity.class);
+        startActivity(intent);
+    }
 }

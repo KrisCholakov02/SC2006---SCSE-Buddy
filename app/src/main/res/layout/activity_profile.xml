@@ -128,14 +128,15 @@
                     android:textSize="15dp"/>
 
                 <Button
-                    android:id="@+id/button3"
+                    android:id="@+id/btnUpdateAccountDetails"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:text="what do i put?"
+                    android:text="Update Account Details"
                     android:layout_weight="15"
                     android:backgroundTint="@color/input_grey"
                     android:drawableLeft="@drawable/privacy_icon"
                     android:textColor="@color/custom_black"
+                    android:onClick="updateDetails"
                     android:textSize="15dp"/>
 
                 <Button
