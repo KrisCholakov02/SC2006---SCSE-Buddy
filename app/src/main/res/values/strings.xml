@@ -3,4 +3,10 @@
     <string name="skip_login">
         <u>Skip Login</u>
     </string>
+    <string name="forgot_password">
+        <u>Forgot Password?</u>
+    </string>
+    <string name="create_account">
+        <u>Create Account</u>
+    </string>
 </resources>

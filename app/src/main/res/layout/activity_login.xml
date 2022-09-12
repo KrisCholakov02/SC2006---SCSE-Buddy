@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -77,13 +77,12 @@
                     android:layout_height="match_parent"
                     android:layout_weight="70"
                     android:orientation="vertical"
-                    android:weightSum="100"
-                    >
+                    android:weightSum="100">
 
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="2.5"></FrameLayout>
+                        android:layout_weight="2.5" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -93,32 +92,31 @@
                         android:gravity="center"
                         android:text="Login"
                         android:textColor="@color/black"
-                        android:textSize="20pt"></TextView>
+                        android:textSize="20pt" />
 
                     <TextView
                         android:id="@+id/skipTextView"
                         android:layout_width="match_parent"
-                        android:layout_weight="8"
                         android:layout_height="0dp"
-                        android:clickable="true"
-                        android:gravity="center"
-                        android:fontFamily="@font/poppins_light"
-                        android:onClick="skipLogin"
                         android:layout_gravity="center"
+                        android:layout_weight="8"
+                        android:clickable="true"
+                        android:fontFamily="@font/poppins_light"
+                        android:gravity="center"
+                        android:onClick="skipLogin"
                         android:text="@string/skip_login"
                         android:textColor="@color/grey_text"
-                        android:textSize="5pt"
-                        tools:ignore="TouchTargetSizeCheck"></TextView>
+                        android:textSize="7pt"
+                        tools:ignore="TouchTargetSizeCheck" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="6"
-                        android:textSize="7pt"
-                        android:text="EMAIL"
                         android:fontFamily="@font/poppins_medium"
+                        android:text="EMAIL"
                         android:textColor="@color/grey_text"
-                        ></TextView>
+                        android:textSize="7pt" />
 
                     <EditText
                         android:id="@+id/editTextEmail"
@@ -127,79 +125,85 @@
                         android:layout_weight="10"
                         android:background="@drawable/text_input_design"
                         android:ems="10"
+                        android:paddingLeft="3pt"
+                        android:text="email"
                         android:fontFamily="@font/poppins_medium"
-                        android:inputType="textPassword" />
+                        android:inputType="textEmailAddress" />
 
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="3"></FrameLayout>
+                        android:layout_weight="3" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="6"
-                        android:textSize="7pt"
-                        android:text="PASSWORD"
-
                         android:fontFamily="@font/poppins_medium"
+                        android:text="PASSWORD"
                         android:textColor="@color/grey_text"
-                        ></TextView>
+                        android:textSize="7pt" />
 
                     <EditText
                         android:id="@+id/editTextPassword"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="10"
+                        android:paddingLeft="3pt"
+                        android:text="password"
                         android:background="@drawable/text_input_design"
                         android:ems="10"
-
                         android:fontFamily="@font/poppins_medium"
                         android:inputType="textPassword" />
 
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="5"></FrameLayout>
+                        android:layout_weight="5" />
 
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:text="Log In"
-                        android:textColor="@color/white"
-
+                        android:layout_weight="15"
                         android:fontFamily="@font/poppins_medium"
-                        android:layout_weight="15"></Button>
+                        android:text="Log In"
+                        android:textColor="@color/white" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="5" />
 
                     <TextView
                         android:id="@+id/forgotPasswordTextView"
                         android:layout_width="match_parent"
-                        android:layout_weight="5"
                         android:layout_height="0dp"
-                        android:clickable="true"
-                        android:gravity="center"
-                        android:fontFamily="@font/poppins_light"
-                        android:onClick="skipLogin"
                         android:layout_gravity="center"
-                        android:text="@string/skip_login"
+                        android:layout_weight="5"
+                        android:clickable="true"
+                        android:fontFamily="@font/poppins_light"
+                        android:gravity="center"
+                        android:onClick="skipLogin"
+                        android:text="@string/forgot_password"
                         android:textColor="@color/grey_text"
-                        android:textSize="5pt"
-                        tools:ignore="TouchTargetSizeCheck"></TextView>
+                        android:textSize="7pt"
+                        tools:ignore="TouchTargetSizeCheck"
+                        android:layout_marginBottom="3pt"/>
 
                     <TextView
                         android:id="@+id/createAccountTextView"
                         android:layout_width="match_parent"
-                        android:layout_weight="5"
                         android:layout_height="0dp"
-                        android:clickable="true"
-                        android:gravity="center"
-                        android:fontFamily="@font/poppins_light"
-                        android:onClick="skipLogin"
                         android:layout_gravity="center"
-                        android:text="@string/skip_login"
+                        android:layout_weight="5"
+                        android:clickable="true"
+                        android:fontFamily="@font/poppins_light"
+                        android:gravity="center"
+                        android:onClick="skipLogin"
+                        android:text="@string/create_account"
                         android:textColor="@color/grey_text"
-                        android:textSize="5pt"
-                        tools:ignore="TouchTargetSizeCheck"></TextView>
+                        android:textSize="7pt"
+                        tools:ignore="TouchTargetSizeCheck" />
 
                 </LinearLayout>
 

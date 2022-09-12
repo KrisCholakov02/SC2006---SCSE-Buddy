@@ -4,29 +4,34 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.os.Bundle;
 import android.view.Window;
 
-public class MainActivity extends AppCompatActivity {
-//8F8E8E
+public class LoginActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
+
     }
 
     public void skipLogin (View v) {
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(LoginActivity.this);
         builder1.setMessage("Are you sure you don't want to log in?");
         builder1.setCancelable(true);
+
 
         builder1.setPositiveButton(
                 "Yes",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
+                        Intent intent = new Intent(v.getContext(), MapActivity.class);
+                        startActivity(intent);
                     }
                 });
 
