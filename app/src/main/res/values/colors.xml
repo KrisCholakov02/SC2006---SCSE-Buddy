@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="input_grey">#8F8E8E</color>
+    <colour name="custom_black">1C2120</colour>
 </resources>
