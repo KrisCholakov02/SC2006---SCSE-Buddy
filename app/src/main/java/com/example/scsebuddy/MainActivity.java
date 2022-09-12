@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void skipLogin (View v) {
         AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
-        builder1.setMessage("Write your message here.");
+        builder1.setMessage("Are you sure you don't want to log in?");
         builder1.setCancelable(true);
 
         builder1.setPositiveButton(
