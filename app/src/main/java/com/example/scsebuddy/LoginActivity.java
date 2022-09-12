@@ -51,4 +51,14 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(v.getContext(), ForgetPwActivity.class);
         startActivity(intent);
     }
+
+    public void createAcc (View v){
+        Intent intent = new Intent(v.getContext(),CreateAccountActivity.class);
+        startActivity(intent);
+    }
+
+    public void loginAcc (View v){
+        Intent intent = new Intent(v.getContext(),MapActivity.class);
+        startActivity(intent);
+    }
 }

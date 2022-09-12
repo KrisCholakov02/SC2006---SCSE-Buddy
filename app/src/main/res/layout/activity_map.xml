@@ -106,7 +106,7 @@
                 android:drawableTop="@drawable/map"
                 android:backgroundTint="@color/white"
                 style="?android:attr/borderlessButtonStyle"
-                />
+                android:onClick="mapScreen"/>
 
             <Button
                 android:id="@+id/btnCourse"
@@ -118,7 +118,7 @@
                 android:drawableTop="@drawable/course"
                 android:backgroundTint="@color/white"
                 style="?android:attr/borderlessButtonStyle"
-                />
+                android:onClick="courseScreen"/>
 
             <Button
                 android:id="@+id/btnForum"
@@ -130,7 +130,7 @@
                 android:drawableTop="@drawable/forum"
                 android:backgroundTint="@color/white"
                 style="?android:attr/borderlessButtonStyle"
-                />
+                android:onClick="forumScreen"/>
 
             <Button
                 android:id="@+id/btnProfile"
@@ -141,7 +141,8 @@
                 android:textColor="@color/custom_black"
                 android:drawableTop="@drawable/profile"
                 android:backgroundTint="@color/white"
-                style="?android:attr/borderlessButtonStyle" />
+                style="?android:attr/borderlessButtonStyle"
+                android:onClick="profileScreen"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

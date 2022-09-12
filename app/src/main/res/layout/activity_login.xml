@@ -167,6 +167,7 @@
                         android:layout_weight="15"
                         android:fontFamily="@font/poppins_medium"
                         android:text="Log In"
+                        android:onClick="loginAcc"
                         android:textColor="@color/white" />
 
                     <FrameLayout
@@ -199,7 +200,7 @@
                         android:clickable="true"
                         android:fontFamily="@font/poppins_light"
                         android:gravity="center"
-                        android:onClick="skipLogin"
+                        android:onClick="createAcc"
                         android:text="@string/create_account"
                         android:textColor="@color/grey_text"
                         android:textSize="7pt"
