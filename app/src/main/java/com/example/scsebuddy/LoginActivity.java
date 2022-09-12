@@ -46,4 +46,9 @@ public class LoginActivity extends AppCompatActivity {
         AlertDialog alert11 = builder1.create();
         alert11.show();
     }
+
+    public void forgetPW (View v) {
+        Intent intent = new Intent(v.getContext(), ForgetPwActivity.class);
+        startActivity(intent);
+    }
 }
