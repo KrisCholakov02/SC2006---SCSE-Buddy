@@ -92,6 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="15"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <Button
@@ -100,6 +101,7 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:text="Map"
+                android:textColor="@color/custom_black"
                 android:drawableTop="@drawable/map"
                 android:backgroundTint="@color/white"
                 />
@@ -109,6 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
+                android:textColor="@color/custom_black"
                 android:text="Course"
                 android:drawableTop="@drawable/course"
                 android:backgroundTint="@color/white"
@@ -120,6 +123,7 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:text="Forum"
+                android:textColor="@color/custom_black"
                 android:drawableTop="@drawable/forum"
                 android:backgroundTint="@color/white"
                 />
@@ -130,6 +134,7 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:text="Profile"
+                android:textColor="@color/custom_black"
                 android:drawableTop="@drawable/profile"
                 android:backgroundTint="@color/white"/>
         </LinearLayout>
