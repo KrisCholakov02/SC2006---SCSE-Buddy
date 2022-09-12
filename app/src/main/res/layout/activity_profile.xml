@@ -153,7 +153,7 @@
                     android:id="@+id/txtLogOut"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:text="TextView"
+                    android:text="Logout"
                     android:layout_weight="10"
                     android:textSize="20dp"
                     android:gravity="center"/>
