@@ -10,5 +10,75 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"></LinearLayout>
+        android:orientation="vertical"
+        android:weightSum="100"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="85">
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="15"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <Button
+                android:id="@+id/btnMap"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"
+                android:drawableTop="@drawable/map"
+                android:onClick="mapScreen"
+                android:text="Map"
+                android:textColor="@color/custom_black" />
+
+            <Button
+                android:id="@+id/btnCourse"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"
+                android:drawableTop="@drawable/course"
+                android:onClick="courseScreen"
+                android:text="Course"
+                android:textColor="@color/custom_black" />
+
+            <Button
+                android:id="@+id/btnForum"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"
+                android:drawableTop="@drawable/forum"
+                android:onClick="forumScreen"
+                android:text="Forum"
+                android:textColor="@color/custom_black" />
+
+            <Button
+                android:id="@+id/btnProfile"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"
+                android:drawableTop="@drawable/profile"
+                android:onClick="profileScreen"
+                android:text="Profile"
+                android:textColor="@color/custom_black" />
+        </LinearLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
