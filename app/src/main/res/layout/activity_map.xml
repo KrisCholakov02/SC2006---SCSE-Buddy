@@ -105,6 +105,7 @@
                 android:textColor="@color/custom_black"
                 android:drawableTop="@drawable/map"
                 android:backgroundTint="@color/white"
+                style="?android:attr/borderlessButtonStyle"
                 />
 
             <Button
@@ -116,6 +117,7 @@
                 android:text="Course"
                 android:drawableTop="@drawable/course"
                 android:backgroundTint="@color/white"
+                style="?android:attr/borderlessButtonStyle"
                 />
 
             <Button
@@ -127,6 +129,7 @@
                 android:textColor="@color/custom_black"
                 android:drawableTop="@drawable/forum"
                 android:backgroundTint="@color/white"
+                style="?android:attr/borderlessButtonStyle"
                 />
 
             <Button
@@ -137,7 +140,8 @@
                 android:text="Profile"
                 android:textColor="@color/custom_black"
                 android:drawableTop="@drawable/profile"
-                android:backgroundTint="@color/white"/>
+                android:backgroundTint="@color/white"
+                style="?android:attr/borderlessButtonStyle" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
