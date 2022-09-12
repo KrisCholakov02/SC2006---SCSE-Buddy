@@ -22,6 +22,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="60"
+            android:orientation="horizontal"
             android:weightSum="100">
 
             <FrameLayout
@@ -51,7 +52,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="40"
-            android:background="@drawable/layout_login"
+            android:background="@drawable/login_layout"
+            android:gravity="center"
             android:orientation="vertical"
             android:weightSum="100">
 
@@ -62,26 +64,98 @@
 
             </FrameLayout>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="15"
-                android:text="Login"
-                android:gravity="center"
-                android:fontFamily="@font/aileron_heavy"
-                android:textSize="20pt"
-                android:textColor="@color/black"></TextView>
+                android:layout_weight="80"
+                android:orientation="horizontal"
+                android:weightSum="100">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="5"
-                android:clickable="true"
-                android:fontFamily="@font/poppins_light"
-                android:gravity="center"
-                android:text="Skip Login"
-                android:textColor="@color/black"
-                android:textSize="5pt"></TextView>
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="15">
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="70"
+                    android:orientation="vertical"
+                    android:weightSum="100"
+                    >
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="10"></FrameLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="15"
+                        android:fontFamily="@font/aileron_heavy"
+                        android:gravity="center"
+                        android:text="Login"
+                        android:textColor="@color/black"
+                        android:textSize="20pt"></TextView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="10"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="30"></FrameLayout>
+
+                        <TextView
+                            android:id="@+id/skipTextView"
+                            android:layout_width="0dp"
+                            android:layout_weight="40"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:fontFamily="@font/poppins_light"
+                            android:onClick="skipLogin"
+                            android:layout_gravity="center"
+                            android:text="@string/skip_login"
+                            android:textColor="@color/black"
+                            android:textSize="5pt"
+                            tools:ignore="TouchTargetSizeCheck"></TextView>
+
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="30"></FrameLayout>
+
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/editTextTextPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="10"
+                        android:background="@drawable/text_input_design"
+                        android:ems="10"
+                        android:inputType="textPassword" />
+
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="15">
+
+                </FrameLayout>
+
+            </LinearLayout>
+
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
