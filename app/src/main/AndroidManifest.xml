@@ -17,6 +17,9 @@
             android:name=".ChangeAccountDetailsActivity"
             android:exported="false" />
         <activity
+            android:name=".CreateAccountActivity"
+            android:exported="false" />
+        <activity
             android:name=".ChangePwActivity"
             android:exported="false" />
         <activity
