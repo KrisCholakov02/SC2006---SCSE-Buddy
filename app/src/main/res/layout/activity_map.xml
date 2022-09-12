@@ -93,11 +93,12 @@
             android:layout_height="0dp"
             android:layout_weight="15"
             android:background="@color/white"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="4">
 
             <Button
                 android:id="@+id/btnMap"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:text="Map"
@@ -108,7 +109,7 @@
 
             <Button
                 android:id="@+id/btnCourse"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:textColor="@color/custom_black"
@@ -119,7 +120,7 @@
 
             <Button
                 android:id="@+id/btnForum"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:text="Forum"
@@ -130,7 +131,7 @@
 
             <Button
                 android:id="@+id/btnProfile"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:text="Profile"
