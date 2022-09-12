@@ -20,10 +20,11 @@
         android:id="@+id/imageView4"
         android:layout_width="916dp"
         android:layout_height="922dp"
+        android:layout_marginTop="152dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/copy_of_sc2006_jkt_ui_mockup__2_" />
+        app:srcCompat="@drawable/create_account_background" />
 
     <Button
         android:id="@+id/button"
