@@ -101,14 +101,17 @@
                 android:layout_weight="1"
                 android:text="Map"
                 android:drawableTop="@drawable/map"
-                android:backgroundTint="@color/white"/>
+                android:backgroundTint="@color/white"
+                />
 
             <Button
                 android:id="@+id/btnCourse"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="Button"
+                android:text="Course"
+                android:drawableTop="@drawable/course"
+                android:backgroundTint="@color/white"
                 />
 
             <Button
@@ -116,14 +119,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:text="Button"
+                android:drawableTop="@drawable/forum"
+                android:backgroundTint="@color/white"
+                />
 
             <Button
                 android:id="@+id/btnProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:text="Button"
+                android:drawableTop="@drawable/profile"
+                android:backgroundTint="@color/white"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
