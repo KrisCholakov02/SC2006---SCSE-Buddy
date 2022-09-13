@@ -45,7 +45,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="40"
-                tools:srcCompat="@tools:sample/avatars" />
+                android:src="@drawable/profile" />
 
             <FrameLayout
                 android:layout_width="0dp"
@@ -147,7 +147,8 @@
                     android:backgroundTint="@color/input_grey"
                     android:drawableLeft="@drawable/faq_icon"
                     android:textColor="@color/custom_black"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp"
+                    android:onClick="openFAQs"/>
 
                 <TextView
                     android:id="@+id/txtLogOut"

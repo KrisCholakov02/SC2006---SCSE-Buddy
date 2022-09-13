@@ -14,6 +14,16 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
     }
 
+    public void updateDetails (View v){
+        Intent intent = new Intent(v.getContext(),ChangeAccountDetailsActivity.class);
+        startActivity(intent);
+    }
+    public void openFAQs (View v){
+        Intent intent = new Intent(v.getContext(), FAQActivity.class);
+        startActivity(intent);
+    }
+
+
     //Bottom buttons
     public void mapScreen (View v){
         Intent intent = new Intent(v.getContext(),MapActivity.class);
@@ -32,10 +42,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void profileScreen (View v){
         Intent intent = new Intent(v.getContext(),ProfileActivity.class);
-        startActivity(intent);
-    }
-    public void updateDetails (View v){
-        Intent intent = new Intent(v.getContext(),ChangeAccountDetailsActivity.class);
         startActivity(intent);
     }
 }
