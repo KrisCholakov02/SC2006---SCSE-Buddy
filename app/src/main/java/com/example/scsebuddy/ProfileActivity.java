@@ -44,6 +44,17 @@ public class ProfileActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void logoutTextView (View v){
+        SharedPreferences sh = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sh.edit();
+        editor.putString("USER_F_NAME", null);
+        editor.putString("USER_L_NAME", null);
+        editor.putString("USER_EMAIL", null);
+        editor.commit();
+
+        Intent intent = new Intent(v.getContext(),LoginActivity.class);
+        startActivity(intent);
+    }
 
     //Bottom buttons
     public void mapScreen (View v){

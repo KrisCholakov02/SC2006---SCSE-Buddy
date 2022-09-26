@@ -91,12 +91,12 @@
                     android:text="TextView"
                     android:gravity="center"
                     android:textSize="15dp"
-                    android:layout_weight="5"/>
+                    android:layout_weight="10"/>
 
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="10"/>
+                    android:layout_weight="5"/>
 
                 <TextView
                     android:id="@+id/txtSettings"
@@ -149,7 +149,9 @@
                     android:text="Logout"
                     android:layout_weight="10"
                     android:textSize="20dp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:onClick="logoutTextView"/>
 
             </LinearLayout>
 
