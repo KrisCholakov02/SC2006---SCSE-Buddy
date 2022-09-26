@@ -93,7 +93,9 @@
                         android:layout_weight="40"
                         android:gravity="start"
                         android:textSize="10dp"
-                        android:text="Login Here." />
+                        android:text="Login Here."
+                        android:onClick="loginTextView"
+                        android:clickable="true"/>
 
                     <androidx.fragment.app.FragmentContainerView
                         android:layout_width="0dp"
