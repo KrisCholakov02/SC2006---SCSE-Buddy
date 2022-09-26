@@ -69,6 +69,22 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
+
+        this.findViewById(R.id.forgotPasswordTextView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ForgetPwActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        this.findViewById(R.id.createAccountTextView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), CreateAccountActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void skipLogin (View v) {
