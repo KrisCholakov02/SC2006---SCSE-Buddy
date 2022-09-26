@@ -3,8 +3,10 @@ package com.example.scsebuddy;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -41,6 +43,8 @@ public class LoginActivity extends AppCompatActivity {
         this.findViewById(R.id.loginButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+
                 HashMap<String, String> map = new HashMap<>();
                 EditText emailInput = findViewById(R.id.editTextEmail);
                 EditText passwordInput = findViewById(R.id.editTextPassword);
@@ -55,6 +59,22 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
                         if (response.code() == 200) {
+                            LoginResult result = response.body();
+
+                            String fName = result.getfName();
+                            String lName = result.getlName();
+                            String email = result.getEmail();
+
+                            System.out.println(fName);
+                            System.out.println(lName);
+                            System.out.println(email);
+
+                            SharedPreferences.Editor editor = sp.edit();
+                            editor.putString("USER_F_NAME", fName);
+                            editor.putString("USER_L_NAME", lName);
+                            editor.putString("USER_EMAIL", email);
+                            editor.commit();
+
                             Intent intent = new Intent(v.getContext(), MapActivity.class);
                             startActivity(intent);
                         } else if (response.code() == 404) {
