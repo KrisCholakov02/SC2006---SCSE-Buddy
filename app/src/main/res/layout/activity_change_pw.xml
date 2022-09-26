@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ForgetPwActivity"
+    tools:context=".ChangePwActivity"
     android:background="@drawable/background_with_white_overlay">
 
     <LinearLayout
@@ -54,27 +54,22 @@
                     android:layout_weight="15"
                     android:fontFamily="@font/aileron_heavy"
                     android:gravity="center"
-                    android:text="Forget Password"
+                    android:text="Change Password"
                     android:textColor="@color/black"
                     android:textSize="15pt" />
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="5">
 
-                </FrameLayout>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="6"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="EMAIL"
+                    android:text="OLD PASSWORD"
                     android:textColor="@color/grey_text"
                     android:textSize="7pt" />
 
                 <EditText
-                    android:id="@+id/editTextEmail"
+                    android:id="@+id/txtOldPW"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="10"
@@ -83,12 +78,52 @@
                     android:paddingLeft="3pt"
                     android:text="email"
                     android:fontFamily="@font/poppins_medium"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="textPassword" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="6"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="NEW PASSWORD"
+                    android:textColor="@color/grey_text"
+                    android:textSize="7pt" />
 
+                <EditText
+                    android:id="@+id/txtNewPw"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="10"
+                    android:background="@drawable/text_input_design"
+                    android:ems="10"
+                    android:paddingLeft="3pt"
+                    android:text="email"
+                    android:fontFamily="@font/poppins_medium"
+                    android:inputType="textPassword" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="6"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="RE-ENTER NEW PASSWORD"
+                    android:textColor="@color/grey_text"
+                    android:textSize="7pt" />
+
+                <EditText
+                    android:id="@+id/txtReNewPw"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="10"
+                    android:background="@drawable/text_input_design"
+                    android:ems="10"
+                    android:paddingLeft="3pt"
+                    android:text="email"
+                    android:fontFamily="@font/poppins_medium"
+                    android:inputType="textPassword" />
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="20"/>
+                    android:layout_weight="5"/>
 
                 <Button
                     android:id="@+id/btnResetPw"
@@ -96,7 +131,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="15"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Reset Password"
+                    android:text="Change Password"
                     android:textColor="@color/white" />
 
             </LinearLayout>

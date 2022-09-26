@@ -4,112 +4,225 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
-    int gray = Color.rgb(236, 236, 236);
+    tools:context=".ProfileActivity"
+    android:background="@drawable/background_with_white_overlay">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="743dp"
-        android:layout_height="913dp"
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/background" />
+        android:weightSum="105">
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="916dp"
-        android:layout_height="922dp"
-        android:layout_marginTop="152dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/create_account_background" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="280dp"
-        android:layout_height="55dp"
-        android:backgroundTint="#ECECEC"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Account"
-        android:textAlignment="textStart"
-        android:textAllCaps="false"
-        android:textColor="#2a364e"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="319dp" />
+        </FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="25"
+            android:weightSum="100">
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="280dp"
-        android:layout_height="55dp"
-        android:backgroundTint="#ECECEC"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Privacy and Security "
-        android:textAlignment="textStart"
-        android:textAllCaps="false"
-        android:textColor="#2a364e"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="30">
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="280dp"
-        android:layout_height="55dp"
-        android:backgroundTint="#ECECEC"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Appearance "
-        android:textAlignment="textStart"
-        android:textAllCaps="false"
-        android:textColor="#2a364e"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+            </FrameLayout>
 
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="280dp"
-        android:layout_height="55dp"
-        android:backgroundTint="#ECECEC"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Language "
-        android:textAlignment="textStart"
-        android:textAllCaps="false"
-        android:textColor="#2a364e"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3"
-        android:drawableLeft="@drawable/language_icon"/>
+            <ImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="40"
+                android:src="@drawable/profile" />
 
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="280dp"
-        android:layout_height="55dp"
-        android:backgroundTint="#ECECEC"
-        android:fontFamily="@font/poppins_bold"
-        android:text="FAQs"
-        android:textAlignment="textStart"
-        android:textAllCaps="false"
-        android:textColor="#2a364e"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="30">
+            </FrameLayout>
+        </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="133dp"
-        tools:layout_editor_absoluteY="88dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="60"
+            android:weightSum="100">
 
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="10">
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="80"
+                android:weightSum="105">
+
+                <TextView
+                    android:id="@+id/txtName"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:textSize="50dp"
+                    android:text="TextView"
+                    android:gravity="center"
+                    android:layout_weight="20"/>
+
+                <TextView
+                    android:id="@+id/txtUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:text="TextView"
+                    android:gravity="center"
+                    android:textSize="15dp"
+                    android:layout_weight="5"/>
+
+                <TextView
+                    android:id="@+id/txtEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:text="TextView"
+                    android:gravity="center"
+                    android:textSize="15dp"
+                    android:layout_weight="5"/>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="10"/>
+
+                <TextView
+                    android:id="@+id/txtSettings"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:text="Settings"
+                    android:textSize="15dp"
+                    android:gravity="center"
+                    android:layout_weight="10"/>
+
+                <Button
+                    android:id="@+id/btnAccountDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:text="Account Details"
+                    android:layout_weight="15"
+                    android:drawableLeft="@drawable/account_icon"
+                    android:textColor="@color/custom_black"
+                    android:backgroundTint="@color/input_grey"
+                    android:textSize="15dp"/>
+
+                <Button
+                    android:id="@+id/btnUpdateAccountDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:text="Update Account Details"
+                    android:layout_weight="15"
+                    android:backgroundTint="@color/input_grey"
+                    android:drawableLeft="@drawable/privacy_icon"
+                    android:textColor="@color/custom_black"
+                    android:onClick="updateDetails"
+                    android:textSize="15dp"/>
+
+                <Button
+                    android:id="@+id/btnFAQs"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:text="FAQs"
+                    android:layout_weight="15"
+                    android:backgroundTint="@color/input_grey"
+                    android:drawableLeft="@drawable/faq_icon"
+                    android:textColor="@color/custom_black"
+                    android:textSize="15dp"
+                    android:onClick="openFAQs"/>
+
+                <TextView
+                    android:id="@+id/txtLogOut"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:text="Logout"
+                    android:layout_weight="10"
+                    android:textSize="20dp"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="10">
+
+            </FrameLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="15"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <Button
+                android:id="@+id/btnMap"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:text="Map"
+                android:textColor="@color/custom_black"
+                android:drawableTop="@drawable/map"
+                android:backgroundTint="@color/white"
+                style="?android:attr/borderlessButtonStyle"
+                android:onClick="mapScreen"/>
+
+            <Button
+                android:id="@+id/btnCourse"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:textColor="@color/custom_black"
+                android:text="Course"
+                android:drawableTop="@drawable/course"
+                android:backgroundTint="@color/white"
+                style="?android:attr/borderlessButtonStyle"
+                android:onClick="courseScreen"/>
+
+            <Button
+                android:id="@+id/btnForum"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:text="Forum"
+                android:textColor="@color/custom_black"
+                android:drawableTop="@drawable/forum"
+                android:backgroundTint="@color/white"
+                style="?android:attr/borderlessButtonStyle"
+                android:onClick="forumScreen"/>
+
+            <Button
+                android:id="@+id/btnProfile"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:text="Profile"
+                android:textColor="@color/custom_black"
+                android:drawableTop="@drawable/profile"
+                android:backgroundTint="@color/white"
+                style="?android:attr/borderlessButtonStyle"
+                android:onClick="profileScreen"/>
+        </LinearLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

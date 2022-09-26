@@ -4,13 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ForgetPwActivity"
+    tools:context=".ChangeAccountDetailsActivity"
     android:background="@drawable/background_with_white_overlay">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:weightSum="100">
 
         <FrameLayout
@@ -23,14 +27,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="80"
             android:orientation="horizontal"
+            android:layout_weight="80"
             android:weightSum="100">
 
             <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="10">
+                android:layout_weight="15">
 
             </FrameLayout>
 
@@ -38,7 +42,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_weight="80"
+                android:layout_weight="70"
                 android:weightSum="100">
 
                 <FrameLayout
@@ -49,20 +53,36 @@
                 </FrameLayout>
 
                 <TextView
+                    android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="15"
-                    android:fontFamily="@font/aileron_heavy"
+                    android:text="Update Account Details"
+                    android:layout_weight="10"
+                    android:textSize="20dp"
                     android:gravity="center"
-                    android:text="Forget Password"
-                    android:textColor="@color/black"
-                    android:textSize="15pt" />
-                <FrameLayout
+                    android:fontFamily="@font/aileron_black"/>
+
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="5">
+                    android:layout_weight="6"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="NAME"
+                    android:textColor="@color/grey_text"
+                    android:textSize="7pt" />
 
-                </FrameLayout>
+                <EditText
+                    android:id="@+id/txtName"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="10"
+                    android:paddingLeft="3pt"
+                    android:text="Name"
+                    android:background="@drawable/text_input_design"
+                    android:ems="10"
+                    android:fontFamily="@font/poppins_medium"
+                    android:inputType="text" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -74,42 +94,58 @@
                     android:textSize="7pt" />
 
                 <EditText
-                    android:id="@+id/editTextEmail"
+                    android:id="@+id/txtEmail"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="10"
+                    android:paddingLeft="3pt"
+                    android:text="Email"
                     android:background="@drawable/text_input_design"
                     android:ems="10"
-                    android:paddingLeft="3pt"
-                    android:text="email"
                     android:fontFamily="@font/poppins_medium"
                     android:inputType="textEmailAddress" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="6"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="YEAR OF STUDY"
+                    android:textColor="@color/grey_text"
+                    android:textSize="7pt" />
+
+                <EditText
+                    android:id="@+id/txtYrOfStudy"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="10"
+                    android:paddingLeft="3pt"
+                    android:text="Year"
+                    android:background="@drawable/text_input_design"
+                    android:ems="10"
+                    android:fontFamily="@font/poppins_medium"
+                    android:inputType="number" />
 
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="20"/>
+                    android:layout_weight="3"/>
 
                 <Button
-                    android:id="@+id/btnResetPw"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="15"
+                    android:layout_weight="10"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Reset Password"
+                    android:text="Update Details"
                     android:textColor="@color/white" />
-
             </LinearLayout>
 
             <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="10">
+                android:layout_weight="15">
 
             </FrameLayout>
-
-
         </LinearLayout>
-
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
