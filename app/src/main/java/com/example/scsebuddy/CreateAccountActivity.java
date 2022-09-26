@@ -42,10 +42,10 @@ public class CreateAccountActivity extends AppCompatActivity {
                 EditText passwordInput = findViewById(R.id.passwordEditText);
                 EditText fNameInput = findViewById(R.id.firstNameEditText);
                 EditText lNameInput = findViewById(R.id.lastNameEditText);
-                String email = emailInput.getText().toString();
-                String password = passwordInput.getText().toString();
-                String fName = fNameInput.getText().toString();
-                String lName = lNameInput.getText().toString();
+                String email = emailInput.getText().toString().trim();
+                String password = passwordInput.getText().toString().trim();
+                String fName = fNameInput.getText().toString().trim();
+                String lName = lNameInput.getText().toString().trim();
                 map.put("email", email);
                 map.put("password", password);
                 map.put("fName", fName);
