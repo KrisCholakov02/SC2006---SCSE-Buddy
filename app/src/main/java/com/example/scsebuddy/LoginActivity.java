@@ -97,9 +97,4 @@ public class LoginActivity extends AppCompatActivity {
         AlertDialog alert11 = builder1.create();
         alert11.show();
     }
-
-    public void handleLogin() {
-        View view = getLayoutInflater().inflate(R.layout.activity_login, null);
-
-    }
 }
