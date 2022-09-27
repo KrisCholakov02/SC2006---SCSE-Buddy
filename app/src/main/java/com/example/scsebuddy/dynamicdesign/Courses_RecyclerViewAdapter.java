@@ -1,6 +1,7 @@
 package com.example.scsebuddy.dynamicdesign;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.scsebuddy.CourseViewActivity;
 import com.example.scsebuddy.R;
 import com.example.scsebuddy.requestsresults.Course;
 
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 
 public class Courses_RecyclerViewAdapter extends RecyclerView.Adapter<Courses_RecyclerViewAdapter.MyViewHolder> {
     Context context;
+    static Context context1;
     ArrayList<Course> courses;
 
     public Courses_RecyclerViewAdapter(Context context, ArrayList<Course> courses) {
@@ -51,18 +54,27 @@ public class Courses_RecyclerViewAdapter extends RecyclerView.Adapter<Courses_Re
         return courses.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView courseCodeTextView, courseTitleTextView, ausTextView;
         ImageView favouriteImageView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
+            context1 = itemView.getContext();
 
             favouriteImageView = itemView.findViewById(R.id.favouriteImageView);
             courseCodeTextView = itemView.findViewById(R.id.courseCodeTextView);
             courseTitleTextView = itemView.findViewById(R.id.courseTitleTextView);
             ausTextView = itemView.findViewById(R.id.ausTextView);
+        }
+
+        @Override
+        public void onClick(View view) {
+            final Intent intent;
+            intent = new Intent(context1,CourseViewActivity.class);
+            context1.startActivity(intent);
         }
     }
 }
