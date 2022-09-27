@@ -1,19 +1,45 @@
 package com.example.scsebuddy;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.example.scsebuddy.dynamicdesign.Course_RecyclerViewAdapter;
+import com.example.scsebuddy.requestsresults.ConstantVariables;
+import com.example.scsebuddy.requestsresults.Course;
+import com.example.scsebuddy.requestsresults.CoursesResult;
+import com.example.scsebuddy.requestsresults.RetrofitInterface;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CourseActivity extends AppCompatActivity {
+    private Retrofit retrofit;
+    private RetrofitInterface retrofitInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
+
+        SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
 
         Spinner sortOrderSpinner = this.findViewById(R.id.sortOrderSpinner);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.sorting_order_spinner_content, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
@@ -24,6 +50,46 @@ public class CourseActivity extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.sorting_by_spinner_content, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         adapter2.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         sortBySpinner.setAdapter(adapter2);
+
+        retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
+        retrofitInterface = retrofit.create(RetrofitInterface.class);
+
+        HashMap<String, String> map = new HashMap<>();
+        String email = sp.getString("USER_EMAIL", null);
+        map.put("email", email);
+
+        Context context = this;
+
+        Call<CoursesResult> getAllCourses = retrofitInterface.executeAllCourses(map);
+
+        getAllCourses.enqueue(new Callback<CoursesResult>() {
+            @Override
+            public void onResponse(Call<CoursesResult> call, Response<CoursesResult> response) {
+                if (response.code() == 200) {
+                    CoursesResult coursesR = response.body();
+
+                    ArrayList<Course> courses = new ArrayList<>(Arrays.asList(coursesR.getCourses()));
+
+                    RecyclerView coursesRecyclerView = findViewById(R.id.coursesRecycleView);
+
+                    Course_RecyclerViewAdapter adapter = new Course_RecyclerViewAdapter(context, courses);
+                    coursesRecyclerView.setAdapter(adapter);
+                    coursesRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+                } else if (response.code() == 404) {
+                    Toast.makeText(CourseActivity.this, "No Data", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CoursesResult> call, Throwable t) {
+                Toast.makeText(CourseActivity.this, "ahahaha", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void setUpCourseRows() {
+
     }
 
     //Bottom buttons

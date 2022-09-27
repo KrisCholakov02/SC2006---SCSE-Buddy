@@ -38,7 +38,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
-
         retrofitInterface = retrofit.create(RetrofitInterface.class);
 
         this.findViewById(R.id.loginButton).setOnClickListener(new View.OnClickListener() {

@@ -162,76 +162,84 @@
                             android:gravity="center"></Spinner>
                     </LinearLayout>
 
-                    <ScrollView
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/coursesRecycleView"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="90">
 
-                        <LinearLayout
-                            android:id="@+id/courseContainer"
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                    </androidx.recyclerview.widget.RecyclerView>
 
-                            <LinearLayout
-                                android:orientation="horizontal"
-                                android:id="@+id/courseEntityContainer"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:weightSum="100">
+<!--                    <ScrollView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="0dp"-->
+<!--                        android:layout_weight="90">-->
 
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:orientation="vertical"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="80">
+<!--                        <LinearLayout-->
+<!--                            android:id="@+id/courseContainer"-->
+<!--                            android:orientation="vertical"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent">-->
 
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:textSize="25sp"
-                                        android:gravity="bottom"
-                                        android:fontFamily="@font/poppins_bold"
-                                        android:text="COURSE CODE"></TextView>
+<!--                            <LinearLayout-->
+<!--                                android:orientation="horizontal"-->
+<!--                                android:id="@+id/courseEntityContainer"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:weightSum="100">-->
 
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:textSize="15sp"
-                                        android:fontFamily="@font/poppins_medium"
-                                        android:text="Course Name Long Name"></TextView>
+<!--                                <LinearLayout-->
+<!--                                    android:layout_width="0dp"-->
+<!--                                    android:orientation="vertical"-->
+<!--                                    android:layout_height="match_parent"-->
+<!--                                    android:layout_weight="80">-->
 
-                                </LinearLayout>
+<!--                                    <TextView-->
+<!--                                        android:layout_width="match_parent"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:textSize="25sp"-->
+<!--                                        android:gravity="bottom"-->
+<!--                                        android:fontFamily="@font/poppins_bold"-->
+<!--                                        android:text="COURSE CODE"></TextView>-->
 
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:orientation="vertical"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="20"
-                                    android:weightSum="100"
-                                    android:layout_gravity="center">
+<!--                                    <TextView-->
+<!--                                        android:layout_width="match_parent"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:textSize="15sp"-->
+<!--                                        android:fontFamily="@font/poppins_medium"-->
+<!--                                        android:text="Course Name Long Name"></TextView>-->
 
-                                    <ImageView
-                                        android:id="@+id/imageView2"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="0dp"
-                                        android:layout_weight="70"
-                                        app:srcCompat="@drawable/ic_course_bookmark_outline"></ImageView>
+<!--                                </LinearLayout>-->
 
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="0dp"
-                                        android:text="XX AUs"
-                                        android:gravity="center"
-                                        android:layout_weight="30"></TextView>
-                                </LinearLayout>
+<!--                                <LinearLayout-->
+<!--                                    android:layout_width="0dp"-->
+<!--                                    android:orientation="vertical"-->
+<!--                                    android:layout_height="match_parent"-->
+<!--                                    android:layout_weight="20"-->
+<!--                                    android:weightSum="100"-->
+<!--                                    android:layout_gravity="center">-->
 
-                            </LinearLayout>
+<!--                                    <ImageView-->
+<!--                                        android:id="@+id/imageView2"-->
+<!--                                        android:layout_width="match_parent"-->
+<!--                                        android:layout_height="0dp"-->
+<!--                                        android:layout_weight="70"-->
+<!--                                        app:srcCompat="@drawable/ic_course_bookmark_outline"></ImageView>-->
 
-                        </LinearLayout>
+<!--                                    <TextView-->
+<!--                                        android:layout_width="match_parent"-->
+<!--                                        android:layout_height="0dp"-->
+<!--                                        android:text="XX AUs"-->
+<!--                                        android:gravity="center"-->
+<!--                                        android:layout_weight="30"></TextView>-->
+<!--                                </LinearLayout>-->
+
+<!--                            </LinearLayout>-->
+
+<!--                        </LinearLayout>-->
 
 
-                    </ScrollView>
+<!--                    </ScrollView>-->
 
                 </LinearLayout>
 

@@ -1,12 +1,10 @@
 package com.example.scsebuddy.requestsresults;
 
-import com.example.scsebuddy.requestsresults.LoginResult;
-
 import java.util.HashMap;
+import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.POST;
+import retrofit2.http.*;
 
 public interface RetrofitInterface {
 
@@ -15,4 +13,10 @@ public interface RetrofitInterface {
 
     @POST("/signup")
     Call<Void> executeSignup(@Body HashMap<String, String> map);
+
+    @POST("/allCourses")
+    Call<CoursesResult> executeAllCourses(@Body HashMap<String, String> map);
+
+    @POST("/searchCourses")
+    Call<Course> executeSearchCourses(@Body HashMap<String, String> map);
 }
