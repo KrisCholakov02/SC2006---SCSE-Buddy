@@ -83,7 +83,7 @@ public class CourseActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<CoursesResult> call, Throwable t) {
-                Toast.makeText(CourseActivity.this, "ahahaha", Toast.LENGTH_LONG).show();
+                Toast.makeText(CourseActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
