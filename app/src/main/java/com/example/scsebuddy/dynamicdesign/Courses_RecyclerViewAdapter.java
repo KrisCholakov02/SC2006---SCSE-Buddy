@@ -15,25 +15,25 @@ import com.example.scsebuddy.requestsresults.Course;
 
 import java.util.ArrayList;
 
-public class Course_RecyclerViewAdapter extends RecyclerView.Adapter<Course_RecyclerViewAdapter.MyViewHolder> {
+public class Courses_RecyclerViewAdapter extends RecyclerView.Adapter<Courses_RecyclerViewAdapter.MyViewHolder> {
     Context context;
     ArrayList<Course> courses;
 
-    public Course_RecyclerViewAdapter (Context context, ArrayList<Course> courses) {
+    public Courses_RecyclerViewAdapter(Context context, ArrayList<Course> courses) {
         this.context = context;
         this.courses = courses;
     }
 
     @NonNull
     @Override
-    public Course_RecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public Courses_RecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.course_row, parent, false);
-        return new Course_RecyclerViewAdapter.MyViewHolder(view);
+        return new Courses_RecyclerViewAdapter.MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Course_RecyclerViewAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull Courses_RecyclerViewAdapter.MyViewHolder holder, int position) {
 
         holder.ausTextView.setText(courses.get(position).getAUs());
         holder.courseCodeTextView.setText(courses.get(position).getCode());

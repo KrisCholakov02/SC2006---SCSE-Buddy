@@ -19,4 +19,7 @@ public interface RetrofitInterface {
 
     @POST("/searchCourses")
     Call<Course> executeSearchCourses(@Body HashMap<String, String> map);
+
+    @GET("/allTopics")
+    Call<TopicsResult> executeAllTopics();
 }

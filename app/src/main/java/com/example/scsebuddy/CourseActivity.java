@@ -13,7 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.scsebuddy.dynamicdesign.Course_RecyclerViewAdapter;
+import com.example.scsebuddy.dynamicdesign.Courses_RecyclerViewAdapter;
 import com.example.scsebuddy.requestsresults.ConstantVariables;
 import com.example.scsebuddy.requestsresults.Course;
 import com.example.scsebuddy.requestsresults.CoursesResult;
@@ -22,7 +22,6 @@ import com.example.scsebuddy.requestsresults.RetrofitInterface;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,7 +46,7 @@ public class CourseActivity extends AppCompatActivity {
         sortOrderSpinner.setAdapter(adapter1);
 
         Spinner sortBySpinner = this.findViewById(R.id.sortBySpinner);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.sorting_by_spinner_content, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.sorting_course_by_spinner_content, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         adapter2.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         sortBySpinner.setAdapter(adapter2);
 
@@ -72,7 +71,7 @@ public class CourseActivity extends AppCompatActivity {
 
                     RecyclerView coursesRecyclerView = findViewById(R.id.coursesRecycleView);
 
-                    Course_RecyclerViewAdapter adapter = new Course_RecyclerViewAdapter(context, courses);
+                    Courses_RecyclerViewAdapter adapter = new Courses_RecyclerViewAdapter(context, courses);
                     coursesRecyclerView.setAdapter(adapter);
                     coursesRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 

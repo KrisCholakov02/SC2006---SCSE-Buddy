@@ -16,9 +16,14 @@
         <item>Ascending</item>
         <item>Descending</item>
     </string-array>
-    <string-array name="sorting_by_spinner_content">
+    <string-array name="sorting_course_by_spinner_content">
         <item>Name</item>
         <item>Year</item>
         <item>Code</item>
+    </string-array>
+    <string-array name="sorting_topic_by_spinner_content">
+        <item>Name</item>
+        <item>Date</item>
+        <item>Posts</item>
     </string-array>
 </resources>
