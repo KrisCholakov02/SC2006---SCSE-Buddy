@@ -24,12 +24,6 @@ public class ProfileActivity extends AppCompatActivity {
         String fName = sp.getString("USER_F_NAME", "");
         String lName = sp.getString("USER_L_NAME", "");
         String email = sp.getString("USER_EMAIL", "");
-        System.out.println("########################################################");
-        System.out.println(fName);
-        System.out.println("########################################################");
-        System.out.println(lName);
-        System.out.println("########################################################");
-        System.out.println(email);
 
         fullNameField.setText(fName + " " + lName);
         emailField.setText(email);

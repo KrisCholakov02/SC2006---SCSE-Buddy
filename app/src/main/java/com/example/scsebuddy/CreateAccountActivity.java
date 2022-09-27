@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.scsebuddy.requestsresults.ConstantVariables;
 import com.example.scsebuddy.requestsresults.LoginResult;
 
 import java.util.HashMap;
@@ -23,14 +24,13 @@ import com.example.scsebuddy.requestsresults.RetrofitInterface;
 public class CreateAccountActivity extends AppCompatActivity {
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
-    private String BASE_URL = "http://192.168.0.102:3000";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
 
-        retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
 
         retrofitInterface = retrofit.create(RetrofitInterface.class);
 
