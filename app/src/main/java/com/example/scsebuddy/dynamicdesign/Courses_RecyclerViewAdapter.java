@@ -38,7 +38,7 @@ public class Courses_RecyclerViewAdapter extends RecyclerView.Adapter<Courses_Re
     @Override
     public void onBindViewHolder(@NonNull Courses_RecyclerViewAdapter.MyViewHolder holder, int position) {
 
-        holder.ausTextView.setText(courses.get(position).getAUs());
+        holder.ausTextView.setText(courses.get(position).getAUs() + " AUs");
         holder.courseCodeTextView.setText(courses.get(position).getCode());
         holder.courseTitleTextView.setText(courses.get(position).getTitle());
         int fav = courses.get(position).getFavorite();
