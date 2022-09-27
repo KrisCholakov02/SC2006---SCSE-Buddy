@@ -57,6 +57,14 @@ public class MapActivity extends AppCompatActivity {
             loginButton.setLayoutParams(params2);
             loginButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
             loginButton.setGravity(Gravity.CENTER);
+
+            loginButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(view.getContext(),LoginActivity.class);
+                    startActivity(intent);
+                }
+            });
         }
 
     }
