@@ -118,6 +118,13 @@ public class LoginActivity extends AppCompatActivity {
                 "Yes",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+
+                        SharedPreferences.Editor editor = sp.edit();
+
+                        editor.putString("USER_EMAIL", null);
+                        editor.commit();
+
                         Intent intent = new Intent(v.getContext(), MapActivity.class);
                         startActivity(intent);
                     }

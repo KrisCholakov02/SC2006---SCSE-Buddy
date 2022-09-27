@@ -17,7 +17,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="0sp"
             android:layout_weight="15"
             android:orientation="horizontal"
             android:weightSum="100">
@@ -89,60 +89,62 @@
         </FrameLayout>
 
         <LinearLayout
+            android:id="@+id/mainPagesButtonsLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="15"
-            android:background="@color/white"
+            android:background="@drawable/main_page_bar"
             android:orientation="horizontal"
-            android:weightSum="4">
+            android:weightSum="4"
+            >
 
             <Button
                 android:id="@+id/btnMap"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="Map"
-                android:textColor="@color/custom_black"
-                android:drawableTop="@drawable/map"
                 android:backgroundTint="@color/white"
-                style="?android:attr/borderlessButtonStyle"
-                android:onClick="mapScreen"/>
+                android:drawableTop="@drawable/map"
+                android:onClick="mapScreen"
+                android:text="Map"
+                android:textColor="@color/custom_black" />
 
             <Button
                 android:id="@+id/btnCourse"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:textColor="@color/custom_black"
-                android:text="Course"
-                android:drawableTop="@drawable/course"
                 android:backgroundTint="@color/white"
-                style="?android:attr/borderlessButtonStyle"
-                android:onClick="courseScreen"/>
+                android:drawableTop="@drawable/course"
+                android:onClick="courseScreen"
+                android:text="Course"
+                android:textColor="@color/custom_black" />
 
             <Button
                 android:id="@+id/btnForum"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="Forum"
-                android:textColor="@color/custom_black"
-                android:drawableTop="@drawable/forum"
                 android:backgroundTint="@color/white"
-                style="?android:attr/borderlessButtonStyle"
-                android:onClick="forumScreen"/>
+                android:drawableTop="@drawable/forum"
+                android:onClick="forumScreen"
+                android:text="Forum"
+                android:textColor="@color/custom_black" />
 
             <Button
                 android:id="@+id/btnProfile"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="Profile"
-                android:textColor="@color/custom_black"
-                android:drawableTop="@drawable/profile"
                 android:backgroundTint="@color/white"
-                style="?android:attr/borderlessButtonStyle"
-                android:onClick="profileScreen"/>
+                android:drawableTop="@drawable/profile"
+                android:onClick="profileScreen"
+                android:text="Profile"
+                android:textColor="@color/custom_black" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
