@@ -77,6 +77,11 @@ public class ForumActivity extends AppCompatActivity {
         });
     }
 
+    public void addPost(View v){
+        Intent intent = new Intent(v.getContext(),ForumPostActivity.class);
+        startActivity(intent);
+    }
+
     //Bottom buttons
     public void mapScreen (View v){
         Intent intent = new Intent(v.getContext(),MapActivity.class);
