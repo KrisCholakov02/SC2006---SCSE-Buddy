@@ -74,6 +74,7 @@ public class Courses_RecyclerViewAdapter extends RecyclerView.Adapter<Courses_Re
         public void onClick(View view) {
             final Intent intent;
             intent = new Intent(context1,CourseViewActivity.class);
+            intent.putExtra("TEST", courseCodeTextView.getText());
             context1.startActivity(intent);
         }
     }
