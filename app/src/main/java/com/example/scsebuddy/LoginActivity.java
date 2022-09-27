@@ -53,6 +53,15 @@ public class LoginActivity extends AppCompatActivity {
                 map.put("email", email);
                 map.put("password", password);
 
+                //offline test
+//                SharedPreferences.Editor edit = sp.edit();
+//                edit.putString("USER_EMAIL", "kris@k.k");
+//                edit.commit();
+//                Intent intent = new Intent(v.getContext(), MapActivity.class);
+//                startActivity(intent);
+
+
+
                 Call<LoginResult> call = retrofitInterface.executeLogin(map);
 
                 call.enqueue(new Callback<LoginResult>() {
