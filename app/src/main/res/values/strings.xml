@@ -9,4 +9,16 @@
     <string name="create_account">
         <u>Create Account</u>
     </string>
+    <string name="searched_by">
+        You\'ve searched by <b>\"SEARCH QUERY\"</b>
+    </string>
+    <string-array name="sorting_order_spinner_content">
+        <item>Ascending</item>
+        <item>Descending</item>
+    </string-array>
+    <string-array name="sorting_by_spinner_content">
+        <item>Name</item>
+        <item>Year</item>
+        <item>Code</item>
+    </string-array>
 </resources>
