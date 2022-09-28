@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,5 +32,10 @@ public class CourseViewActivity extends AppCompatActivity {
                 courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_outline);
             }
         }
+    }
+    public void addReview(View v){
+        Intent intent = new Intent(this, CoursePostActivity.class);
+        startActivity(intent);
+
     }
 }
