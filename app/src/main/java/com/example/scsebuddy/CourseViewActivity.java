@@ -77,11 +77,11 @@ public class CourseViewActivity extends AppCompatActivity {
         HashMap<String, String> map = new HashMap<>();
        // map.put("lName", lName);
         if(courseFav == 1) {
-            courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_outline);
+            //courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_outline);
             courseFav = 0;
         }
         else {
-            courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_yellow);
+            //courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_yellow);
             courseFav = 1;
         }
         SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_WORLD_READABLE);
@@ -97,6 +97,14 @@ public class CourseViewActivity extends AppCompatActivity {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.code() == 200) {
                     Toast.makeText(CourseViewActivity.this, "Favorite Updated Successfully!", Toast.LENGTH_LONG).show();
+                    if(courseFav == 1) {
+                        courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_yellow);
+                        //courseFav = 0;
+                    }
+                    else {
+                        courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_outline);
+                        //courseFav = 1;
+                    }
                     try {
                         Thread.sleep(2000);
                     } catch (InterruptedException e) {
@@ -104,6 +112,14 @@ public class CourseViewActivity extends AppCompatActivity {
                     }
                 } else if (response.code() == 400) {
                     Toast.makeText(CourseViewActivity.this, "Wrong Credentials!", Toast.LENGTH_LONG).show();
+                    if(courseFav == 1) {
+                        //courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_outline);
+                        courseFav = 0;
+                    }
+                    else {
+                        //courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_yellow);
+                        courseFav = 1;
+                    }
                 }
             }
 
