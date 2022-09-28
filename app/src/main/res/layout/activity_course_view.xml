@@ -60,7 +60,8 @@
                     android:layout_weight="19"
                     android:background="@drawable/rounded_button"
                     android:src="@drawable/ic_course_bookmark_outline"
-                    android:id="@+id/courseFavImageView">
+                    android:id="@+id/courseFavImageView"
+                    android:onClick="addFav">
 
                 </ImageView>
                 <FrameLayout

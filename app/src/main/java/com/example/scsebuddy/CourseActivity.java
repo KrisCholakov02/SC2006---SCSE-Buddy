@@ -34,6 +34,13 @@ public class CourseActivity extends AppCompatActivity {
     private RetrofitInterface retrofitInterface;
 
     @Override
+    protected void onRestart(){
+        super.onRestart();
+        Intent i = new Intent(this,CourseActivity.class);
+        startActivity(i);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);

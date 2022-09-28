@@ -20,7 +20,6 @@ public class CoursePostActivity extends AppCompatActivity {
 
         Intent ii = getIntent();
         Bundle b = ii.getExtras();
-        ImageView courseFavImageView = this.findViewById(R.id.courseFavImageView);
         if(b!=null) {
             courseCodeTextView.setText(b.get("courseCode") + "");
         }

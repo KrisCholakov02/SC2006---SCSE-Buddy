@@ -22,4 +22,7 @@ public interface RetrofitInterface {
 
     @GET("/allTopics")
     Call<TopicsResult> executeAllTopics();
+
+    @POST("/courseFav")
+    Call<Void> executeCourseFav(@Body HashMap<String, String> map);
 }
