@@ -43,30 +43,57 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="20">
+                android:layout_weight="30">
 
             </FrameLayout>
 
-            <EditText
-                android:id="@+id/CourseEditText"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="60"
-                android:background="@color/white"
+                android:weightSum="100"
+                android:layout_weight="40"
+                android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/courseCodeTextView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="79"
+                android:background="@drawable/rounded_button"
                 android:bottomLeftRadius="10dp"
                 android:bottomRightRadius="10dp"
-                android:drawableRight="@android:drawable/ic_menu_search"
-                android:inputType="textPersonName"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="Search"
                 android:topLeftRadius="10dp"
-                android:topRightRadius="10dp" />
+                android:topRightRadius="10dp"
+                android:text="test"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:textColor="@color/grey_text"/>
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"/>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="19"
+                    android:background="@drawable/rounded_button"
+                    android:src="@drawable/ic_course_bookmark_outline"
+                    android:id="@+id/courseFavImageView">
+
+                </ImageView>
+
+            </LinearLayout>
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="20">
+                android:layout_weight="30">
 
             </FrameLayout>
 
@@ -90,7 +117,18 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="10"></FrameLayout>
+                android:layout_weight="5"></FrameLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:text="test"
+                android:id="@+id/courseTitleTextView"
+                android:textColor="@color/grey_text"
+                />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -114,44 +152,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="85"
                     android:orientation="vertical"
-                    android:weightSum="100">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="10"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="Sort by"
-                            android:textColor="@color/grey_text"
-                            android:textSize="15sp"></TextView>
-
-                        <Spinner
-                            android:id="@+id/sortTopicBySpinner"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:spinnerMode="dropdown"></Spinner>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="Order"
-                            android:textColor="@color/grey_text"
-                            android:textSize="15sp"></TextView>
-
-                        <Spinner
-                            android:id="@+id/sortOrderSpinner"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:spinnerMode="dropdown"></Spinner>
-                    </LinearLayout>
+                    android:weightSum="90">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/topicsRecycleView"

@@ -41,6 +41,12 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="Course Name Long Name"></TextView>
 
+                <TextView
+                    android:id="@+id/courseFavTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:text="123123"/>
             </LinearLayout>
 
             <LinearLayout

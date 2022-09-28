@@ -21,6 +21,7 @@ public class Courses_RecyclerViewAdapter extends RecyclerView.Adapter<Courses_Re
     Context context;
     static Context context1;
     ArrayList<Course> courses;
+    static int favv = 0;
 
     public Courses_RecyclerViewAdapter(Context context, ArrayList<Course> courses) {
         this.context = context;
@@ -44,8 +45,10 @@ public class Courses_RecyclerViewAdapter extends RecyclerView.Adapter<Courses_Re
         int fav = courses.get(position).getFavorite();
         if (fav == 0) {
             holder.favouriteImageView.setImageResource(R.drawable.ic_course_bookmark_outline);
+            holder.courseFavTextView.setText(fav +"");
         } else {
             holder.favouriteImageView.setImageResource(R.drawable.ic_course_bookmark_yellow);
+            holder.courseFavTextView.setText(fav+ "");
         }
     }
 
@@ -56,7 +59,7 @@ public class Courses_RecyclerViewAdapter extends RecyclerView.Adapter<Courses_Re
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        TextView courseCodeTextView, courseTitleTextView, ausTextView;
+        TextView courseCodeTextView, courseTitleTextView, ausTextView, courseFavTextView;
         ImageView favouriteImageView;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -67,6 +70,7 @@ public class Courses_RecyclerViewAdapter extends RecyclerView.Adapter<Courses_Re
             favouriteImageView = itemView.findViewById(R.id.favouriteImageView);
             courseCodeTextView = itemView.findViewById(R.id.courseCodeTextView);
             courseTitleTextView = itemView.findViewById(R.id.courseTitleTextView);
+            courseFavTextView = itemView.findViewById(R.id.courseFavTextView);
             ausTextView = itemView.findViewById(R.id.ausTextView);
         }
 
@@ -74,7 +78,9 @@ public class Courses_RecyclerViewAdapter extends RecyclerView.Adapter<Courses_Re
         public void onClick(View view) {
             final Intent intent;
             intent = new Intent(context1,CourseViewActivity.class);
-            intent.putExtra("TEST", courseCodeTextView.getText());
+            intent.putExtra("courseCode", courseCodeTextView.getText());
+            intent.putExtra("courseTitle", courseTitleTextView.getText());
+            intent.putExtra("courseFav", courseFavTextView.getText());
             context1.startActivity(intent);
         }
     }

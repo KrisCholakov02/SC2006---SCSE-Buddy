@@ -52,7 +52,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="60"
-                        android:background="@color/white"
+                        android:background="@drawable/rounded_button"
                         android:bottomLeftRadius="10dp"
                         android:bottomRightRadius="10dp"
                         android:drawableRight="@android:drawable/ic_menu_search"
