@@ -25,4 +25,8 @@ public interface RetrofitInterface {
 
     @POST("/courseFav")
     Call<Void> executeCourseFav(@Body HashMap<String, String> map);
+
+    @POST("/coursePost")
+    Call<Void> executeCoursePost(@Body HashMap<String, String> map);
+
 }

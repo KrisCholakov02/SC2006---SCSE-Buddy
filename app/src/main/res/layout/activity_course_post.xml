@@ -100,7 +100,8 @@
                             android:id="@+id/gradeSpinner"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="75"/>
+                            android:layout_weight="75"
+                            />
 
                     </LinearLayout>
 
@@ -140,7 +141,7 @@
                         android:fontFamily="@font/poppins_medium"/>
 
                     <EditText
-                        android:id="@+id/contentEditText"
+                        android:id="@+id/courseReviewEditText"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="50"
@@ -163,7 +164,8 @@
                         android:layout_weight="10"
                         android:text="Post"
                         android:fontFamily="@font/poppins_medium"
-                        android:textColor="@color/white"/>
+                        android:textColor="@color/white"
+                        android:onClick="addReviewPost"/>
 
                 </LinearLayout>
 
