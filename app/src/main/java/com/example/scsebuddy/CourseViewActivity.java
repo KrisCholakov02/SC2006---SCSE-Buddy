@@ -10,16 +10,21 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 public class CourseViewActivity extends AppCompatActivity {
 
+    TextView courseCodeTV,courseTitleTV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_view);
+        courseCodeTV = this.findViewById(R.id.courseCodeTextView);
+        courseTitleTV = this.findViewById(R.id.courseTitleTextView);
+
+        //intent passing bundle
         Intent ii = getIntent();
         Bundle b = ii.getExtras();
-        TextView courseCodeTV = this.findViewById(R.id.courseCodeTextView);
-        TextView courseTitleTV = this.findViewById(R.id.courseTitleTextView);
         ImageView courseFavImageView = this.findViewById(R.id.courseFavImageView);
         if(b!=null){
             courseCodeTV.setText(b.get("courseCode")+"");
@@ -35,6 +40,7 @@ public class CourseViewActivity extends AppCompatActivity {
     }
     public void addReview(View v){
         Intent intent = new Intent(this, CoursePostActivity.class);
+        intent.putExtra("courseCode", courseCodeTV.getText());
         startActivity(intent);
 
     }
