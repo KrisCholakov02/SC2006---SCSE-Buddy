@@ -29,6 +29,11 @@ public class ProfileActivity extends AppCompatActivity {
         emailField.setText(email);
     }
 
+    public void changePW (View v){
+        Intent intent = new Intent(v.getContext(),ChangePwActivity.class);
+        startActivity(intent);
+    }
+
     public void updateDetails (View v){
         Intent intent = new Intent(v.getContext(),ChangeAccountDetailsActivity.class);
         startActivity(intent);

@@ -126,11 +126,13 @@
                     android:layout_weight="5"/>
 
                 <Button
-                    android:id="@+id/btnResetPw"
+                    android:id="@+id/btnChangePw"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="15"
                     android:fontFamily="@font/poppins_medium"
+                    android:onClick="changePW"
+                    android:clickable="true"
                     android:text="Change Password"
                     android:textColor="@color/white" />
 
