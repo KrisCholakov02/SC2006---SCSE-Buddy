@@ -40,4 +40,8 @@
         <item>D</item>
         <item>F</item>
     </string-array>
+
+    <string-array name="topic_by_spinner">
+        <item>xxx</item>
+    </string-array>
 </resources>
