@@ -42,6 +42,14 @@
     </string-array>
 
     <string-array name="topic_by_spinner">
-        <item>xxx</item>
+        <item>News</item>
+        <item>Events</item>
+        <item>Job Opening</item>
+        <item>Self Introduction</item>
+        <item>Course Work Help</item>
+        <item>Lost And Found</item>
+        <item>Looking For Groups</item>
+        <item>Survey</item>
+        <item>Index Swap</item>
     </string-array>
 </resources>

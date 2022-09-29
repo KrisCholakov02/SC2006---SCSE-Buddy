@@ -34,9 +34,10 @@ public class CoursePostActivity extends AppCompatActivity {
 
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
+    Spinner gradeSpinner;
+
     TextView courseCodeTextView ;
     EditText courseReviewEditText;
-    Spinner gradeSpinner;
 
     Context context;
     @Override

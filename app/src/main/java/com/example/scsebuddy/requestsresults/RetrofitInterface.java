@@ -32,4 +32,7 @@ public interface RetrofitInterface {
     @POST("/changePW")
     Call<Void> executeChangePW(@Body HashMap<String, String> map);
 
+    @POST("/forumPost")
+    Call<Void> executeForumPost(@Body HashMap<String, String> map);
+
 }
