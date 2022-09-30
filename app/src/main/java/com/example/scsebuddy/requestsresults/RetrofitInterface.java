@@ -17,9 +17,6 @@ public interface RetrofitInterface {
     @POST("/allCourses")
     Call<CoursesResult> executeAllCourses(@Body HashMap<String, String> map);
 
-    @POST("/searchCourses")
-    Call<Course> executeSearchCourses(@Body HashMap<String, String> map);
-
     @GET("/allTopics")
     Call<TopicsResult> executeAllTopics();
 
@@ -34,5 +31,14 @@ public interface RetrofitInterface {
 
     @POST("/forumPost")
     Call<Void> executeForumPost(@Body HashMap<String, String> map);
+
+    //TODO FOR KRIS
+    @POST("/searchCourses")
+    Call<Course> executeSearchCourses(@Body HashMap<String, String> map);
+
+    @POST("/searchPost")
+    Call<Course> executeSearchPost(@Body HashMap<String, String> map);
+
+    //GET for Both Course and Forum!!
 
 }
