@@ -80,7 +80,7 @@ public class CoursePostActivity extends AppCompatActivity {
         map.put("courseCode", courseCodeTextView.getText()+"");
         map.put("grade", gradeSpinner.getSelectedItem().toString());
         map.put("dateTime", sdf.format(date));
-        map.put("content", courseCodeTextView.getText()+"");
+        map.put("content", courseReviewEditText.getText()+"");
 
         Call<Void> call = retrofitInterface.executeCoursePost(map);
 
