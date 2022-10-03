@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -73,7 +74,7 @@ public class CourseActivity extends AppCompatActivity {
             public void onResponse(Call<CoursesResult> call, Response<CoursesResult> response) {
                 if (response.code() == 200) {
                     CoursesResult coursesR = response.body();
-
+                    //Log.e("TEST", coursesR.getCourses()[0].getCode().toString());
                     ArrayList<Course> courses = new ArrayList<>(Arrays.asList(coursesR.getCourses()));
 
                     RecyclerView coursesRecyclerView = findViewById(R.id.coursesRecycleView);
