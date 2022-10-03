@@ -42,7 +42,7 @@ public class ForumActivity extends AppCompatActivity {
         sortOrderSpinner.setAdapter(adapter1);
 
         Spinner sortBySpinner = this.findViewById(R.id.sortTopicBySpinner);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.sorting_topic_by_spinner_content, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.topic_by_spinner, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         adapter2.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         sortBySpinner.setAdapter(adapter2);
 
