@@ -1,6 +1,8 @@
 package com.example.scsebuddy.dynamicdesign;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.scsebuddy.CourseViewActivity;
+import com.example.scsebuddy.ForumViewActivity;
 import com.example.scsebuddy.R;
 import com.example.scsebuddy.requestsresults.Course;
 import com.example.scsebuddy.requestsresults.Topic;
@@ -19,6 +23,7 @@ import java.util.ArrayList;
 public class Topics_RecyclerViewAdapter extends RecyclerView.Adapter<Topics_RecyclerViewAdapter.MyViewHolder> {
     Context context;
     ArrayList<Topic> topics;
+    static Context context1;
 
     public Topics_RecyclerViewAdapter(Context context, ArrayList<Topic> topics) {
         this.context = context;
@@ -47,16 +52,28 @@ public class Topics_RecyclerViewAdapter extends RecyclerView.Adapter<Topics_Recy
         return topics.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView topicTitleTextView, topicDescriptionTextView, topicNoOfPostsTextView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
 
             topicTitleTextView = itemView.findViewById(R.id.topicTitleTextView);
             topicDescriptionTextView = itemView.findViewById(R.id.topicDescriptionTextView);
             topicNoOfPostsTextView = itemView.findViewById(R.id.topicNoOfPostsTextView);
+            context1 = itemView.getContext();
+        }
+
+        @Override
+        public void onClick(View view) {
+            //Log.e("HERE", "here");
+            final Intent intent;
+            intent = new Intent(context1, ForumViewActivity.class);
+            intent.putExtra("topicTitle", topicTitleTextView.getText().toString());
+            Log.e("HELLO", topicTitleTextView.getText().toString());
+            context1.startActivity(intent);
         }
     }
 }

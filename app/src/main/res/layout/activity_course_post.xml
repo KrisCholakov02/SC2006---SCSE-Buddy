@@ -150,7 +150,8 @@
                         android:hint="Content Goes Here"
                         android:paddingLeft="3pt"
                         android:background="@drawable/text_input_design"
-                        android:fontFamily="@font/poppins_medium"/>
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="top"/>
 
                     <CheckBox
                         android:id="@+id/annoymousCb"
