@@ -173,7 +173,7 @@
                     android:weightSum="90">
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/topicsRecycleView"
+                        android:id="@+id/courseReviewRecycleView"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="90">

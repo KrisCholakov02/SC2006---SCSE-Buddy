@@ -152,10 +152,13 @@
                         android:background="@drawable/text_input_design"
                         android:fontFamily="@font/poppins_medium"/>
 
-                    <FrameLayout
+                    <CheckBox
+                        android:id="@+id/annoymousCb"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="5"/>
+                        android:layout_height="wrap_content"
+                        android:text="Post Annoymously"
+                        android:fontFamily="@font/poppins_medium"
+                        android:layout_weight="1"/>
 
                     <Button
                         android:id="@+id/button"

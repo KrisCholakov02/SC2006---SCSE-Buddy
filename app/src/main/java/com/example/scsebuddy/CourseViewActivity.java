@@ -1,23 +1,34 @@
 package com.example.scsebuddy;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.scsebuddy.dynamicdesign.CourseReview_RecyclerViewAdapter;
+import com.example.scsebuddy.dynamicdesign.Topics_RecyclerViewAdapter;
 import com.example.scsebuddy.requestsresults.ConstantVariables;
+import com.example.scsebuddy.requestsresults.CourseReview;
+import com.example.scsebuddy.requestsresults.CourseReviewResult;
 import com.example.scsebuddy.requestsresults.RetrofitInterface;
+import com.example.scsebuddy.requestsresults.Topic;
+import com.example.scsebuddy.requestsresults.TopicsResult;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import retrofit2.Call;
@@ -34,6 +45,9 @@ public class CourseViewActivity extends AppCompatActivity {
     ImageView courseFavImageView;
 
     TextView courseCodeTV,courseTitleTV;
+    Context context;
+
+    //RecyclerView courseReviewRecycleView;
 
 
 
@@ -44,7 +58,7 @@ public class CourseViewActivity extends AppCompatActivity {
         courseCodeTV = this.findViewById(R.id.courseCodeTextView);
         courseTitleTV = this.findViewById(R.id.courseTitleTextView);
 
-
+        Context context = this;
         retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
         retrofitInterface = retrofit.create(RetrofitInterface.class);
 
@@ -63,6 +77,54 @@ public class CourseViewActivity extends AppCompatActivity {
             else{
                 courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_outline);
             }
+
+            HashMap<String, String> map = new HashMap<>();
+            String courseCode = courseCodeTV.getText().toString();
+            map.put("courseCode", courseCode);
+
+
+            Call<CourseReviewResult> executeAllCourseReview = retrofitInterface.executeAllCourseReview(map);
+
+            executeAllCourseReview.enqueue(new Callback<CourseReviewResult>() {
+                @Override
+                public void onResponse(Call<CourseReviewResult> call, Response<CourseReviewResult> response) {
+                    if (response.code() == 200) {
+//                        TopicsResult topicR = response.body();
+//
+//                        ArrayList<Topic> topics = new ArrayList<>(Arrays.asList(topicR.getTopics()));
+//
+//                        RecyclerView topicsRecyclerView = findViewById(R.id.topicsRecycleView);
+//
+//                        Topics_RecyclerViewAdapter adapter = new Topics_RecyclerViewAdapter(context, topics);
+//                        topicsRecyclerView.setAdapter(adapter);
+//                        topicsRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+                        CourseReviewResult courseR = response.body();
+                        ArrayList<CourseReview> reviews = new ArrayList<>(Arrays.asList(courseR.getCoursesReview()));
+                        Log.e("TEST", courseR.getCoursesReview()[0].getGrade()+"");
+                        RecyclerView courseReviewRecycleView = findViewById(R.id.courseReviewRecycleView);
+
+                        CourseReview_RecyclerViewAdapter adapter = new CourseReview_RecyclerViewAdapter(context,reviews);
+                        courseReviewRecycleView.setAdapter(adapter);
+                        courseReviewRecycleView.setLayoutManager(new LinearLayoutManager(context));
+
+
+
+
+
+                    } else if (response.code() == 404) {
+                        Toast.makeText(CourseViewActivity.this, "No Data", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<CourseReviewResult> call, Throwable t) {
+                    Toast.makeText(CourseViewActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+
+
+
         }
     }
     public void addReview(View v){

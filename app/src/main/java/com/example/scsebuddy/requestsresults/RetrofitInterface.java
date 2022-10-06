@@ -8,17 +8,22 @@ import retrofit2.http.*;
 
 public interface RetrofitInterface {
 
+    //Everything about Account
     @POST("/login")
     Call<LoginResult> executeLogin(@Body HashMap<String, String> map);
 
     @POST("/signup")
     Call<Void> executeSignup(@Body HashMap<String, String> map);
 
+    @POST("/changePW")
+    Call<Void> executeChangePW(@Body HashMap<String, String> map);
+
+    //Everything about Courses
     @POST("/allCourses")
     Call<CoursesResult> executeAllCourses(@Body HashMap<String, String> map);
 
-    @GET("/allTopics")
-    Call<TopicsResult> executeAllTopics();
+    @POST("/allCourseReview")
+    Call<CourseReviewResult> executeAllCourseReview(@Body HashMap<String, String> map);
 
     @POST("/courseFav")
     Call<Void> executeCourseFav(@Body HashMap<String, String> map);
@@ -26,11 +31,15 @@ public interface RetrofitInterface {
     @POST("/coursePost")
     Call<Void> executeCoursePost(@Body HashMap<String, String> map);
 
-    @POST("/changePW")
-    Call<Void> executeChangePW(@Body HashMap<String, String> map);
+    //Everything About Forum
+    @GET("/allTopics")
+    Call<TopicsResult> executeAllTopics();
 
     @POST("/forumPost")
     Call<Void> executeForumPost(@Body HashMap<String, String> map);
+
+
+
 
     //TODO FOR KRIS
     @POST("/searchCourses")

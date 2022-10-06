@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -58,12 +59,12 @@ public class ForumPostActivity extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_WORLD_READABLE);
         String email = sp.getString("USER_EMAIL", "");
 
-
         Calendar calendar = Calendar.getInstance();
         Date date = (Date) calendar.getTime();
 //        System.out.println("AAA" + date);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //        System.out.println("AAAA" +sdf.format(date));
+
 
         HashMap<String, String> map = new HashMap<>();
         map.put("email", email);

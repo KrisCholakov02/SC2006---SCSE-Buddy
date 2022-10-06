@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -38,6 +39,7 @@ public class CoursePostActivity extends AppCompatActivity {
 
     TextView courseCodeTextView ;
     EditText courseReviewEditText;
+    CheckBox annoymousCb;
 
     Context context;
     @Override
@@ -52,6 +54,8 @@ public class CoursePostActivity extends AppCompatActivity {
 
         courseCodeTextView = this.findViewById(R.id.courseCodeTextView);
         courseReviewEditText = this.findViewById(R.id.courseReviewEditText);
+
+        annoymousCb = this.findViewById(R.id.annoymousCb);
 
         retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
         retrofitInterface = retrofit.create(RetrofitInterface.class);
@@ -68,6 +72,9 @@ public class CoursePostActivity extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_WORLD_READABLE);
         String email = sp.getString("USER_EMAIL", "");
 
+        if(annoymousCb.isChecked()){
+            email = "Annoymous";
+        }
 
         Calendar calendar = Calendar.getInstance();
         Date date = (Date) calendar.getTime();

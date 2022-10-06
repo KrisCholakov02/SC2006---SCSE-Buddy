@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
@@ -52,15 +53,7 @@ public class LoginActivity extends AppCompatActivity {
                 String password = passwordInput.getText().toString();
                 map.put("email", email);
                 map.put("password", password);
-
-                //offline test
-//                SharedPreferences.Editor edit = sp.edit();
-//                edit.putString("USER_EMAIL", "kris@k.k");
-//                edit.commit();
-//                Intent intent = new Intent(v.getContext(), MapActivity.class);
-//                startActivity(intent);
-
-
+                Log.e("TEST1", map+"");
 
                 Call<LoginResult> call = retrofitInterface.executeLogin(map);
 
