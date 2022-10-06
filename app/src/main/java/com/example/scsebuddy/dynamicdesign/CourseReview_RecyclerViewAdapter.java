@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.scsebuddy.R;
 import com.example.scsebuddy.requestsresults.CourseReview;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CourseReview_RecyclerViewAdapter extends RecyclerView.Adapter<CourseReview_RecyclerViewAdapter.MyViewHolder> {
      Context context;
