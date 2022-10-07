@@ -32,7 +32,7 @@ public class ForumPostActivity extends AppCompatActivity {
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
     Spinner topicSpinner;
-
+    CheckBox annoymousCb;
     EditText contentEditText, titleEditText;
 
     Context context;
@@ -51,6 +51,7 @@ public class ForumPostActivity extends AppCompatActivity {
 
         contentEditText = this.findViewById(R.id.contentEditText);
         titleEditText = this.findViewById(R.id.titleEditText);
+        annoymousCb = this.findViewById(R.id.annoymousCb);
 
     }
 
@@ -58,6 +59,11 @@ public class ForumPostActivity extends AppCompatActivity {
 
         SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_WORLD_READABLE);
         String email = sp.getString("USER_EMAIL", "");
+
+        if(annoymousCb.isChecked()){
+            email = "Annoymous";
+        }
+
 
         Calendar calendar = Calendar.getInstance();
         Date date = (Date) calendar.getTime();
