@@ -80,7 +80,7 @@ public class ForumPostActivity extends AppCompatActivity {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.code() == 200) {
                     Toast.makeText(ForumPostActivity.this, "Posted Successfully!", Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(context, CourseViewActivity.class);
+                    Intent i = new Intent(context, ForumViewActivity.class);
                     startActivity(i);
 
                     try {
