@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -50,12 +51,12 @@ public class CourseActivity extends AppCompatActivity {
         txtSearchCourse = findViewById(R.id.txtSearchCourse);
 
         SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
-
+        //asc/desc
         Spinner sortOrderSpinner = this.findViewById(R.id.sortOrderSpinner);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.sorting_order_spinner_content, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         adapter1.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         sortOrderSpinner.setAdapter(adapter1);
-
+        //name,year,code
         Spinner sortBySpinner = this.findViewById(R.id.sortBySpinner);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.sorting_course_by_spinner_content, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         adapter2.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
@@ -95,6 +96,30 @@ public class CourseActivity extends AppCompatActivity {
             public void onFailure(Call<CoursesResult> call, Throwable t) {
                 Toast.makeText(CourseActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
+        });
+
+        sortBySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // your code here
+                switch(position){
+                    case 0: //All
+                        break;
+                    case 1: //Name
+                        break;
+                    case 2: //Year
+                        break;
+                    case 3: //Code
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // All
+                Call<CoursesResult> getAllCourses = retrofitInterface.executeAllCourses(map);
+            }
+
         });
     }
 

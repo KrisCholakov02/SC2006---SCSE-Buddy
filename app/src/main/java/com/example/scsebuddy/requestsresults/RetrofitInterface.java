@@ -34,6 +34,10 @@ public interface RetrofitInterface {
     @POST("/searchCourses")
     Call<CoursesResult> executeSearchCourses(@Body HashMap<String, String> map);
 
+    //not done dk how do
+    @POST("/sortCourseYear")
+    Call<CoursesResult> executeSortCourseYear(@Body HashMap<String, String> map);
+
 
 
     //Everything About Forum
