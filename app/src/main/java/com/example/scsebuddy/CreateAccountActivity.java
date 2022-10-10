@@ -2,7 +2,11 @@ package com.example.scsebuddy;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -103,10 +107,16 @@ public class CreateAccountActivity extends AppCompatActivity {
                             }
                             Intent intent = new Intent(v.getContext(), LoginActivity.class);
                             startActivity(intent);
-                        } else if (response.code() == 400) {
-                            Toast.makeText(CreateAccountActivity.this, "Wrong Credentials!", Toast.LENGTH_LONG).show();
+                        } else if (response.code() == 404) {
+                            //Toast.makeText(CreateAccountActivity.this, "Wrong Credentials!", Toast.LENGTH_LONG).show();
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(CreateAccountActivity.this);
+                            builder1.setMessage(valid_email + " is used.");
+                            builder1.setCancelable(true);
+                            AlertDialog alert11 = builder1.create();
+                            alert11.show();
                         }
-                    }
+                        }
+
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
