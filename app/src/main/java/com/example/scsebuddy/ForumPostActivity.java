@@ -61,7 +61,7 @@ public class ForumPostActivity extends AppCompatActivity {
         String email = sp.getString("USER_EMAIL", "");
 
         if(annoymousCb.isChecked()){
-            email = "Annoymous";
+            email = "Anonymous";
         }
 
 
