@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -52,6 +53,13 @@ public class ForumPostActivity extends AppCompatActivity {
         contentEditText = this.findViewById(R.id.contentEditText);
         titleEditText = this.findViewById(R.id.titleEditText);
         annoymousCb = this.findViewById(R.id.annoymousCb);
+
+        Intent ii = getIntent();
+        Bundle b = ii.getExtras();
+        if(b!=null){
+            selectValue(topicSpinner,b.get("forumTopic")+"");
+            //Log.e("HELLO", b.get("topicTitle")+"");
+        }
 
     }
 
@@ -105,5 +113,13 @@ public class ForumPostActivity extends AppCompatActivity {
                 Toast.makeText(ForumPostActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+    private void selectValue(Spinner spinner, Object value) {
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).equals(value)) {
+                spinner.setSelection(i);
+                break;
+            }
+        }
     }
 }

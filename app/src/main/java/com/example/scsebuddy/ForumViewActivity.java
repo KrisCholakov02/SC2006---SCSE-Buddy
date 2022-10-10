@@ -151,6 +151,8 @@ public class ForumViewActivity extends AppCompatActivity {
 
     public void addPost(View v){
         Intent intent = new Intent(v.getContext(),ForumPostActivity.class);
+        intent.putExtra("forumTopic", titleTextView.getText().toString());
+
         startActivity(intent);
     }
 }
