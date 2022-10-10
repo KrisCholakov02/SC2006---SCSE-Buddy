@@ -36,7 +36,9 @@ public class CourseActivity extends AppCompatActivity {
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
     EditText txtSearchCourse;
-
+    Context context;
+    Spinner sortOrderSpinner,sortBySpinner;
+    String email;
     @Override
     protected void onRestart(){
         super.onRestart();
@@ -49,15 +51,16 @@ public class CourseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
         txtSearchCourse = findViewById(R.id.txtSearchCourse);
+        context = this;
 
         SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
         //asc/desc
-        Spinner sortOrderSpinner = this.findViewById(R.id.sortOrderSpinner);
+         sortOrderSpinner = this.findViewById(R.id.sortOrderSpinner);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.sorting_order_spinner_content, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         adapter1.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         sortOrderSpinner.setAdapter(adapter1);
         //name,year,code
-        Spinner sortBySpinner = this.findViewById(R.id.sortBySpinner);
+         sortBySpinner = this.findViewById(R.id.sortBySpinner);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.sorting_course_by_spinner_content, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         adapter2.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         sortBySpinner.setAdapter(adapter2);
@@ -65,12 +68,40 @@ public class CourseActivity extends AppCompatActivity {
         retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
         retrofitInterface = retrofit.create(RetrofitInterface.class);
 
+        //default loading
         HashMap<String, String> map = new HashMap<>();
-        String email = sp.getString("USER_EMAIL", null);
+        email = sp.getString("USER_EMAIL", null);
         map.put("email", email);
+        map.put("orderBy", "asc");
+        map.put("sortBy", "code");
+        updateRV(map);
 
-        Context context = this;
 
+    }
+
+    public void sortByButton(View v){
+        String orderBy = sortOrderSpinner.getSelectedItem().toString();
+        String sortBy = sortBySpinner.getSelectedItem().toString();
+        switch(sortBy){
+            case "Name":
+                sortBy = "Title";
+                break;
+            case "Year":
+                sortBy = "Year_Taken";
+                break;
+            case "Code":
+                sortBy = "Code";
+                break;
+        }
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("email", email);
+        map.put("orderBy",orderBy);
+        map.put("sortBy", sortBy);
+        updateRV(map);
+    }
+
+    private void updateRV(HashMap map){
         Call<CoursesResult> getAllCourses = retrofitInterface.executeAllCourses(map);
 
         getAllCourses.enqueue(new Callback<CoursesResult>() {
@@ -96,30 +127,6 @@ public class CourseActivity extends AppCompatActivity {
             public void onFailure(Call<CoursesResult> call, Throwable t) {
                 Toast.makeText(CourseActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
-        });
-
-        sortBySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // your code here
-                switch(position){
-                    case 0: //All
-                        break;
-                    case 1: //Name
-                        break;
-                    case 2: //Year
-                        break;
-                    case 3: //Code
-                        break;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // All
-                Call<CoursesResult> getAllCourses = retrofitInterface.executeAllCourses(map);
-            }
-
         });
     }
 

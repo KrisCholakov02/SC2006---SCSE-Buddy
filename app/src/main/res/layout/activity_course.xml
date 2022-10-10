@@ -177,6 +177,16 @@
                             android:layout_height="match_parent"
                             android:spinnerMode="dropdown"
                             android:gravity="center"></Spinner>
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="left"
+                            android:text="Go"
+                            android:id="@+id/sortBtn"
+                            android:onClick="sortByButton"
+                            android:backgroundTint="@color/white"
+                            android:textColor="@color/custom_black"/>
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView

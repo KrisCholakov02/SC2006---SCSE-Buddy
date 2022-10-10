@@ -13,8 +13,8 @@
         You\'ve searched by <b>\"SEARCH QUERY\"</b>
     </string>
     <string-array name="sorting_order_spinner_content">
-        <item>Ascending</item>
-        <item>Descending</item>
+        <item>Asc</item>
+        <item>Desc</item>
     </string-array>
     <string-array name="sorting_course_by_spinner_content">
         <item>Name</item>
