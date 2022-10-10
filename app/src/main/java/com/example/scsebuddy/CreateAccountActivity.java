@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -24,7 +26,7 @@ import com.example.scsebuddy.requestsresults.RetrofitInterface;
 public class CreateAccountActivity extends AppCompatActivity {
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
-
+    String valid_email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,14 +36,50 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         retrofitInterface = retrofit.create(RetrofitInterface.class);
 
+        EditText emailInput = findViewById(R.id.emailEditText);
+        EditText passwordInput = findViewById(R.id.passwordEditText);
+        EditText fNameInput = findViewById(R.id.firstNameEditText);
+        EditText lNameInput = findViewById(R.id.lastNameEditText);
+
+
+        emailInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                is_Valid_Email(emailInput);
+            }
+            public void is_Valid_Email(EditText edt) {
+                if (edt.getText().toString() == null) {
+                    edt.setError("Invalid Email Address");
+                    valid_email = null;
+                } else if (isEmailValid(edt.getText().toString()) == false) {
+                    edt.setError("Invalid Email Address");
+                    valid_email = null;
+                } else {
+                    valid_email = edt.getText().toString();
+                }
+            }
+
+            boolean isEmailValid(CharSequence email) {
+                return android.util.Patterns.EMAIL_ADDRESS.matcher(email)
+                        .matches();
+            } // end of TextWatcher (email)
+        });
+
         this.findViewById(R.id.createAccountButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 HashMap<String, String> map = new HashMap<>();
-                EditText emailInput = findViewById(R.id.emailEditText);
-                EditText passwordInput = findViewById(R.id.passwordEditText);
-                EditText fNameInput = findViewById(R.id.firstNameEditText);
-                EditText lNameInput = findViewById(R.id.lastNameEditText);
+
                 String email = emailInput.getText().toString().trim();
                 String password = passwordInput.getText().toString().trim();
                 String fName = fNameInput.getText().toString().trim();
