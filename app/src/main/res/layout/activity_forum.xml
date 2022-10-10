@@ -47,21 +47,43 @@
 
                 </FrameLayout>
 
-                <EditText
-                    android:id="@+id/txtSearchForum"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:orientation="horizontal"
                     android:layout_weight="60"
-                    android:background="@drawable/rounded_button"
-                    android:bottomLeftRadius="10dp"
-                    android:bottomRightRadius="10dp"
-                    android:drawableRight="@android:drawable/ic_menu_search"
-                    android:inputType="textPersonName"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="Search"
-                    android:topLeftRadius="10dp"
-                    android:topRightRadius="10dp" />
+                    android:weightSum="100">
+
+                    <EditText
+                        android:id="@+id/txtSearchForum"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="80"
+                        android:background="@drawable/rounded_button"
+                        android:bottomLeftRadius="10dp"
+                        android:bottomRightRadius="10dp"
+                        android:inputType="text"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:hint="Search"
+                        android:topLeftRadius="10dp"
+                        android:topRightRadius="10dp" />
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="20"
+                        android:clickable="true"
+                        android:background="@drawable/rounded_button"
+                        android:onClick="forumSearch"
+                        app:srcCompat="@android:drawable/ic_search_category_default" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="20">
 
                 <FrameLayout
                     android:layout_width="match_parent"
