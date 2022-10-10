@@ -34,7 +34,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
 
-        retrofitInterface = retrofit.create(RetrofitInterface.class);
+        retrofitInterface = retrofit.create(RetrofitInterface.class); //
 
         EditText emailInput = findViewById(R.id.emailEditText);
         EditText passwordInput = findViewById(R.id.passwordEditText);
