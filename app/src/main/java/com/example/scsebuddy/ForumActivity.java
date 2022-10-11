@@ -70,11 +70,8 @@ public class ForumActivity extends AppCompatActivity {
         String orderBy = sortOrderSpinner.getSelectedItem().toString();
         String sortBy = sortBySpinner.getSelectedItem().toString();
         switch(sortBy){
-            case "Name":
+            case "Topic":
                 sortBy = "Title";
-                break;
-            case "Date":
-                sortBy = "Date_Published";
                 break;
             case "Posts":
                 sortBy = "No_Of_Posts";

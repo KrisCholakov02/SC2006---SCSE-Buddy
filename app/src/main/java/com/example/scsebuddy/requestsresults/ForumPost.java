@@ -12,6 +12,11 @@ public class ForumPost {
     private String description;
     private String name;
     private String topicID;
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
 
     public String getDatePublished() {
         return datePublished;
