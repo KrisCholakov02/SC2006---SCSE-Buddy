@@ -41,8 +41,8 @@ public interface RetrofitInterface {
 
 
     //Everything About Forum
-    @GET("/allTopics")
-    Call<TopicsResult> executeAllTopics();
+    @POST("/allTopics")
+    Call<TopicsResult> executeAllTopics(@Body HashMap<String, String> map);
 
     @POST("/forumPost")
     Call<Void> executeForumPost(@Body HashMap<String, String> map);

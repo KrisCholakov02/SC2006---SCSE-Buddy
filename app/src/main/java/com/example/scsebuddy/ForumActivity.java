@@ -37,6 +37,7 @@ public class ForumActivity extends AppCompatActivity {
     private RetrofitInterface retrofitInterface;
     EditText txtSearchForum;
     Context context;
+    Spinner sortOrderSpinner,sortBySpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +45,12 @@ public class ForumActivity extends AppCompatActivity {
         setContentView(R.layout.activity_forum);
         txtSearchForum = this.findViewById(R.id.txtSearchForum);
 
-        Spinner sortOrderSpinner = this.findViewById(R.id.sortOrderSpinner);
+        sortOrderSpinner = this.findViewById(R.id.sortOrderSpinner);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.sorting_order_spinner_content, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         adapter1.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         sortOrderSpinner.setAdapter(adapter1);
 
-        Spinner sortBySpinner = this.findViewById(R.id.sortTopicBySpinner);
+        sortBySpinner = this.findViewById(R.id.sortTopicBySpinner);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.sorting_topic_by_spinner_content, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         adapter2.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         sortBySpinner.setAdapter(adapter2);
@@ -57,32 +58,34 @@ public class ForumActivity extends AppCompatActivity {
         context = this;
         retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
         retrofitInterface = retrofit.create(RetrofitInterface.class);
-        Call<TopicsResult> getAllTopics = retrofitInterface.executeAllTopics();
 
-        getAllTopics.enqueue(new Callback<TopicsResult>() {
-            @Override
-            public void onResponse(Call<TopicsResult> call, Response<TopicsResult> response) {
-                if (response.code() == 200) {
-                    TopicsResult topicR = response.body();
+        //default loading
+        HashMap<String, String> map = new HashMap<>();
+        map.put("orderBy", "asc");
+        map.put("sortBy", "title");
+        updateRV(map);
+    }
 
-                    ArrayList<Topic> topics = new ArrayList<>(Arrays.asList(topicR.getTopics()));
+    public void sortByButton (View v){
+        String orderBy = sortOrderSpinner.getSelectedItem().toString();
+        String sortBy = sortBySpinner.getSelectedItem().toString();
+        switch(sortBy){
+            case "Name":
+                sortBy = "Title";
+                break;
+            case "Date":
+                sortBy = "Date_Published";
+                break;
+            case "Posts":
+                sortBy = "No_Of_Posts";
+                break;
+        }
+        // if forum search, use different updateRV()
 
-                    RecyclerView topicsRecyclerView = findViewById(R.id.topicsRecycleView);
-
-                    Topics_RecyclerViewAdapter adapter = new Topics_RecyclerViewAdapter(context, topics);
-                    topicsRecyclerView.setAdapter(adapter);
-                    topicsRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-
-                } else if (response.code() == 404) {
-                    Toast.makeText(ForumActivity.this, "No Data", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<TopicsResult> call, Throwable t) {
-                Toast.makeText(ForumActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
+        HashMap<String, String> map = new HashMap<>();
+        map.put("orderBy",orderBy);
+        map.put("sortBy", sortBy);
+        updateRV(map);
     }
 
     public void forumSearch (View v){
@@ -134,6 +137,35 @@ public class ForumActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void updateRV(HashMap map){
+        Call<TopicsResult> getAllTopics = retrofitInterface.executeAllTopics(map);
+
+        getAllTopics.enqueue(new Callback<TopicsResult>() {
+            @Override
+            public void onResponse(Call<TopicsResult> call, Response<TopicsResult> response) {
+                if (response.code() == 200) {
+                    TopicsResult topicR = response.body();
+
+                    ArrayList<Topic> topics = new ArrayList<>(Arrays.asList(topicR.getTopics()));
+
+                    RecyclerView topicsRecyclerView = findViewById(R.id.topicsRecycleView);
+
+                    Topics_RecyclerViewAdapter adapter = new Topics_RecyclerViewAdapter(context, topics);
+                    topicsRecyclerView.setAdapter(adapter);
+                    topicsRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+                } else if (response.code() == 404) {
+                    Toast.makeText(ForumActivity.this, "No Data", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TopicsResult> call, Throwable t) {
+                Toast.makeText(ForumActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 
