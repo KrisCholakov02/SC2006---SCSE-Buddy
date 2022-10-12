@@ -11,8 +11,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +49,8 @@ public class CourseViewActivity extends AppCompatActivity {
     TextView courseCodeTV,courseTitleTV;
     Context context;
 
+    Spinner sortOrderSpinner,sortBySpinner;
+
     //RecyclerView courseReviewRecycleView;
 
 
@@ -58,7 +62,18 @@ public class CourseViewActivity extends AppCompatActivity {
         courseCodeTV = this.findViewById(R.id.courseCodeTextView);
         courseTitleTV = this.findViewById(R.id.courseTitleTextView);
 
-        Context context = this;
+        //asc/desc
+        sortOrderSpinner = this.findViewById(R.id.sortOrderSpinner);
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.sorting_order_spinner_content, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+        adapter1.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+        sortOrderSpinner.setAdapter(adapter1);
+        //name,year,code
+        sortBySpinner = this.findViewById(R.id.sortBySpinner);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.courseReview_spinner, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+        adapter2.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+        sortBySpinner.setAdapter(adapter2);
+
+        context = this;
         retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
         retrofitInterface = retrofit.create(RetrofitInterface.class);
 
@@ -77,18 +92,25 @@ public class CourseViewActivity extends AppCompatActivity {
             else{
                 courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_outline);
             }
-
+            //default load
             HashMap<String, String> map = new HashMap<>();
             String courseCode = courseCodeTV.getText().toString();
             map.put("courseCode", courseCode);
+            map.put("orderBy", "desc");
+            map.put("sortBy", "Date_Published");
+            updateRV(map);
 
 
-            Call<CourseReviewResult> executeAllCourseReview = retrofitInterface.executeAllCourseReview(map);
+        }
+    }
 
-            executeAllCourseReview.enqueue(new Callback<CourseReviewResult>() {
-                @Override
-                public void onResponse(Call<CourseReviewResult> call, Response<CourseReviewResult> response) {
-                    if (response.code() == 200) {
+    public void updateRV(HashMap map){
+        Call<CourseReviewResult> executeAllCourseReview = retrofitInterface.executeAllCourseReview(map);
+
+        executeAllCourseReview.enqueue(new Callback<CourseReviewResult>() {
+            @Override
+            public void onResponse(Call<CourseReviewResult> call, Response<CourseReviewResult> response) {
+                if (response.code() == 200) {
 //                        TopicsResult topicR = response.body();
 //
 //                        ArrayList<Topic> topics = new ArrayList<>(Arrays.asList(topicR.getTopics()));
@@ -99,39 +121,54 @@ public class CourseViewActivity extends AppCompatActivity {
 //                        topicsRecyclerView.setAdapter(adapter);
 //                        topicsRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-                        CourseReviewResult courseR = response.body();
-                        ArrayList<CourseReview> reviews = new ArrayList<>(Arrays.asList(courseR.getCoursesReview()));
-                        Log.e("TEST", courseR.getCoursesReview()[0].getGrade()+"");
-                        RecyclerView courseReviewRecycleView = findViewById(R.id.courseReviewRecycleView);
+                    CourseReviewResult courseR = response.body();
+                    ArrayList<CourseReview> reviews = new ArrayList<>(Arrays.asList(courseR.getCoursesReview()));
+                    Log.e("TEST", courseR.getCoursesReview()[0].getGrade()+"");
+                    RecyclerView courseReviewRecycleView = findViewById(R.id.courseReviewRecycleView);
 
-                        CourseReview_RecyclerViewAdapter adapter = new CourseReview_RecyclerViewAdapter(context,reviews);
-                        courseReviewRecycleView.setAdapter(adapter);
-                        courseReviewRecycleView.setLayoutManager(new LinearLayoutManager(context));
-
-
+                    CourseReview_RecyclerViewAdapter adapter = new CourseReview_RecyclerViewAdapter(context,reviews);
+                    courseReviewRecycleView.setAdapter(adapter);
+                    courseReviewRecycleView.setLayoutManager(new LinearLayoutManager(context));
 
 
 
-                    } else if (response.code() == 404) {
-                        Toast.makeText(CourseViewActivity.this, "No Data", Toast.LENGTH_LONG).show();
-                    }
+
+
+                } else if (response.code() == 404) {
+                    Toast.makeText(CourseViewActivity.this, "No Data", Toast.LENGTH_LONG).show();
                 }
+            }
 
-                @Override
-                public void onFailure(Call<CourseReviewResult> call, Throwable t) {
-                    Toast.makeText(CourseViewActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            });
-
-
-
-        }
+            @Override
+            public void onFailure(Call<CourseReviewResult> call, Throwable t) {
+                Toast.makeText(CourseViewActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
     public void addReview(View v){
         Intent intent = new Intent(this, CoursePostActivity.class);
         intent.putExtra("courseCode", courseCodeTV.getText());
         startActivity(intent);
 
+    }
+
+    public void sortByButton(View v){
+        String orderBy = sortOrderSpinner.getSelectedItem().toString();
+        String sortBy = sortBySpinner.getSelectedItem().toString();
+        switch(sortBy){
+            case "Date":
+                sortBy = "Date_Published";
+                break;
+            case "Grade":
+                sortBy = "Grade";
+                break;
+        }
+        HashMap<String, String> map = new HashMap<>();
+        String courseCode = courseCodeTV.getText().toString();
+        map.put("courseCode", courseCode);
+        map.put("orderBy", orderBy);
+        map.put("sortBy", sortBy);
+        updateRV(map);
     }
 
 
