@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -129,6 +130,11 @@ public class ForumActivity extends AppCompatActivity {
 
                     RecyclerView forumPostRecyclerView = findViewById(R.id.topicsRecycleView);
                     forumPostRecyclerView.setVisibility(View.GONE);
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(ForumActivity.this);
+                    builder1.setMessage("No search result.");
+                    builder1.setCancelable(true);
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
                 }
             }
 
