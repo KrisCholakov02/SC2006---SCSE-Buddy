@@ -93,12 +93,54 @@ public class CourseActivity extends AppCompatActivity {
                 sortBy = "Code";
                 break;
         }
-
         HashMap<String, String> map = new HashMap<>();
-        map.put("email", email);
-        map.put("orderBy",orderBy);
-        map.put("sortBy", sortBy);
-        updateRV(map);
+        if(txtSearchCourse.getText().toString().trim().equals("")) {
+
+            map.put("email", email);
+            map.put("orderBy",orderBy);
+            map.put("sortBy", sortBy);
+            updateRV(map);
+        }
+        else {
+            map.put("email", email);
+            map.put("orderBy",orderBy);
+            map.put("sortBy", sortBy);
+            map.put("searchCourse", txtSearchCourse.getText().toString().trim());
+            updateRVSearch(map);
+        }
+
+
+    }
+
+    private void updateRVSearch(HashMap map){
+        Call<CoursesResult> getSearchCourse = retrofitInterface.executeSearchCourses(map);
+
+        getSearchCourse.enqueue(new Callback<CoursesResult>() {
+            @Override
+            public void onResponse(Call<CoursesResult> call, Response<CoursesResult> response) {
+                if (response.code() == 200) {
+                    CoursesResult coursesR = response.body();
+                    //Log.e("TEST", coursesR.getCourses()[0].getCode().toString());
+                    ArrayList<Course> courses = new ArrayList<>(Arrays.asList(coursesR.getCourses()));
+
+                    RecyclerView coursesRecyclerView = findViewById(R.id.coursesRecycleView);
+                    coursesRecyclerView.setVisibility(View.VISIBLE);
+                    Courses_RecyclerViewAdapter adapter = new Courses_RecyclerViewAdapter(context, courses);
+                    coursesRecyclerView.setAdapter(adapter);
+                    coursesRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+                } else if (response.code() == 404) {
+                    Toast.makeText(CourseActivity.this, "No Data", Toast.LENGTH_LONG).show();
+                    RecyclerView coursesRecyclerView = findViewById(R.id.coursesRecycleView);
+                    coursesRecyclerView.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CoursesResult> call, Throwable t) {
+                Toast.makeText(CourseActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void updateRV(HashMap map){
@@ -141,44 +183,17 @@ public class CourseActivity extends AppCompatActivity {
 
         SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
 
-        retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
-        retrofitInterface = retrofit.create(RetrofitInterface.class);
-
+        //default case
         HashMap<String, String> map = new HashMap<>();
         String email = sp.getString("USER_EMAIL", null);
         map.put("email", email);
         map.put("searchCourse", searchCourse);
+        map.put("orderBy", "asc");
+        map.put("sortBy", "code");
 
-        Context context = this;
+        updateRVSearch(map);
 
-        Call<CoursesResult> getSearchCourse = retrofitInterface.executeSearchCourses(map);
 
-        getSearchCourse.enqueue(new Callback<CoursesResult>() {
-            @Override
-            public void onResponse(Call<CoursesResult> call, Response<CoursesResult> response) {
-                if (response.code() == 200) {
-                    CoursesResult coursesR = response.body();
-                    //Log.e("TEST", coursesR.getCourses()[0].getCode().toString());
-                    ArrayList<Course> courses = new ArrayList<>(Arrays.asList(coursesR.getCourses()));
-
-                    RecyclerView coursesRecyclerView = findViewById(R.id.coursesRecycleView);
-                    coursesRecyclerView.setVisibility(View.VISIBLE);
-                    Courses_RecyclerViewAdapter adapter = new Courses_RecyclerViewAdapter(context, courses);
-                    coursesRecyclerView.setAdapter(adapter);
-                    coursesRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-
-                } else if (response.code() == 404) {
-                    Toast.makeText(CourseActivity.this, "No Data", Toast.LENGTH_LONG).show();
-                    RecyclerView coursesRecyclerView = findViewById(R.id.coursesRecycleView);
-                    coursesRecyclerView.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<CoursesResult> call, Throwable t) {
-                Toast.makeText(CourseActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
 
     }
 
