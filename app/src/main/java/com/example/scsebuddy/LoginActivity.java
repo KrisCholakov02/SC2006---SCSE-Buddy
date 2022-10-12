@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                         } else if (response.code() == 404) {
                             Toast.makeText(LoginActivity.this, "Wrong Credential", Toast.LENGTH_LONG).show();
                             AlertDialog.Builder builder1 = new AlertDialog.Builder(LoginActivity.this);
-                            builder1.setMessage(email + " is wrong.");
+                            builder1.setMessage("Email or Password is wrong.");
                             builder1.setCancelable(true);
                             AlertDialog alert11 = builder1.create();
                             alert11.show();
