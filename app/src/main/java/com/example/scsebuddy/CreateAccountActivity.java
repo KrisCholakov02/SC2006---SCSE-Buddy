@@ -82,47 +82,56 @@ public class CreateAccountActivity extends AppCompatActivity {
         this.findViewById(R.id.createAccountButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashMap<String, String> map = new HashMap<>();
+                if(valid_email!= null){
+                    HashMap<String, String> map = new HashMap<>();
+                    String email = emailInput.getText().toString().trim();
+                    String password = passwordInput.getText().toString().trim();
+                    String fName = fNameInput.getText().toString().trim();
+                    String lName = lNameInput.getText().toString().trim();
+                    map.put("email", email);
+                    map.put("password", password);
+                    map.put("fName", fName);
+                    map.put("lName", lName);
 
-                String email = emailInput.getText().toString().trim();
-                String password = passwordInput.getText().toString().trim();
-                String fName = fNameInput.getText().toString().trim();
-                String lName = lNameInput.getText().toString().trim();
-                map.put("email", email);
-                map.put("password", password);
-                map.put("fName", fName);
-                map.put("lName", lName);
+                    Call<Void> call = retrofitInterface.executeSignup(map);
 
-                Call<Void> call = retrofitInterface.executeSignup(map);
-
-                call.enqueue(new Callback<Void>() {
-                    @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
-                        if (response.code() == 200) {
-                            Toast.makeText(CreateAccountActivity.this, "Signed up successfully!", Toast.LENGTH_LONG).show();
-                            try {
-                                Thread.sleep(2000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
+                    call.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            if (response.code() == 200) {
+                                Toast.makeText(CreateAccountActivity.this, "Signed up successfully!", Toast.LENGTH_LONG).show();
+                                try {
+                                    Thread.sleep(2000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                Intent intent = new Intent(v.getContext(), LoginActivity.class);
+                                startActivity(intent);
+                            } else if (response.code() == 404) {
+                                //Toast.makeText(CreateAccountActivity.this, "Wrong Credentials!", Toast.LENGTH_LONG).show();
+                                AlertDialog.Builder builder1 = new AlertDialog.Builder(CreateAccountActivity.this);
+                                builder1.setMessage(valid_email + " is used.");
+                                builder1.setCancelable(true);
+                                AlertDialog alert11 = builder1.create();
+                                alert11.show();
                             }
-                            Intent intent = new Intent(v.getContext(), LoginActivity.class);
-                            startActivity(intent);
-                        } else if (response.code() == 404) {
-                            //Toast.makeText(CreateAccountActivity.this, "Wrong Credentials!", Toast.LENGTH_LONG).show();
-                            AlertDialog.Builder builder1 = new AlertDialog.Builder(CreateAccountActivity.this);
-                            builder1.setMessage(valid_email + " is used.");
-                            builder1.setCancelable(true);
-                            AlertDialog alert11 = builder1.create();
-                            alert11.show();
-                        }
                         }
 
 
-                    @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
-                        Toast.makeText(CreateAccountActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            Toast.makeText(CreateAccountActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+                } else{
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(CreateAccountActivity.this);
+                    builder1.setMessage("Email Not Valid");
+                    builder1.setCancelable(true);
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                }
+
+
             }
         });
     }
