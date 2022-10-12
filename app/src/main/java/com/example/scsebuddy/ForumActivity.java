@@ -73,7 +73,7 @@ public class ForumActivity extends AppCompatActivity {
             case "Topic":
                 sortBy = "Title";
                 break;
-            case "Posts":
+            case "Count":
                 sortBy = "No_Of_Posts";
                 break;
         }
