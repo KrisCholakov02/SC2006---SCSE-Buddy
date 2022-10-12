@@ -113,13 +113,15 @@ public class CourseActivity extends AppCompatActivity {
                     ArrayList<Course> courses = new ArrayList<>(Arrays.asList(coursesR.getCourses()));
 
                     RecyclerView coursesRecyclerView = findViewById(R.id.coursesRecycleView);
-
+                    coursesRecyclerView.setVisibility(View.VISIBLE);
                     Courses_RecyclerViewAdapter adapter = new Courses_RecyclerViewAdapter(context, courses);
                     coursesRecyclerView.setAdapter(adapter);
                     coursesRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
                 } else if (response.code() == 404) {
                     Toast.makeText(CourseActivity.this, "No Data", Toast.LENGTH_LONG).show();
+                    RecyclerView coursesRecyclerView = findViewById(R.id.coursesRecycleView);
+                    coursesRecyclerView.setVisibility(View.GONE);
                 }
             }
 
@@ -160,13 +162,15 @@ public class CourseActivity extends AppCompatActivity {
                     ArrayList<Course> courses = new ArrayList<>(Arrays.asList(coursesR.getCourses()));
 
                     RecyclerView coursesRecyclerView = findViewById(R.id.coursesRecycleView);
-
+                    coursesRecyclerView.setVisibility(View.VISIBLE);
                     Courses_RecyclerViewAdapter adapter = new Courses_RecyclerViewAdapter(context, courses);
                     coursesRecyclerView.setAdapter(adapter);
                     coursesRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
                 } else if (response.code() == 404) {
                     Toast.makeText(CourseActivity.this, "No Data", Toast.LENGTH_LONG).show();
+                    RecyclerView coursesRecyclerView = findViewById(R.id.coursesRecycleView);
+                    coursesRecyclerView.setVisibility(View.GONE);
                 }
             }
 

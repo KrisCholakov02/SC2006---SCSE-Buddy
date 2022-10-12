@@ -114,6 +114,7 @@ public class ForumActivity extends AppCompatActivity {
                     ArrayList<ForumPost> posts = new ArrayList<>(Arrays.asList(forumR.getForumPost()));
                     //Log.e("TEST", forumR.getCoursesReview()[0].getGrade()+"");
                     RecyclerView forumPostRecyclerView = findViewById(R.id.topicsRecycleView);
+                    forumPostRecyclerView.setVisibility(View.VISIBLE);
 
                     ForumPost_RecyclerViewAdapter adapter = new ForumPost_RecyclerViewAdapter(context,posts);
                     forumPostRecyclerView.setAdapter(adapter);
@@ -125,6 +126,9 @@ public class ForumActivity extends AppCompatActivity {
 
                 } else if (response.code() == 404) {
                     Toast.makeText(ForumActivity.this, "No Data", Toast.LENGTH_LONG).show();
+
+                    RecyclerView forumPostRecyclerView = findViewById(R.id.topicsRecycleView);
+                    forumPostRecyclerView.setVisibility(View.GONE);
                 }
             }
 
