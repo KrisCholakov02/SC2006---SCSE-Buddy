@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -133,6 +134,11 @@ public class CourseActivity extends AppCompatActivity {
                     Toast.makeText(CourseActivity.this, "No Data", Toast.LENGTH_LONG).show();
                     RecyclerView coursesRecyclerView = findViewById(R.id.coursesRecycleView);
                     coursesRecyclerView.setVisibility(View.GONE);
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(CourseActivity.this);
+                    builder1.setMessage("No search result.");
+                    builder1.setCancelable(true);
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
                 }
             }
 
