@@ -190,7 +190,7 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="left"
                             android:text="Go"
-                            android:textSize="10sp"
+                            android:textSize="8sp"
                             android:id="@+id/sortBtn"
                             android:onClick="sortByButton"
                             android:backgroundTint="@color/white"
