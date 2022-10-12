@@ -29,7 +29,7 @@
     <string-array name="grade_by_spinner">
         <item>5</item>
         <item>4</item>
-        <item>3-</item>
+        <item>3</item>
         <item>2</item>
         <item>1</item>
     </string-array>
