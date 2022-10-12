@@ -11,6 +11,9 @@ public class CourseReview {
     private String datePublished;
     private String courseCode;
     private String name;
+    private String email;
+
+    public String getEmail() { return  email;}
 
     public String getName() {
         return name;
