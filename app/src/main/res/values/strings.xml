@@ -23,7 +23,7 @@
     </string-array>
     <string-array name="sorting_topic_by_spinner_content">
         <item>Topic</item>
-        <item>Posts</item>
+        <item>Count</item>
     </string-array>
 
     <string-array name="grade_by_spinner">
