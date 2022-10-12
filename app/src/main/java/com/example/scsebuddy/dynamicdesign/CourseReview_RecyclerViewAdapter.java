@@ -47,6 +47,7 @@ public class CourseReview_RecyclerViewAdapter extends RecyclerView.Adapter<Cours
         holder.courseReviewTextView.setText(reviews.get(position).getDescription());
         holder.postByTextView.setText("Post By: " + reviews.get(position).getName());
         holder.datePostedTextView.setText("Date Posted: " + reviews.get(position).getDatePublished());
+        holder.gradeTextView.setText("Grade: " + reviews.get(position).getGrade());
     }
 
     @Override
@@ -57,7 +58,7 @@ public class CourseReview_RecyclerViewAdapter extends RecyclerView.Adapter<Cours
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
 //        TextView topicTitleTextView, topicDescriptionTextView, topicNoOfPostsTextView;
-        TextView courseReviewTextView, postByTextView, datePostedTextView;
+        TextView courseReviewTextView, postByTextView, datePostedTextView, gradeTextView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -65,6 +66,7 @@ public class CourseReview_RecyclerViewAdapter extends RecyclerView.Adapter<Cours
             courseReviewTextView = itemView.findViewById(R.id.courseReviewTextView);
             postByTextView = itemView.findViewById(R.id.postByTextView);
             datePostedTextView = itemView.findViewById(R.id.datePostedTextView);
+            gradeTextView = itemView.findViewById(R.id.gradeTextView);
 
 
 //            topicTitleTextView = itemView.findViewById(R.id.topicTitleTextView);

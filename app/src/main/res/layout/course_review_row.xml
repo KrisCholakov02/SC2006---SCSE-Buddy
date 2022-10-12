@@ -67,6 +67,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="15sp"
+                        android:text="Grade:"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textColor="@color/grey_text"
+                        android:gravity="left"
+                        android:id="@+id/gradeTextView">
+                    </TextView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
                         android:text="Review:"
                         android:fontFamily="@font/poppins_medium"
                         android:textColor="@color/grey_text"
