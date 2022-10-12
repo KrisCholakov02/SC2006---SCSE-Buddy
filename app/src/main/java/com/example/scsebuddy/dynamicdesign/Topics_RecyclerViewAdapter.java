@@ -72,6 +72,7 @@ public class Topics_RecyclerViewAdapter extends RecyclerView.Adapter<Topics_Recy
             final Intent intent;
             intent = new Intent(context1, ForumViewActivity.class);
             intent.putExtra("topicTitle", topicTitleTextView.getText().toString());
+            intent.putExtra("noOfPosts", topicNoOfPostsTextView.getText().toString());
             Log.e("HELLO", topicTitleTextView.getText().toString());
             context1.startActivity(intent);
         }

@@ -67,6 +67,7 @@ public class ForumPostActivity extends AppCompatActivity {
 
         SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_WORLD_READABLE);
         String email = sp.getString("USER_EMAIL", "");
+        int noOfPosts = sp.getInt("noOfPosts", 0)+1;
 
         if(annoymousCb.isChecked()){
             email = "Anonymous";
@@ -86,6 +87,7 @@ public class ForumPostActivity extends AppCompatActivity {
         map.put("topic", topicSpinner.getSelectedItem().toString());
         map.put("dateTime", sdf.format(date));
         map.put("content", contentEditText.getText()+"");
+        map.put("noOfPosts", noOfPosts + "");
 
         Call<Void> call = retrofitInterface.executeForumPost(map);
 
