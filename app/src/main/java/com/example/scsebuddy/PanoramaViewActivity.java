@@ -9,7 +9,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 
-public class PanoramaView extends AppCompatActivity {
+public class PanoramaViewActivity extends AppCompatActivity {
 
     private static VrPanoramaView panoramaView;
 

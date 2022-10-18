@@ -67,7 +67,7 @@ public class MapActivity extends AppCompatActivity {
 
     //Bottom buttons
     public void mapScreen (View v){
-        Intent intent = new Intent(v.getContext(), PanoramaView.class);
+        Intent intent = new Intent(v.getContext(), PanoramaViewActivity.class);
         startActivity(intent);
     }
 
