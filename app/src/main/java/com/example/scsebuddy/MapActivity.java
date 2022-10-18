@@ -2,17 +2,13 @@ package com.example.scsebuddy;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -71,7 +67,7 @@ public class MapActivity extends AppCompatActivity {
 
     //Bottom buttons
     public void mapScreen (View v){
-        Intent intent = new Intent(v.getContext(),MapActivity.class);
+        Intent intent = new Intent(v.getContext(), PanoramaView.class);
         startActivity(intent);
     }
 

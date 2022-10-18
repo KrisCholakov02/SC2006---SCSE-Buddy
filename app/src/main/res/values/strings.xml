@@ -46,7 +46,7 @@
         <item>Survey</item>
         <item>Index Swap</item>
     </string-array>
-    
+
     <string-array name="courseReview_spinner">
         <item>Date</item>
         <item>Grade</item>
