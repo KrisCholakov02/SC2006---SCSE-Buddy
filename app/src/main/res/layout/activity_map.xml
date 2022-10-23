@@ -23,31 +23,51 @@
             android:weightSum="100">
 
             <FrameLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="45">
+                android:layout_weight="10">
 
             </FrameLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="10"
+                android:layout_weight="60"
                 android:orientation="vertical"
                 android:weightSum="100">
 
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="20">
+                    android:layout_weight="8">
 
                 </FrameLayout>
 
                 <EditText
-                    android:id="@+id/txtSearchMap"
+                    android:id="@+id/txtStartSearch"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="60"
+                    android:layout_weight="40"
+                    android:background="@drawable/rounded_button"
+                    android:bottomLeftRadius="10dp"
+                    android:bottomRightRadius="10dp"
+                    android:drawableRight="@android:drawable/ic_menu_search"
+                    android:inputType="textPersonName"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="Search"
+                    android:topLeftRadius="10dp"
+                    android:topRightRadius="10dp" />
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4"/>
+
+                <EditText
+                    android:id="@+id/txtEndSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="40"
                     android:background="@drawable/rounded_button"
                     android:bottomLeftRadius="10dp"
                     android:bottomRightRadius="10dp"
@@ -62,16 +82,32 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="20">
+                    android:layout_weight="8">
 
                 </FrameLayout>
 
             </LinearLayout>
 
-            <FrameLayout
-                android:layout_width="match_parent"
+
+            <Button
+                android:id="@+id/btnNavigate"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="45"></FrameLayout>
+                android:layout_gravity="left"
+                android:text="GO"
+                android:textSize="15sp"
+                android:layout_weight="20"
+                android:onClick="navigateButton"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/custom_black"/>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="10"></FrameLayout>
+
+
+
         </LinearLayout>
 
         <FrameLayout

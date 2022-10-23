@@ -6,15 +6,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MapActivity extends AppCompatActivity {
 
+    EditText txtStartSearch, txtEndSearch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +26,9 @@ public class MapActivity extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
 
         String email = sp.getString("USER_EMAIL", null);
+         txtStartSearch = this.findViewById(R.id.txtStartSearch);
+         txtEndSearch = this.findViewById(R.id.txtEndSearch);
+
 
         if (email == null) {
             this.findViewById(R.id.btnForum).setVisibility(View.GONE);
@@ -64,6 +70,14 @@ public class MapActivity extends AppCompatActivity {
         }
 
     }
+
+    public void navigateButton (View v){
+        //txtStartSearch
+        //txtEndSearch
+        Log.e("HHH", txtStartSearch.getText().toString());
+        Log.e("HHH", txtEndSearch.getText().toString());
+    }
+
 
     //Bottom buttons
     public void mapScreen (View v){
