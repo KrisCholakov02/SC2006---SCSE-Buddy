@@ -96,11 +96,17 @@ public class MapActivity extends AppCompatActivity {
     }
 
     public void navigateButton (View v){
+
+        retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
+        retrofitInterface = retrofit.create(RetrofitInterface.class);
+
         String start = txtStartSearch.getText().toString();
         String destination = txtEndSearch.getText().toString();
+
         HashMap<String, String> map = new HashMap<>();
         map.put("start", start);
         map.put("destination", destination);
+        Log.e("HHH", map.toString());
 
         Call<PathResult> getPath = retrofitInterface.executeGetPath(map);
 
