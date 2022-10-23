@@ -54,4 +54,8 @@ public interface RetrofitInterface {
     @POST("/searchPost")
     Call<ForumPostResult> executeSearchPost(@Body HashMap<String, String> map);
 
+    // Map
+
+    @POST("/getPath")
+    Call<PathResult> executeGetPath(@Body HashMap<String, String> map);
 }

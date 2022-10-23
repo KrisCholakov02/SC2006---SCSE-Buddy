@@ -15,7 +15,28 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.scsebuddy.requestsresults.ConstantVariables;
+import com.example.scsebuddy.requestsresults.Course;
+import com.example.scsebuddy.requestsresults.CoursesResult;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import com.example.scsebuddy.requestsresults.Location;
+import com.example.scsebuddy.requestsresults.PathResult;
+import com.example.scsebuddy.requestsresults.RetrofitInterface;
+
 public class MapActivity extends AppCompatActivity {
+    private Retrofit retrofit;
+    private RetrofitInterface retrofitInterface;
+
 
     EditText txtStartSearch, txtEndSearch;
     @Override
@@ -60,6 +81,9 @@ public class MapActivity extends AppCompatActivity {
             loginButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
             loginButton.setGravity(Gravity.CENTER);
 
+            retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
+            retrofitInterface = retrofit.create(RetrofitInterface.class);
+
             loginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -72,10 +96,40 @@ public class MapActivity extends AppCompatActivity {
     }
 
     public void navigateButton (View v){
-        //txtStartSearch
-        //txtEndSearch
-        Log.e("HHH", txtStartSearch.getText().toString());
-        Log.e("HHH", txtEndSearch.getText().toString());
+        String start = txtStartSearch.getText().toString();
+        String destination = txtEndSearch.getText().toString();
+        HashMap<String, String> map = new HashMap<>();
+        map.put("start", start);
+        map.put("destination", destination);
+
+        Call<PathResult> getPath = retrofitInterface.executeGetPath(map);
+
+        getPath.enqueue(new Callback<PathResult>() {
+            @Override
+            public void onResponse(Call<PathResult> call, Response<PathResult> response) {
+                if (response.code() == 200) {
+                    PathResult pathR = response.body();
+                    ArrayList<Location> locations = new ArrayList<>(Arrays.asList(pathR.getLocations()));
+
+                    for (int i = 0; i < locations.size(); i++) {
+                        Location location = locations.get(i);
+                        System.out.println(location.getName());
+                        System.out.println(location.getCode());
+                        System.out.println(location.getLevel());
+                        System.out.println(location.getPhotoId());
+                        System.out.println("");
+                    }
+
+                } else if (response.code() == 404){
+                    Log.e("HHH", "No such start/destination");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PathResult> call, Throwable t) {
+
+            }
+        });
     }
 
 
