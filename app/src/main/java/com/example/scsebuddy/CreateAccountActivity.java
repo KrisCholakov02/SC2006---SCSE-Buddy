@@ -44,7 +44,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         EditText passwordInput = findViewById(R.id.passwordEditText);
         EditText fNameInput = findViewById(R.id.firstNameEditText);
         EditText lNameInput = findViewById(R.id.lastNameEditText);
-
+        EditText password1Input = findViewById(R.id.password1EditText);
 
         emailInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -82,10 +82,12 @@ public class CreateAccountActivity extends AppCompatActivity {
         this.findViewById(R.id.createAccountButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(valid_email!= null){
+                String password = passwordInput.getText().toString().trim();
+                String password1 = password1Input.getText().toString().trim();
+                if(valid_email!= null && password1.equals(password)){
                     HashMap<String, String> map = new HashMap<>();
                     String email = emailInput.getText().toString().trim();
-                    String password = passwordInput.getText().toString().trim();
+                    //String password = passwordInput.getText().toString().trim();
                     String fName = fNameInput.getText().toString().trim();
                     String lName = lNameInput.getText().toString().trim();
                     map.put("email", email);
@@ -116,22 +118,26 @@ public class CreateAccountActivity extends AppCompatActivity {
                                 alert11.show();
                             }
                         }
-
-
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
                             Toast.makeText(CreateAccountActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
                 } else{
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(CreateAccountActivity.this);
-                    builder1.setMessage("Email Not Valid");
-                    builder1.setCancelable(true);
-                    AlertDialog alert11 = builder1.create();
-                    alert11.show();
+                    if(!password1.equals(password)){
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(CreateAccountActivity.this);
+                        builder1.setMessage("Password does not match!");
+                        builder1.setCancelable(true);
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
+                    }else{
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(CreateAccountActivity.this);
+                        builder1.setMessage("Email Not Valid");
+                        builder1.setCancelable(true);
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
+                    }
                 }
-
-
             }
         });
     }
