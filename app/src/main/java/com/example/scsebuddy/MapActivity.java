@@ -36,7 +36,7 @@ import com.example.scsebuddy.requestsresults.RetrofitInterface;
 public class MapActivity extends AppCompatActivity {
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
-
+    private String[] path;
 
     EditText txtStartSearch, txtEndSearch;
     @Override
@@ -50,7 +50,7 @@ public class MapActivity extends AppCompatActivity {
          txtStartSearch = this.findViewById(R.id.txtStartSearch);
          txtEndSearch = this.findViewById(R.id.txtEndSearch);
 
-
+    loadData();
         if (email == null) {
             this.findViewById(R.id.btnForum).setVisibility(View.GONE);
             this.findViewById(R.id.btnCourse).setVisibility(View.GONE);
@@ -94,6 +94,45 @@ public class MapActivity extends AppCompatActivity {
         }
 
     }
+    private void loadData(){
+        retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
+        retrofitInterface = retrofit.create(RetrofitInterface.class);
+        Call<PathResult> getAllPath = retrofitInterface.executeGetAllPath();
+
+        getAllPath.enqueue(new Callback<PathResult>() {
+            @Override
+            public void onResponse(Call<PathResult> call, Response<PathResult> response) {
+                if (response.code() == 200) {
+                    PathResult pathR = response.body();
+                    ArrayList<Location> locations = new ArrayList<>(Arrays.asList(pathR.getLocations()));
+//                    path = new String[locations.size()];
+//                    for(int i = 0; i <locations.size(); i++){
+//                        Location location = locations.get(i);
+//                        System.out.println(location.getPhotoId());
+//                        path[i] = location.getPhotoId();
+//                    }
+
+                        for (int i = 0; i < 3; i++) {
+                        Location location = locations.get(i);
+                        System.out.println(location.getName());
+                        System.out.println(location.getCode());
+                        System.out.println(location.getLevel());
+                        System.out.println(location.getPhotoId());
+                        System.out.println("");
+                    }
+
+                } else if (response.code() == 404){
+                    Log.e("HHH", "No such start/destination");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PathResult> call, Throwable t) {
+
+            }
+        });
+
+    }
 
     public void navigateButton (View v){
 
@@ -116,15 +155,21 @@ public class MapActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     PathResult pathR = response.body();
                     ArrayList<Location> locations = new ArrayList<>(Arrays.asList(pathR.getLocations()));
-
-                    for (int i = 0; i < locations.size(); i++) {
+                    path = new String[locations.size()];
+                    for(int i = 0; i <locations.size(); i++){
                         Location location = locations.get(i);
-                        System.out.println(location.getName());
-                        System.out.println(location.getCode());
-                        System.out.println(location.getLevel());
                         System.out.println(location.getPhotoId());
-                        System.out.println("");
+                        path[i] = location.getPhotoId();
                     }
+
+//                        for (int i = 0; i < locations.size(); i++) {
+//                        Location location = locations.get(i);
+//                        System.out.println(location.getName());
+//                        System.out.println(location.getCode());
+//                        System.out.println(location.getLevel());
+//                        System.out.println(location.getPhotoId());
+//                        System.out.println("");
+//                    }
 
                 } else if (response.code() == 404){
                     Log.e("HHH", "No such start/destination");
@@ -142,6 +187,7 @@ public class MapActivity extends AppCompatActivity {
     //Bottom buttons
     public void mapScreen (View v){
         Intent intent = new Intent(v.getContext(), PanoramaViewActivity.class);
+        intent.putExtra("path", path);
         startActivity(intent);
     }
 

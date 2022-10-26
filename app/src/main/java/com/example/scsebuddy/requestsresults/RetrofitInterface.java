@@ -58,4 +58,8 @@ public interface RetrofitInterface {
 
     @POST("/getPath")
     Call<PathResult> executeGetPath(@Body HashMap<String, String> map);
+
+    @GET("/getAllPath")
+    Call<PathResult> executeGetAllPath();
+
 }
