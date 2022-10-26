@@ -10,6 +10,8 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -37,20 +39,20 @@ public class MapActivity extends AppCompatActivity {
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
     private String[] path;
-
-    EditText txtStartSearch, txtEndSearch;
+    Context context;
+    private AutoCompleteTextView txtStartSearch, txtEndSearch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-
+        context = this;
         SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
 
         String email = sp.getString("USER_EMAIL", null);
          txtStartSearch = this.findViewById(R.id.txtStartSearch);
          txtEndSearch = this.findViewById(R.id.txtEndSearch);
 
-    loadData();
+        loadData();
         if (email == null) {
             this.findViewById(R.id.btnForum).setVisibility(View.GONE);
             this.findViewById(R.id.btnCourse).setVisibility(View.GONE);
@@ -105,21 +107,30 @@ public class MapActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     PathResult pathR = response.body();
                     ArrayList<Location> locations = new ArrayList<>(Arrays.asList(pathR.getLocations()));
+                    String[] mapName= new String[locations.size()];
+                    for(int i = 0; i < locations.size(); i++){
+                        Location location = locations.get(i);
+                        mapName[i] = location.getName();
+                    }
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, mapName);
+                    txtStartSearch.setAdapter(adapter);
+                    txtEndSearch.setAdapter(adapter);
 //                    path = new String[locations.size()];
 //                    for(int i = 0; i <locations.size(); i++){
 //                        Location location = locations.get(i);
 //                        System.out.println(location.getPhotoId());
 //                        path[i] = location.getPhotoId();
 //                    }
+//
+//                        for (int i = 0; i < 3; i++) {
+//                        Location location = locations.get(i);
+//                        System.out.println(location.getName());
+//                        System.out.println(location.getCode());
+//                        System.out.println(location.getLevel());
+//                        System.out.println(location.getPhotoId());
+//                        System.out.println("");
+//                    }
 
-                        for (int i = 0; i < 3; i++) {
-                        Location location = locations.get(i);
-                        System.out.println(location.getName());
-                        System.out.println(location.getCode());
-                        System.out.println(location.getLevel());
-                        System.out.println(location.getPhotoId());
-                        System.out.println("");
-                    }
 
                 } else if (response.code() == 404){
                     Log.e("HHH", "No such start/destination");

@@ -43,7 +43,7 @@
 
                 </FrameLayout>
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/txtStartSearch"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -55,7 +55,7 @@
                     android:inputType="textPersonName"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="Search"
+                    android:hint="Search"
                     android:topLeftRadius="10dp"
                     android:topRightRadius="10dp" />
                 <FrameLayout
@@ -63,7 +63,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="4"/>
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/txtEndSearch"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -75,7 +75,7 @@
                     android:inputType="textPersonName"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="Search"
+                    android:hint="Search"
                     android:topLeftRadius="10dp"
                     android:topRightRadius="10dp" />
 
