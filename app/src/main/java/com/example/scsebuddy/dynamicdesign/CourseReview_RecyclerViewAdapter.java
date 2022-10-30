@@ -20,7 +20,7 @@ import java.util.Date;
 
 public class CourseReview_RecyclerViewAdapter extends RecyclerView.Adapter<CourseReview_RecyclerViewAdapter.MyViewHolder> {
      Context context;
-    ArrayList<CourseReview> reviews;
+     ArrayList<CourseReview> reviews;
 
     public CourseReview_RecyclerViewAdapter(Context context, ArrayList<CourseReview> reviews) {
         this.context = context;
@@ -43,7 +43,6 @@ public class CourseReview_RecyclerViewAdapter extends RecyclerView.Adapter<Cours
 //        holder.topicNoOfPostsTextView.setText(String.valueOf(numberOfPosts));
 //        holder.topicTitleTextView.setText(topics.get(position).getTitle());
         Log.e("TEST", "IM HERE?");
-
         holder.courseReviewTextView.setText(reviews.get(position).getDescription());
         holder.postByTextView.setText("Post By: " + reviews.get(position).getName());
         holder.datePostedTextView.setText("Date Posted: " + reviews.get(position).getDatePublished());
@@ -67,7 +66,6 @@ public class CourseReview_RecyclerViewAdapter extends RecyclerView.Adapter<Cours
             postByTextView = itemView.findViewById(R.id.postByTextView);
             datePostedTextView = itemView.findViewById(R.id.datePostedTextView);
             gradeTextView = itemView.findViewById(R.id.gradeTextView);
-
 
 //            topicTitleTextView = itemView.findViewById(R.id.topicTitleTextView);
 //            topicDescriptionTextView = itemView.findViewById(R.id.topicDescriptionTextView);

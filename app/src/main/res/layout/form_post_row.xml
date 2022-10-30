@@ -93,10 +93,27 @@
 
                 </LinearLayout>
 
-                <FrameLayout
+
+                <LinearLayout
                     android:layout_width="0dp"
+                    android:orientation="vertical"
                     android:layout_height="match_parent"
-                    android:layout_weight="10"></FrameLayout>
+                    android:layout_weight="10"
+                    android:weightSum="100">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="20"
+                        android:background="@drawable/thumb_up_24"
+                        android:id="@+id/btnForumLike"/>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="80"></FrameLayout>
+                </LinearLayout>
+
 
             </LinearLayout>
 
