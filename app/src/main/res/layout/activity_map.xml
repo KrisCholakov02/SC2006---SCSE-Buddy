@@ -141,9 +141,9 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/white"
-                android:drawableTop="@drawable/map"
+                android:drawableTop="@drawable/photo360"
                 android:onClick="mapScreen"
-                android:text="Map"
+                android:text="360"
                 android:textColor="@color/custom_black" />
 
             <Button
