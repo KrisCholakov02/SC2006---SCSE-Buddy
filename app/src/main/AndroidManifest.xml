@@ -17,14 +17,17 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:windowSoftInputMode="adjustPan"
             android:name=".PanoramaViewActivity"
             android:exported="false" />
         <activity
             android:name=".CoursePostActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".CourseViewActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".TopicAcceptActivity"
             android:exported="false" />
@@ -33,10 +36,12 @@
             android:exported="false" />
         <activity
             android:name=".ForumViewActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".ForumPostActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".ChangeAccountDetailsActivity"
             android:exported="false" />
@@ -51,16 +56,19 @@
             android:exported="false" />
         <activity
             android:name=".CourseActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".ForumActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".ForgetPwActivity"
             android:exported="false" />
         <activity
             android:name=".MapActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".ProfileActivity"
             android:exported="false" />

@@ -52,16 +52,17 @@
                     android:bottomLeftRadius="10dp"
                     android:bottomRightRadius="10dp"
                     android:drawableRight="@android:drawable/ic_menu_search"
+                    android:hint="Search"
                     android:inputType="textPersonName"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:hint="Search"
                     android:topLeftRadius="10dp"
                     android:topRightRadius="10dp" />
+
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="4"/>
+                    android:layout_weight="4" />
 
                 <AutoCompleteTextView
                     android:id="@+id/txtEndSearch"
@@ -72,10 +73,10 @@
                     android:bottomLeftRadius="10dp"
                     android:bottomRightRadius="10dp"
                     android:drawableRight="@android:drawable/ic_menu_search"
+                    android:hint="Search"
                     android:inputType="textPersonName"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:hint="Search"
                     android:topLeftRadius="10dp"
                     android:topRightRadius="10dp" />
 
@@ -94,12 +95,12 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="left"
-                android:text="GO"
-                android:textSize="15sp"
                 android:layout_weight="20"
-                android:onClick="navigateButton"
                 android:backgroundTint="@color/white"
-                android:textColor="@color/custom_black"/>
+                android:onClick="navigateButton"
+                android:text="GO"
+                android:textColor="@color/custom_black"
+                android:textSize="15sp" />
 
             <FrameLayout
                 android:layout_width="0dp"
@@ -107,13 +108,19 @@
                 android:layout_weight="10"></FrameLayout>
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/mapDirectionRecycleView"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="70">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mapDirectionRecycleView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </FrameLayout>
 
         <LinearLayout
             android:id="@+id/mainPagesButtonsLayout"
@@ -122,8 +129,7 @@
             android:layout_weight="15"
             android:background="@drawable/main_page_bar"
             android:orientation="horizontal"
-            android:weightSum="4"
-            >
+            android:weightSum="4">
 
             <Button
                 android:id="@+id/btnMap"

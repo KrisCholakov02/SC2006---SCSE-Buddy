@@ -177,6 +177,7 @@ public class MapActivity extends AppCompatActivity {
                         System.out.println(location.getPhotoId());
                         path[i] = location.getPhotoId();
                     }
+
                     ArrayList<Direction> directions = new ArrayList<>(Arrays.asList(pathR.getDirections()));
                     RecyclerView mapDirectionRecycleView = findViewById(R.id.mapDirectionRecycleView);
                     mapDirectionRecycleView.setVisibility(View.VISIBLE);
