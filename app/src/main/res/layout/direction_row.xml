@@ -50,7 +50,6 @@
                         android:layout_height="match_parent"
                         android:layout_weight="70"></FrameLayout>
 
-
                     <ImageView
                         android:id="@+id/DirectionArrowImageView"
                         android:layout_width="0dp"
