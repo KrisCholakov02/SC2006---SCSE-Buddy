@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ import com.example.scsebuddy.dynamicdesign.Courses_RecyclerViewAdapter;
 import com.example.scsebuddy.requestsresults.ConstantVariables;
 import com.example.scsebuddy.requestsresults.Course;
 import com.example.scsebuddy.requestsresults.CoursesResult;
+import com.example.scsebuddy.requestsresults.Location;
 import com.example.scsebuddy.requestsresults.RetrofitInterface;
 
 import java.util.ArrayList;
@@ -36,7 +38,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CourseActivity extends AppCompatActivity {
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
-    EditText txtSearchCourse;
+    AutoCompleteTextView txtSearchCourse;
     Context context;
     Spinner sortOrderSpinner,sortBySpinner;
     String email;
@@ -159,7 +161,15 @@ public class CourseActivity extends AppCompatActivity {
                     CoursesResult coursesR = response.body();
                     //Log.e("TEST", coursesR.getCourses()[0].getCode().toString());
                     ArrayList<Course> courses = new ArrayList<>(Arrays.asList(coursesR.getCourses()));
-
+//                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, mapName);
+//                    txtStartSearch.setAdapter(adapter);
+                    String[] courseName= new String[courses.size()];
+                    for(int i = 0; i < courses.size(); i++){
+                        Course course = courses.get(i);
+                        courseName[i] = course.getCode();
+                    }
+                    ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1,courseName);
+                    txtSearchCourse.setAdapter(adapter1);
                     RecyclerView coursesRecyclerView = findViewById(R.id.coursesRecycleView);
                     coursesRecyclerView.setVisibility(View.VISIBLE);
                     Courses_RecyclerViewAdapter adapter = new Courses_RecyclerViewAdapter(context, courses);

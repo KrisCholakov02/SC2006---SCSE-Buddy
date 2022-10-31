@@ -54,7 +54,7 @@
                         android:layout_weight="60"
                         android:weightSum="100">
 
-                        <EditText
+                        <AutoCompleteTextView
                             android:id="@+id/txtSearchCourse"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
