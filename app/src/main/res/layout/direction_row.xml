@@ -8,7 +8,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        android:foreground="@drawable/black_border">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,7 +66,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="120sp"
                 android:orientation="vertical"
                 android:layout_weight="30"
                 android:weightSum="100">
