@@ -1,6 +1,8 @@
 package com.example.scsebuddy;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +19,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.scsebuddy.dynamicdesign.Courses_RecyclerViewAdapter;
+import com.example.scsebuddy.dynamicdesign.MapDirection_RecyclerViewAdapter;
 import com.example.scsebuddy.requestsresults.ConstantVariables;
 import com.example.scsebuddy.requestsresults.Course;
 import com.example.scsebuddy.requestsresults.CoursesResult;
@@ -31,6 +35,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import com.example.scsebuddy.requestsresults.Direction;
 import com.example.scsebuddy.requestsresults.Location;
 import com.example.scsebuddy.requestsresults.PathResult;
 import com.example.scsebuddy.requestsresults.RetrofitInterface;
@@ -172,7 +177,12 @@ public class MapActivity extends AppCompatActivity {
                         System.out.println(location.getPhotoId());
                         path[i] = location.getPhotoId();
                     }
-
+                    ArrayList<Direction> directions = new ArrayList<>(Arrays.asList(pathR.getDirections()));
+                    RecyclerView mapDirectionRecycleView = findViewById(R.id.mapDirectionRecycleView);
+                    mapDirectionRecycleView.setVisibility(View.VISIBLE);
+                    MapDirection_RecyclerViewAdapter adapter = new MapDirection_RecyclerViewAdapter(context, directions);
+                    mapDirectionRecycleView.setAdapter(adapter);
+                    mapDirectionRecycleView.setLayoutManager(new LinearLayoutManager(context));
 //                        for (int i = 0; i < locations.size(); i++) {
 //                        Location location = locations.get(i);
 //                        System.out.println(location.getName());

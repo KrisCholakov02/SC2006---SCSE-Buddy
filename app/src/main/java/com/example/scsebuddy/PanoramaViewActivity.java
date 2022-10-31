@@ -6,7 +6,9 @@ import com.google.vr.sdk.widgets.pano.VrPanoramaView;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +25,8 @@ public class PanoramaViewActivity extends AppCompatActivity {
     private String[] path;
     private int pageNum = 0;
     TextView pageNumTextView;
+    //SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +38,7 @@ public class PanoramaViewActivity extends AppCompatActivity {
         if(b!=null){
             path = (String[]) b.get("path");
             if(path != null)
-            loadPanoramaImage(path[pageNum]);
+                loadPanoramaImage(path[pageNum]);
             else
                 loadPanoramaImage("a1");
         }
