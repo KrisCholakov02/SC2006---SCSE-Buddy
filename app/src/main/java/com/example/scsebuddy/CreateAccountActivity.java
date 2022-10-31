@@ -31,6 +31,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
     String valid_email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +62,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
                 is_Valid_Email(emailInput);
             }
+
             public void is_Valid_Email(EditText edt) {
                 if (edt.getText().toString() == null) {
                     edt.setError("Invalid Email Address");
@@ -84,53 +86,71 @@ public class CreateAccountActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String password = passwordInput.getText().toString().trim();
                 String password1 = password1Input.getText().toString().trim();
-                if(valid_email!= null && password1.equals(password)){
+                if (valid_email != null && password1.equals(password)) {
                     HashMap<String, String> map = new HashMap<>();
                     String email = emailInput.getText().toString().trim();
                     //String password = passwordInput.getText().toString().trim();
                     String fName = fNameInput.getText().toString().trim();
                     String lName = lNameInput.getText().toString().trim();
-                    map.put("email", email);
-                    map.put("password", password);
-                    map.put("fName", fName);
-                    map.put("lName", lName);
 
-                    Call<Void> call = retrofitInterface.executeSignup(map);
+                    if (!fName.isEmpty()) {
+                        if (!lName.isEmpty()) {
+                            map.put("email", email);
+                            map.put("password", password);
+                            map.put("fName", fName);
+                            map.put("lName", lName);
 
-                    call.enqueue(new Callback<Void>() {
-                        @Override
-                        public void onResponse(Call<Void> call, Response<Void> response) {
-                            if (response.code() == 200) {
-                                Toast.makeText(CreateAccountActivity.this, "Signed up successfully!", Toast.LENGTH_LONG).show();
-                                try {
-                                    Thread.sleep(2000);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
+                            Call<Void> call = retrofitInterface.executeSignup(map);
+
+                            call.enqueue(new Callback<Void>() {
+                                @Override
+                                public void onResponse(Call<Void> call, Response<Void> response) {
+                                    if (response.code() == 200) {
+                                        Toast.makeText(CreateAccountActivity.this, "Signed up successfully!", Toast.LENGTH_LONG).show();
+                                        try {
+                                            Thread.sleep(2000);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                        Intent intent = new Intent(v.getContext(), LoginActivity.class);
+                                        startActivity(intent);
+                                    } else if (response.code() == 404) {
+                                        //Toast.makeText(CreateAccountActivity.this, "Wrong Credentials!", Toast.LENGTH_LONG).show();
+                                        AlertDialog.Builder builder1 = new AlertDialog.Builder(CreateAccountActivity.this);
+                                        builder1.setMessage(valid_email + " is used.");
+                                        builder1.setCancelable(true);
+                                        AlertDialog alert11 = builder1.create();
+                                        alert11.show();
+                                    }
                                 }
-                                Intent intent = new Intent(v.getContext(), LoginActivity.class);
-                                startActivity(intent);
-                            } else if (response.code() == 404) {
-                                //Toast.makeText(CreateAccountActivity.this, "Wrong Credentials!", Toast.LENGTH_LONG).show();
-                                AlertDialog.Builder builder1 = new AlertDialog.Builder(CreateAccountActivity.this);
-                                builder1.setMessage(valid_email + " is used.");
-                                builder1.setCancelable(true);
-                                AlertDialog alert11 = builder1.create();
-                                alert11.show();
-                            }
+
+                                @Override
+                                public void onFailure(Call<Void> call, Throwable t) {
+                                    Toast.makeText(CreateAccountActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        } else {
+                            AlertDialog.Builder builder3 = new AlertDialog.Builder(CreateAccountActivity.this);
+                            builder3.setMessage("Empty Last Name");
+                            builder3.setCancelable(true);
+                            AlertDialog alert3 = builder3.create();
+                            alert3.show();
                         }
-                        @Override
-                        public void onFailure(Call<Void> call, Throwable t) {
-                            Toast.makeText(CreateAccountActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    });
-                } else{
-                    if(!password1.equals(password)){
+                    } else {
+                        AlertDialog.Builder builder2 = new AlertDialog.Builder(CreateAccountActivity.this);
+                        builder2.setMessage("Empty First Name");
+                        builder2.setCancelable(true);
+                        AlertDialog alert2 = builder2.create();
+                        alert2.show();
+                    }
+                } else {
+                    if (!password1.equals(password)) {
                         AlertDialog.Builder builder1 = new AlertDialog.Builder(CreateAccountActivity.this);
                         builder1.setMessage("Password does not match!");
                         builder1.setCancelable(true);
                         AlertDialog alert11 = builder1.create();
                         alert11.show();
-                    }else{
+                    } else {
                         AlertDialog.Builder builder1 = new AlertDialog.Builder(CreateAccountActivity.this);
                         builder1.setMessage("Email Not Valid");
                         builder1.setCancelable(true);
@@ -141,8 +161,9 @@ public class CreateAccountActivity extends AppCompatActivity {
             }
         });
     }
-    public void loginTextView (View v){
-        Intent intent = new Intent(v.getContext(),LoginActivity.class);
+
+    public void loginTextView(View v) {
+        Intent intent = new Intent(v.getContext(), LoginActivity.class);
         startActivity(intent);
     }
 }
