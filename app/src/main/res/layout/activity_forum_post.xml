@@ -67,7 +67,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="85"
                     android:orientation="vertical"
-                    android:weightSum="95">
+                    android:weightSum="98">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -104,6 +104,11 @@
 
                     </LinearLayout>
 
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"/>
+
                     <HorizontalScrollView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -129,7 +134,7 @@
                                     android:textColor="@color/white"
                                     android:text="Example"
                                     android:textAllCaps="false"
-                                    android:visibility="visible"></Button>
+                                    android:visibility="gone"></Button>
 
                                 <FrameLayout
                                     android:layout_width="3sp"
