@@ -18,6 +18,7 @@ import com.example.scsebuddy.requestsresults.ConstantVariables;
 import com.example.scsebuddy.requestsresults.LoginResult;
 
 import java.util.HashMap;
+import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -92,13 +93,17 @@ public class CreateAccountActivity extends AppCompatActivity {
                     //String password = passwordInput.getText().toString().trim();
                     String fName = fNameInput.getText().toString().trim();
                     String lName = lNameInput.getText().toString().trim();
+                    Random ran = new Random();
 
                     if (!fName.isEmpty()) {
                         if (!lName.isEmpty()) {
+                            int codeVerify = ran.nextInt(999999);
+
                             map.put("email", email);
                             map.put("password", password);
                             map.put("fName", fName);
                             map.put("lName", lName);
+                            map.put("codeVerify", codeVerify+"");
 
                             Call<Void> call = retrofitInterface.executeSignup(map);
 
@@ -106,13 +111,20 @@ public class CreateAccountActivity extends AppCompatActivity {
                                 @Override
                                 public void onResponse(Call<Void> call, Response<Void> response) {
                                     if (response.code() == 200) {
-                                        Toast.makeText(CreateAccountActivity.this, "Signed up successfully!", Toast.LENGTH_LONG).show();
-                                        try {
-                                            Thread.sleep(2000);
-                                        } catch (InterruptedException e) {
-                                            e.printStackTrace();
-                                        }
-                                        Intent intent = new Intent(v.getContext(), LoginActivity.class);
+//                                        Toast.makeText(CreateAccountActivity.this, "Signed up successfully!", Toast.LENGTH_LONG).show();
+//                                        try {
+//                                            Thread.sleep(2000);
+//                                        } catch (InterruptedException e) {
+//                                            e.printStackTrace();
+//                                        }
+//                                        Random ran = new Random();
+//                                        int codeVerify = ran.nextInt(9999999);
+                                        Intent intent = new Intent(v.getContext(), VerificationActivity.class);
+                                        intent.putExtra("codeVerify", codeVerify);
+                                        intent.putExtra("email", email);
+                                        intent.putExtra("password", password);
+                                        intent.putExtra("fName", fName);
+                                        intent.putExtra("lName", lName);
                                         startActivity(intent);
                                     } else if (response.code() == 404) {
                                         //Toast.makeText(CreateAccountActivity.this, "Wrong Credentials!", Toast.LENGTH_LONG).show();
