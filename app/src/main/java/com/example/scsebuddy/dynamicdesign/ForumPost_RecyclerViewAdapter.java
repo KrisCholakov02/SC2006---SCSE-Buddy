@@ -1,6 +1,7 @@
 package com.example.scsebuddy.dynamicdesign;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.scsebuddy.ForumPostActivity;
+import com.example.scsebuddy.MapActivity;
 import com.example.scsebuddy.R;
 import com.example.scsebuddy.requestsresults.CourseReview;
 import com.example.scsebuddy.requestsresults.ForumPost;
@@ -51,10 +54,12 @@ public class ForumPost_RecyclerViewAdapter extends RecyclerView.Adapter<ForumPos
             tag.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // Make new window appear with delete TODO
-                    Button x = (Button) view;
-                    String y = x.getText().toString();
-                    Log.e("TAGS",y);
+                    Intent intent = new Intent(view.getContext(), MapActivity.class);
+                    Button tag = (Button) view;
+                    String tagLocation = tag.getText().toString();
+                    intent.putExtra("mapDestination", tagLocation);
+
+                    context.startActivity(intent);
                 }
             });
             holder.postRowLayout.addView(tag);

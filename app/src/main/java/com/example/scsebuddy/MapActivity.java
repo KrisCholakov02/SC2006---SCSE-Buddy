@@ -100,6 +100,14 @@ public class MapActivity extends AppCompatActivity {
             });
         }
 
+        Intent intent = getIntent();
+        String destination = "";
+        try {
+            destination = intent.getStringExtra("mapDestination");
+        } catch (Exception e) {
+            Log.e("Exception", e.toString());
+        }
+        txtEndSearch.setText(destination);
     }
     private void loadData(){
         retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
@@ -120,21 +128,6 @@ public class MapActivity extends AppCompatActivity {
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, mapName);
                     txtStartSearch.setAdapter(adapter);
                     txtEndSearch.setAdapter(adapter);
-//                    path = new String[locations.size()];
-//                    for(int i = 0; i <locations.size(); i++){
-//                        Location location = locations.get(i);
-//                        System.out.println(location.getPhotoId());
-//                        path[i] = location.getPhotoId();
-//                    }
-//
-//                        for (int i = 0; i < 3; i++) {
-//                        Location location = locations.get(i);
-//                        System.out.println(location.getName());
-//                        System.out.println(location.getCode());
-//                        System.out.println(location.getLevel());
-//                        System.out.println(location.getPhotoId());
-//                        System.out.println("");
-//                    }
 
 
                 } else if (response.code() == 404){
