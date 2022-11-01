@@ -12,7 +12,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -22,7 +21,6 @@ import com.example.scsebuddy.requestsresults.ConstantVariables;
 import com.example.scsebuddy.requestsresults.RetrofitInterface;
 
 import java.util.Date;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
@@ -76,7 +74,7 @@ public class CoursePostActivity extends AppCompatActivity {
         AutoCompleteTextView tagSearchTextView = findViewById(R.id.tagSearchTextView);
         String textSearch = tagSearchTextView.getText().toString();
 
-        LinearLayout tagsLayout = findViewById(R.id.tagsLayout);
+        LinearLayout tagsLayout = findViewById(R.id.reviewTagsLayout);
 
         // make button look like example one TODO
         Button newTagButton = new Button(this);
@@ -100,6 +98,22 @@ public class CoursePostActivity extends AppCompatActivity {
             email = "Anonymous";
         }
 
+        String tagsString = "";
+        LinearLayout tagsLayout = findViewById(R.id.reviewTagsLayout);
+        int n = tagsLayout.getChildCount();
+        int cnt = 0;
+        for (int i = 0; i < n; i++) {
+            if (tagsLayout.getChildAt(i) instanceof Button) {
+                Button tag = (Button) tagsLayout.getChildAt(i);
+                String tagString = tag.getText().toString();
+                if (cnt == 0) tagsString += tagString;
+                else {
+                    tagsString += "," + tagString;
+                }
+                cnt++;
+            }
+        }
+
         Calendar calendar = Calendar.getInstance();
         Date date = (Date) calendar.getTime();
 //        System.out.println("AAA" + date);
@@ -112,6 +126,8 @@ public class CoursePostActivity extends AppCompatActivity {
         map.put("grade", gradeSpinner.getSelectedItem().toString());
         map.put("dateTime", sdf.format(date));
         map.put("content", courseReviewEditText.getText()+"");
+        map.put("tags", tagsString);
+
 
         Call<Void> call = retrofitInterface.executeCoursePost(map);
 

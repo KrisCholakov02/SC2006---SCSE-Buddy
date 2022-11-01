@@ -3,11 +3,6 @@ package com.example.scsebuddy.requestsresults;
 import java.util.ArrayList;
 
 public class CourseReview {
-//    private String code;
-//    private String title; //change
-//    private String aus;
-//    private int favorite;
-//    private int year;
     private int grade;
     private String description;
     private String datePublished;
