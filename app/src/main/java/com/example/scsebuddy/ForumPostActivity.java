@@ -9,8 +9,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -63,6 +66,26 @@ public class ForumPostActivity extends AppCompatActivity {
 
     }
 
+    public void postAddTag(View v) {
+        AutoCompleteTextView tagSearchTextView = findViewById(R.id.postTagSearchTextView);
+        String textSearch = tagSearchTextView.getText().toString();
+
+        LinearLayout tagsLayout = findViewById(R.id.postTagsLayout);
+
+        // make button look like example one TODO
+        Button newTagButton = new Button(this);
+        newTagButton.setBackground(tagsLayout.getChildAt(0).getBackground());
+        newTagButton.setText(textSearch);
+        newTagButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Make new window appear with delete TODO
+            }
+        });
+
+        tagsLayout.addView(newTagButton);
+    }
+
     public void addForumPost(View v){
 
         SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_WORLD_READABLE);
@@ -73,6 +96,22 @@ public class ForumPostActivity extends AppCompatActivity {
             email = "Anonymous";
         }
 
+
+        String tagsString = "";
+        LinearLayout tagsLayout = findViewById(R.id.postTagsLayout);
+        int n = tagsLayout.getChildCount();
+        int cnt = 0;
+        for (int i = 0; i < n; i++) {
+            if (tagsLayout.getChildAt(i) instanceof Button) {
+                Button tag = (Button) tagsLayout.getChildAt(i);
+                String tagString = tag.getText().toString();
+                if (cnt == 0) tagsString += tagString;
+                else {
+                    tagsString += "," + tagString;
+                }
+                cnt++;
+            }
+        }
 
         Calendar calendar = Calendar.getInstance();
         Date date = (Date) calendar.getTime();
@@ -88,6 +127,7 @@ public class ForumPostActivity extends AppCompatActivity {
         map.put("dateTime", sdf.format(date));
         map.put("content", contentEditText.getText()+"");
         map.put("noOfPosts", noOfPosts + "");
+        map.put("tags", tagsString);
 
         Call<Void> call = retrofitInterface.executeForumPost(map);
 

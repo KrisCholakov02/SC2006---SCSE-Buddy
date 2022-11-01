@@ -70,8 +70,8 @@ public class CoursePostActivity extends AppCompatActivity {
 
     }
 
-    public void addTag(View v) {
-        AutoCompleteTextView tagSearchTextView = findViewById(R.id.tagSearchTextView);
+    public void courseAddTag(View v) {
+        AutoCompleteTextView tagSearchTextView = findViewById(R.id.courseTagSearchTextView);
         String textSearch = tagSearchTextView.getText().toString();
 
         LinearLayout tagsLayout = findViewById(R.id.reviewTagsLayout);

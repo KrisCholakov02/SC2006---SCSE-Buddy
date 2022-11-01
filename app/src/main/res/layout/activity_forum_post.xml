@@ -20,13 +20,13 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="10">
+            android:layout_weight="5">
         </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="90"
+            android:layout_weight="95"
             android:orientation="horizontal"
             android:weightSum="100"
             android:background="@drawable/create_account_background">
@@ -43,7 +43,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="80"
                 android:orientation="vertical"
-                android:weightSum="101">
+                android:weightSum="100">
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -53,22 +53,14 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="10"
+                    android:layout_weight="8"
                     android:text="New Forum Post"
                     android:layout_gravity="center"
                     android:textAlignment="center"
-                    android:textSize="35sp"
+                    android:textSize="30sp"
                     android:fontFamily="@font/poppins_medium"
                     android:textColor="@color/grey_text"
                     />
-
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="3">
-
-                </FrameLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -76,6 +68,78 @@
                     android:layout_weight="85"
                     android:orientation="vertical"
                     android:weightSum="95">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="9"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/postTagSearchTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="80"
+                            android:background="@drawable/rounded_button"
+                            android:bottomLeftRadius="10dp"
+                            android:bottomRightRadius="10dp"
+                            android:drawableRight="@android:drawable/ic_menu_search"
+                            android:hint="Search"
+                            android:inputType="textPersonName"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:topLeftRadius="10dp"
+                            android:topRightRadius="10dp" />
+
+                        <Button
+                            android:id="@+id/postTagButton"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="20"
+                            android:background="@drawable/rounded_button"
+                            android:onClick="postAddTag"
+                            android:text="Tag"
+                            android:textColor="@color/white" />
+
+                    </LinearLayout>
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="9"
+                        android:orientation="horizontal"
+                        android:fillViewport="true">
+
+                        <LinearLayout
+                            android:id="@+id/postTagsLayout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:weightSum="100">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <Button
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:textColor="@color/white"
+                                    android:text="Example"
+                                    android:textAllCaps="false"
+                                    android:visibility="visible"></Button>
+
+                                <FrameLayout
+                                    android:layout_width="3sp"
+                                    android:layout_height="match_parent"></FrameLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </HorizontalScrollView>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -118,9 +182,10 @@
                         android:id="@+id/titleEditText"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="10"
+                        android:layout_weight="8"
                         android:ems="10"
                         android:inputType="text"
+                        android:textSize="20sp"
                         android:hint="Title"
                         android:paddingLeft="3pt"
                         android:background="@drawable/text_input_design"
@@ -141,8 +206,9 @@
                         android:id="@+id/contentEditText"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="50"
+                        android:layout_weight="45"
                         android:ems="10"
+                        android:textSize="20sp"
                         android:inputType="textMultiLine"
                         android:hint="Content Goes Here"
                         android:paddingLeft="3pt"
