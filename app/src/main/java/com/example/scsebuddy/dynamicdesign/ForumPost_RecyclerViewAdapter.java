@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +16,7 @@ import com.example.scsebuddy.R;
 import com.example.scsebuddy.requestsresults.CourseReview;
 import com.example.scsebuddy.requestsresults.ForumPost;
 
+import java.io.Console;
 import java.util.ArrayList;
 
 public class ForumPost_RecyclerViewAdapter extends RecyclerView.Adapter<ForumPost_RecyclerViewAdapter.MyViewHolder> {
@@ -35,17 +38,28 @@ public class ForumPost_RecyclerViewAdapter extends RecyclerView.Adapter<ForumPos
 
     @Override
     public void onBindViewHolder(@NonNull ForumPost_RecyclerViewAdapter.MyViewHolder holder, int position) {
-
-//        holder.topicDescriptionTextView.setText(topics.get(position).getDescription());
-//        int numberOfPosts = topics.get(position).getNumberOfPosts();
-//        holder.topicNoOfPostsTextView.setText(String.valueOf(numberOfPosts));
-//        holder.topicTitleTextView.setText(topics.get(position).getTitle());
         Log.e("TEST", "IM HERE?");
 
         holder.topicTitleTextView.setText(posts.get(position).getTitle());
         holder.postByTextView.setText("Post By: " + posts.get(position).getName());
         holder.datePostedTextView.setText("Date Posted: " + posts.get(position).getDatePublished());
         holder.forumPostTextView.setText(posts.get(position).getDescription());
+        for (int i = 0; i < posts.get(position).getTags().size(); i++) {
+            if (posts.get(position).getTags().get(i).equals("")) continue;
+            Button tag = new Button(context);
+            tag.setText(posts.get(position).getTags().get(i));
+            tag.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Make new window appear with delete TODO
+                    Button x = (Button) view;
+                    String y = x.getText().toString();
+                    Log.e("TAGS",y);
+                }
+            });
+            holder.postRowLayout.addView(tag);
+        }
+
     }
 
     @Override
@@ -54,9 +68,8 @@ public class ForumPost_RecyclerViewAdapter extends RecyclerView.Adapter<ForumPos
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-
-        //        TextView topicTitleTextView, topicDescriptionTextView, topicNoOfPostsTextView;
         TextView topicTitleTextView, postByTextView, datePostedTextView,forumPostTextView;
+        LinearLayout postRowLayout;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -65,11 +78,7 @@ public class ForumPost_RecyclerViewAdapter extends RecyclerView.Adapter<ForumPos
             postByTextView = itemView.findViewById(R.id.postByTextView);
             datePostedTextView = itemView.findViewById(R.id.datePostedTextView);
             forumPostTextView = itemView.findViewById(R.id.forumPostTextView);
-
-
-//            topicTitleTextView = itemView.findViewById(R.id.topicTitleTextView);
-//            topicDescriptionTextView = itemView.findViewById(R.id.topicDescriptionTextView);
-//            topicNoOfPostsTextView = itemView.findViewById(R.id.topicNoOfPostsTextView);
+            postRowLayout = itemView.findViewById(R.id.postRowLayout);
         }
     }
 }
