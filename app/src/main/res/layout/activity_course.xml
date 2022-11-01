@@ -109,11 +109,11 @@
                 android:layout_weight="5"></FrameLayout>
 
             <TextView
+                android:id="@+id/courseSearchMessageTextView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="5"
                 android:textSize="15sp"
-                android:text="@string/searched_by"
                 android:gravity="center"
                 android:textColor="@color/grey_text"
                 android:fontFamily="@font/poppins_medium"></TextView>

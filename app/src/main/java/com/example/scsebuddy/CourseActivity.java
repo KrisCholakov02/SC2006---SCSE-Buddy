@@ -9,6 +9,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.scsebuddy.dynamicdesign.Courses_RecyclerViewAdapter;
@@ -209,8 +212,9 @@ public class CourseActivity extends AppCompatActivity {
 
         updateRVSearch(map);
 
-
-
+        TextView courseSearchMessageTextView = findViewById(R.id.courseSearchMessageTextView);
+        Spanned styledText = Html.fromHtml(getString(R.string.searched_by, searchCourse), Html.FROM_HTML_MODE_LEGACY);
+        courseSearchMessageTextView.setText(styledText);
     }
 
     //Bottom buttons

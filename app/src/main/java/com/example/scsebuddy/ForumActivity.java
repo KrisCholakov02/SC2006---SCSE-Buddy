@@ -7,11 +7,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.scsebuddy.dynamicdesign.ForumPost_RecyclerViewAdapter;
@@ -94,6 +98,10 @@ public class ForumActivity extends AppCompatActivity {
         HashMap<String, String> map = new HashMap<>();
         String forumSearch = txtSearchForum.getText().toString();
         map.put("forumSearch", forumSearch);
+
+        TextView forumSearchMessageTextView = findViewById(R.id.forumSearchMessageTextViews);
+        Spanned styledText = Html.fromHtml(getString(R.string.searched_by, forumSearch), Html.FROM_HTML_MODE_LEGACY);
+        forumSearchMessageTextView.setText(styledText);
 
         Call<ForumPostResult> executeSearchPost = retrofitInterface.executeSearchPost(map);
 
