@@ -20,13 +20,13 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="10">
+            android:layout_weight="5">
         </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="90"
+            android:layout_weight="95"
             android:orientation="horizontal"
             android:weightSum="100"
             android:background="@drawable/create_account_background">
@@ -53,22 +53,17 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="10"
+                    android:layout_weight="8"
                     android:text="Course Review"
                     android:layout_gravity="center"
                     android:textAlignment="center"
-                    android:textSize="35sp"
+                    android:textSize="30sp"
                     android:fontFamily="@font/poppins_medium"
                     android:textColor="@color/grey_text"
                     />
 
 
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="3">
 
-                </FrameLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -83,6 +78,11 @@
                         android:orientation="horizontal"
                         android:layout_weight="5"
                         android:weightSum="100">
+
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="50"></FrameLayout>
 
                         <TextView
                             android:id="@+id/textView2"
@@ -100,10 +100,82 @@
                             android:id="@+id/gradeSpinner"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="75"
+                            android:layout_weight="25"
                             />
 
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="9"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/tagSearchTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="80"
+                            android:background="@drawable/rounded_button"
+                            android:bottomLeftRadius="10dp"
+                            android:bottomRightRadius="10dp"
+                            android:drawableRight="@android:drawable/ic_menu_search"
+                            android:hint="Search"
+                            android:inputType="textPersonName"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:topLeftRadius="10dp"
+                            android:topRightRadius="10dp" />
+
+                        <Button
+                            android:id="@+id/tagButton"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:text="Tag"
+                            android:textColor="@color/white"
+                            android:background="@drawable/rounded_button"
+                            android:layout_weight="20"
+                            android:onClick="addTag"></Button>
+
+                    </LinearLayout>
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="9"
+                        android:orientation="horizontal"
+                        android:fillViewport="true">
+                        
+                        <LinearLayout
+                            android:id="@+id/tagsLayout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:weightSum="100">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <Button
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:textColor="@color/white"
+                                    android:text="Example"
+                                    android:textAllCaps="false"
+                                    android:visibility="visible"></Button>
+
+                                <FrameLayout
+                                    android:layout_width="3sp"
+                                    android:layout_height="match_parent"></FrameLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </HorizontalScrollView>
 
                     <TextView
                         android:id="@+id/textView4"
@@ -120,10 +192,10 @@
                         android:id="@+id/courseCodeTextView"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="10"
+                        android:layout_weight="8"
                         android:ems="10"
                         android:hint="Course Code"
-                        android:textSize="25sp"
+                        android:textSize="20sp"
                         android:gravity="center_vertical"
                         android:paddingLeft="3pt"
                         android:background="@drawable/text_input_design"
@@ -144,14 +216,15 @@
                         android:id="@+id/courseReviewEditText"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="50"
-                        android:ems="10"
-                        android:inputType="textMultiLine"
-                        android:hint="Content Goes Here"
-                        android:paddingLeft="3pt"
+                        android:layout_weight="45"
                         android:background="@drawable/text_input_design"
+                        android:ems="10"
                         android:fontFamily="@font/poppins_medium"
-                        android:gravity="top"/>
+                        android:gravity="top"
+                        android:textSize="20sp"
+                        android:hint="Content Goes Here"
+                        android:inputType="textMultiLine"
+                        android:paddingLeft="3pt" />
 
                     <CheckBox
                         android:id="@+id/annoymousCb"

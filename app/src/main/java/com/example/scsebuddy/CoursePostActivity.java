@@ -8,9 +8,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,6 +71,27 @@ public class CoursePostActivity extends AppCompatActivity {
 
 
     }
+
+    public void addTag(View v) {
+        AutoCompleteTextView tagSearchTextView = findViewById(R.id.tagSearchTextView);
+        String textSearch = tagSearchTextView.getText().toString();
+
+        LinearLayout tagsLayout = findViewById(R.id.tagsLayout);
+
+        // make button look like example one TODO
+        Button newTagButton = new Button(this);
+        newTagButton.setBackground(tagsLayout.getChildAt(0).getBackground());
+        newTagButton.setText(textSearch);
+        newTagButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Make new window appear with delete TODO
+            }
+        });
+
+        tagsLayout.addView(newTagButton);
+    }
+
     public void addReviewPost (View v){
         SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_WORLD_READABLE);
         String email = sp.getString("USER_EMAIL", "");
