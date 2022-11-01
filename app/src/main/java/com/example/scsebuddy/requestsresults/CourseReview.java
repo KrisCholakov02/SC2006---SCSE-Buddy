@@ -1,5 +1,7 @@
 package com.example.scsebuddy.requestsresults;
 
+import java.util.ArrayList;
+
 public class CourseReview {
 //    private String code;
 //    private String title; //change
@@ -12,6 +14,7 @@ public class CourseReview {
     private String courseCode;
     private String name;
     private String email;
+    private ArrayList<String> tags;
 
     public String getEmail() { return  email;}
 
@@ -35,4 +38,7 @@ public class CourseReview {
         return courseCode;
     }
 
+    public ArrayList<String> getTags() {
+        return tags;
+    }
 }

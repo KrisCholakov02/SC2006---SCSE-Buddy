@@ -1,5 +1,7 @@
 package com.example.scsebuddy.requestsresults;
 
+import java.util.ArrayList;
+
 public class ForumPost {
     //    private String code;
 //    private String title; //change
@@ -13,6 +15,7 @@ public class ForumPost {
     private String name;
     private String topicID;
     private String email;
+    private ArrayList <String> tags;
 
     public String getEmail() {
         return email;
@@ -36,5 +39,9 @@ public class ForumPost {
 
     public String getTopicID() {
         return topicID;
+    }
+
+    public ArrayList<String> getTags() {
+        return tags;
     }
 }
