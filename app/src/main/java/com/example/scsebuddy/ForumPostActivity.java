@@ -173,6 +173,7 @@ public class ForumPostActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     Toast.makeText(ForumPostActivity.this, "Posted Successfully!", Toast.LENGTH_LONG).show();
                     Intent i = new Intent(context, ForumViewActivity.class);
+                    i.putExtra("topicTitle",topicSpinner.getSelectedItem().toString() + "");
                     startActivity(i);
 
                     try {
