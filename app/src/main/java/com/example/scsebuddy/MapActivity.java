@@ -137,10 +137,8 @@ public class MapActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<PathResult> call, Throwable t) {
-
             }
         });
-
     }
 
     public void navigateButton (View v){

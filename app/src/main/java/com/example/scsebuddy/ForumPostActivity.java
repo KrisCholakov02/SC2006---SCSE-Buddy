@@ -18,9 +18,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.scsebuddy.requestsresults.ConstantVariables;
+import com.example.scsebuddy.requestsresults.Location;
+import com.example.scsebuddy.requestsresults.PathResult;
 import com.example.scsebuddy.requestsresults.RetrofitInterface;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -38,6 +42,7 @@ public class ForumPostActivity extends AppCompatActivity {
     Spinner topicSpinner;
     CheckBox annoymousCb;
     EditText contentEditText, titleEditText;
+    AutoCompleteTextView tagSearchTextView;
 
     Context context;
     @Override
@@ -49,13 +54,14 @@ public class ForumPostActivity extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.topic_by_spinner, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         topicSpinner.setAdapter(adapter);
-
+        context = this;
         retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
         retrofitInterface = retrofit.create(RetrofitInterface.class);
 
         contentEditText = this.findViewById(R.id.contentEditText);
         titleEditText = this.findViewById(R.id.titleEditText);
         annoymousCb = this.findViewById(R.id.annoymousCb);
+        tagSearchTextView = findViewById(R.id.postTagSearchTextView);
 
         Intent ii = getIntent();
         Bundle b = ii.getExtras();
@@ -63,11 +69,41 @@ public class ForumPostActivity extends AppCompatActivity {
             selectValue(topicSpinner,b.get("forumTopic")+"");
             //Log.e("HELLO", b.get("topicTitle")+"");
         }
+        loadData();
+    }
 
+    private void loadData(){
+        retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
+        retrofitInterface = retrofit.create(RetrofitInterface.class);
+        Call<PathResult> getAllPath = retrofitInterface.executeGetAllPath();
+
+        getAllPath.enqueue(new Callback<PathResult>() {
+            @Override
+            public void onResponse(Call<PathResult> call, Response<PathResult> response) {
+                if (response.code() == 200) {
+                    PathResult pathR = response.body();
+                    ArrayList<Location> locations = new ArrayList<>(Arrays.asList(pathR.getLocations()));
+                    String[] mapName= new String[locations.size()];
+                    for(int i = 0; i < locations.size(); i++){
+                        Location location = locations.get(i);
+                        mapName[i] = location.getName();
+                    }
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, mapName);
+                    tagSearchTextView.setAdapter(adapter);
+
+
+                } else if (response.code() == 404){
+                    Log.e("HHH", "No such start/destination");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PathResult> call, Throwable t) {
+            }
+        });
     }
 
     public void postAddTag(View v) {
-        AutoCompleteTextView tagSearchTextView = findViewById(R.id.postTagSearchTextView);
         String textSearch = tagSearchTextView.getText().toString();
 
         LinearLayout tagsLayout = findViewById(R.id.postTagsLayout);

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -18,8 +19,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.scsebuddy.requestsresults.ConstantVariables;
+import com.example.scsebuddy.requestsresults.Location;
+import com.example.scsebuddy.requestsresults.PathResult;
 import com.example.scsebuddy.requestsresults.RetrofitInterface;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -41,13 +46,14 @@ public class CoursePostActivity extends AppCompatActivity {
     TextView courseCodeTextView ;
     EditText courseReviewEditText;
     CheckBox annoymousCb;
+    AutoCompleteTextView tagSearchTextView;
 
     Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_post);
-
+        context = this;
         gradeSpinner = this.findViewById(R.id.gradeSpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.grade_by_spinner, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
@@ -55,6 +61,7 @@ public class CoursePostActivity extends AppCompatActivity {
 
         courseCodeTextView = this.findViewById(R.id.courseCodeTextView);
         courseReviewEditText = this.findViewById(R.id.courseReviewEditText);
+        tagSearchTextView = findViewById(R.id.courseTagSearchTextView);
 
         annoymousCb = this.findViewById(R.id.annoymousCb);
 
@@ -66,12 +73,43 @@ public class CoursePostActivity extends AppCompatActivity {
         if(b!=null) {
             courseCodeTextView.setText(b.get("courseCode") + "");
         }
+        loadData();
+    }
 
+    private void loadData(){
+        retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
+        retrofitInterface = retrofit.create(RetrofitInterface.class);
+        Call<PathResult> getAllPath = retrofitInterface.executeGetAllPath();
+
+        getAllPath.enqueue(new Callback<PathResult>() {
+            @Override
+            public void onResponse(Call<PathResult> call, Response<PathResult> response) {
+                if (response.code() == 200) {
+                    PathResult pathR = response.body();
+                    ArrayList<Location> locations = new ArrayList<>(Arrays.asList(pathR.getLocations()));
+                    String[] mapName= new String[locations.size()];
+                    for(int i = 0; i < locations.size(); i++){
+                        Location location = locations.get(i);
+                        mapName[i] = location.getName();
+                    }
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, mapName);
+                    tagSearchTextView.setAdapter(adapter);
+
+
+                } else if (response.code() == 404){
+                    Log.e("HHH", "No such start/destination");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PathResult> call, Throwable t) {
+
+            }
+        });
 
     }
 
     public void courseAddTag(View v) {
-        AutoCompleteTextView tagSearchTextView = findViewById(R.id.courseTagSearchTextView);
         String textSearch = tagSearchTextView.getText().toString();
 
         LinearLayout tagsLayout = findViewById(R.id.reviewTagsLayout);
