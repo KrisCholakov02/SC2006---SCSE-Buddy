@@ -97,7 +97,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                     if (!fName.isEmpty()) {
                         if (!lName.isEmpty()) {
-                            int codeVerify = ran.nextInt(999999);
+                            int codeVerify = ran.nextInt(899999)+100000;
 
                             map.put("email", email);
                             map.put("password", password);
