@@ -1,8 +1,11 @@
 package com.example.scsebuddy;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,6 +16,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -110,16 +114,49 @@ public class ForumPostActivity extends AppCompatActivity {
 
         // make button look like example one TODO
         Button newTagButton = new Button(this);
-        newTagButton.setBackground(tagsLayout.getChildAt(0).getBackground());
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        newTagButton.setLayoutParams(params);
+        newTagButton.setBackground(ContextCompat.getDrawable(context,R.drawable.rounded_button_black));
+        newTagButton.setTextColor(ContextCompat.getColor(context, R.color.white));
+        newTagButton.setAllCaps(false);
+        newTagButton.setTextSize(13);
         newTagButton.setText(textSearch);
         newTagButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Make new window appear with delete TODO
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(ForumPostActivity.this);
+                builder1.setMessage("Do you want to delete this button?");
+                builder1.setCancelable(true);
+
+
+                builder1.setPositiveButton(
+                        "Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                newTagButton.setVisibility(View.GONE);
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        "No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
             }
         });
-
         tagsLayout.addView(newTagButton);
+        FrameLayout frameLayout = new FrameLayout(this);
+        LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(5,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        frameLayout.setLayoutParams(params1);
+        tagsLayout.addView(frameLayout);
     }
 
     public void addForumPost(View v){

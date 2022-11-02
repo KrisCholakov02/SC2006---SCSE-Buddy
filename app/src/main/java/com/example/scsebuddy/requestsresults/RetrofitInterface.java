@@ -18,6 +18,9 @@ public interface RetrofitInterface {
     @POST("/changePW")
     Call<Void> executeChangePW(@Body HashMap<String, String> map);
 
+    @POST("/verificationCode")
+    Call<Void> executeCode(@Body HashMap<String, String> map);
+
     //Everything about Courses
     @POST("/allCourses")
     Call<CoursesResult> executeAllCourses(@Body HashMap<String, String> map);
