@@ -109,19 +109,9 @@ public class ForumActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ForumPostResult> call, Response<ForumPostResult> response) {
                 if (response.code() == 200) {
-//                        TopicsResult topicR = response.body();
-//
-//                        ArrayList<Topic> topics = new ArrayList<>(Arrays.asList(topicR.getTopics()));
-//
-//                        RecyclerView topicsRecyclerView = findViewById(R.id.topicsRecycleView);
-//
-//                        Topics_RecyclerViewAdapter adapter = new Topics_RecyclerViewAdapter(context, topics);
-//                        topicsRecyclerView.setAdapter(adapter);
-//                        topicsRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
                     ForumPostResult forumR = response.body();
                     ArrayList<ForumPost> posts = new ArrayList<>(Arrays.asList(forumR.getForumPost()));
-                    //Log.e("TEST", forumR.getCoursesReview()[0].getGrade()+"");
                     RecyclerView forumPostRecyclerView = findViewById(R.id.topicsRecycleView);
                     forumPostRecyclerView.setVisibility(View.VISIBLE);
 
