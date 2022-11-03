@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:weightSum="100"
-            >
+            android:background="@color/cardviewbackground">
 
             <FrameLayout
                 android:layout_width="match_parent"
