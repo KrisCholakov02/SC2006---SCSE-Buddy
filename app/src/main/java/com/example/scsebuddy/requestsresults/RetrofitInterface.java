@@ -61,6 +61,12 @@ public interface RetrofitInterface {
     @POST("/searchPost")
     Call<ForumPostResult> executeSearchPost(@Body HashMap<String, String> map);
 
+    @POST("/forumViewComment")
+    Call<ForumCommentResult> executeForumComment(@Body HashMap<String, String> map);
+
+    @POST("/forumCommentPost")
+    Call<Void> executeForumCommentPost(@Body HashMap<String, String> map);
+
     // Map
 
     @POST("/getPath")

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -59,10 +60,12 @@ public class ForumViewActivity extends AppCompatActivity {
             titleTextView.setText(b.get("topicTitle")+"");
             Log.e("HELLO", b.get("topicTitle")+"");
             }
+        SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
 
             HashMap<String, String> map = new HashMap<>();
             String topicID = titleTextView.getText().toString();
             map.put("topicID", topicID);
+            map.put("email", sp.getString("USER_EMAIL",""));
 
         Call<ForumPostResult> executeAllForumPost = retrofitInterface.executeAllForumPost(map);
 

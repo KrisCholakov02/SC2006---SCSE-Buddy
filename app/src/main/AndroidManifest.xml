@@ -17,6 +17,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ForumPostCommentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ForumViewCommentsActivity"
+            android:exported="false" />
+        <activity
             android:name=".VerificationActivity"
             android:exported="false" />
         <activity

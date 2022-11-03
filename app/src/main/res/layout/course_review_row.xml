@@ -11,9 +11,6 @@
         tools:ignore="MissingConstraints"
         app:cardUseCompatPadding="true"
         android:background="@color/white">
-<!--        android:foreground="@drawable/black_border"-->
-
-
 
 
         <LinearLayout
@@ -66,6 +63,7 @@
                         android:fontFamily="@font/poppins_medium"
                         android:textColor="@color/grey_text"
                         android:gravity="left"></TextView>
+
 
                     <TextView
                         android:layout_width="match_parent"

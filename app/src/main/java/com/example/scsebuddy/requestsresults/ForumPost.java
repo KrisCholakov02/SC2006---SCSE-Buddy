@@ -15,7 +15,18 @@ public class ForumPost {
     private String name;
     private String topicID;
     private String email;
+    private int ID;
     private ArrayList <String> tags;
+
+    public int getID(){
+        return ID;
+    }
+
+    public int getFavorite() {
+        return favorite;
+    }
+
+    private int favorite;
 
     public String getEmail() {
         return email;
