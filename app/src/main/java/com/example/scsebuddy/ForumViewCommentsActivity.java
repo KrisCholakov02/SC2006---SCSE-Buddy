@@ -44,7 +44,7 @@ private int postID;
 //        super.onRestart();
 //        Intent i = new Intent(this,ForumViewCommentsActivity.class);
 //        startActivity(i);
-//        //finish();
+//        finish();
 //    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +115,12 @@ private int postID;
         Intent i = new Intent(this, ForumPostCommentActivity.class);
         Log.e("TEST", postID+" H");
         i.putExtra("postID", postID);
+//        titleTextView.setText(b.get("topicTitle")+"");
+//        postByTextView.setText(b.get("postBy")+"");
+//        contentTextView.setText(b.get("forumPost")+"");
+        i.putExtra("topicTitle", titleTextView.getText().toString());
+        i.putExtra("forumPost", contentTextView.getText().toString());
+        i.putExtra("postBy", postByTextView.getText().toString());
         startActivity(i);
         finish();
     }

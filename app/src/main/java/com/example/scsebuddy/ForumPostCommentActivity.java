@@ -35,6 +35,7 @@ public class ForumPostCommentActivity extends AppCompatActivity {
     EditText contentEditText;
     CheckBox annoymousCb;
     Context context;
+    String title, postBy, content;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +49,10 @@ public class ForumPostCommentActivity extends AppCompatActivity {
         if(b!=null) {
             //Log.e("TEST",b.getString("postID") );
             postID = Integer.parseInt(b.getInt("postID")+"");
+            title=b.get("topicTitle")+"";
+            postBy=b.get("postBy")+"";
+            content=b.get("forumPost")+"";
+            Log.e("TEST", title + postBy + content);
         }
 
     }
@@ -83,14 +88,18 @@ public class ForumPostCommentActivity extends AppCompatActivity {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.code() == 200) {
                     Toast.makeText(ForumPostCommentActivity.this, "Posted Successfully!", Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(context, ForumViewCommentsActivity.class);
+                    Intent intent = new Intent(context, ForumViewCommentsActivity.class);
 //                    courseCodeTV.setText(b.get("courseCode")+"");
 //                    courseTitleTV.setText(b.get("courseTitle")+"");
 //                    courseFav = Integer.parseInt(b.get("courseFav")+"");
 //                    i.putExtra("courseCode", courseCodeTextView.getText()+ "");
 //                    i.putExtra("courseTitle",courseTitle);
 //                    i.putExtra("courseFav",courseFav);
-                    startActivity(i);
+                    intent.putExtra("postID", postID+"");
+                    intent.putExtra("forumPost", content);
+                    intent.putExtra("postBy", postBy);
+                    intent.putExtra("topicTitle",title);
+                    startActivity(intent);
                     finish();
 
                     try {
