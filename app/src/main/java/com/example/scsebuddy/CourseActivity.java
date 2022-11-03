@@ -50,6 +50,7 @@ public class CourseActivity extends AppCompatActivity {
         super.onRestart();
         Intent i = new Intent(this,CourseActivity.class);
         startActivity(i);
+        //finish();
     }
 
     @Override

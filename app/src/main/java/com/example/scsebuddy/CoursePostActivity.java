@@ -55,6 +55,13 @@ public class CoursePostActivity extends AppCompatActivity {
     AutoCompleteTextView tagSearchTextView;
 
     Context context;
+
+    protected void onRestart(){
+        super.onRestart();
+        Intent i = new Intent(this,CoursePostActivity.class);
+        startActivity(i);
+        //finish();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

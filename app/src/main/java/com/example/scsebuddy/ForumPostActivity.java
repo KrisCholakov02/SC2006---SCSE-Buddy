@@ -49,6 +49,8 @@ public class ForumPostActivity extends AppCompatActivity {
     AutoCompleteTextView tagSearchTextView;
 
     Context context;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

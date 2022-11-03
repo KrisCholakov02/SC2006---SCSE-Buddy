@@ -43,7 +43,12 @@ public class ForumActivity extends AppCompatActivity {
     EditText txtSearchForum;
     Context context;
     Spinner sortOrderSpinner,sortBySpinner;
-
+    protected void onRestart(){
+        super.onRestart();
+        Intent i = new Intent(this,ForumActivity.class);
+        startActivity(i);
+        //finish();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

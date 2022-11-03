@@ -40,6 +40,12 @@ private int postID;
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
     FloatingActionButton mAddFab;
+    protected void onRestart(){
+        super.onRestart();
+        Intent i = new Intent(this,ForumViewCommentsActivity.class);
+        startActivity(i);
+        //finish();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

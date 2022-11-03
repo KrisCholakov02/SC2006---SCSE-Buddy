@@ -151,7 +151,7 @@ public class CourseViewActivity extends AppCompatActivity {
         intent.putExtra("courseFav", courseFav);
         intent.putExtra("courseTitle", courseTitleTV.getText());
         startActivity(intent);
-
+        finish();
     }
 
     public void sortByButton(View v){

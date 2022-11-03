@@ -40,7 +40,12 @@ public class ForumViewActivity extends AppCompatActivity {
     private RetrofitInterface retrofitInterface;
     Context context;
     TextView titleTextView;
-
+    protected void onRestart(){
+        super.onRestart();
+        Intent i = new Intent(this,ForumViewActivity.class);
+        startActivity(i);
+        //finish();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
