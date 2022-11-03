@@ -62,7 +62,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Date Posted: "
-                        android:textSize="15sp"
+                        android:textSize="12sp"
                         android:fontFamily="@font/poppins_medium"
                         android:textColor="@color/grey_text"
                         android:gravity="left"></TextView>
@@ -90,12 +90,12 @@
                     <TextView
                         android:id="@+id/courseReviewTextView"
                         android:layout_width="match_parent"
-                        android:textSize="12.5sp"
                         android:layout_height="wrap_content"
-                        android:text="LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG"
                         android:fontFamily="@font/poppins_medium"
+                        android:gravity="left"
+                        android:text="LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG"
                         android:textColor="@color/grey_text"
-                        android:gravity="left"></TextView>
+                        android:textSize="14sp"></TextView>
 
                     <HorizontalScrollView
                         android:layout_width="match_parent"
