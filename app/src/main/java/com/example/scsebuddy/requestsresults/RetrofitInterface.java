@@ -2,6 +2,7 @@ package com.example.scsebuddy.requestsresults;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 import retrofit2.Call;
 import retrofit2.http.*;
@@ -20,6 +21,9 @@ public interface RetrofitInterface {
 
     @POST("/verificationCode")
     Call<Void> executeCode(@Body HashMap<String, String> map);
+
+    @POST("/changeAccDetails")
+    Call<Void> executeChangeAccDetails (@Body HashMap<String, String>map);
 
     //Everything about Courses
     @POST("/allCourses")
