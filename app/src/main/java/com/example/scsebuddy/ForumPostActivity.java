@@ -212,6 +212,7 @@ public class ForumPostActivity extends AppCompatActivity {
                     Intent i = new Intent(context, ForumViewActivity.class);
                     i.putExtra("topicTitle",topicSpinner.getSelectedItem().toString() + "");
                     startActivity(i);
+                    finish();
 
                     try {
                         Thread.sleep(2000);

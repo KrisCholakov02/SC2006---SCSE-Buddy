@@ -46,6 +46,8 @@ public class CoursePostActivity extends AppCompatActivity {
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
     Spinner gradeSpinner;
+    private int courseFav;
+    private String courseTitle;
 
     TextView courseCodeTextView ;
     EditText courseReviewEditText;
@@ -76,6 +78,8 @@ public class CoursePostActivity extends AppCompatActivity {
         Bundle b = ii.getExtras();
         if(b!=null) {
             courseCodeTextView.setText(b.get("courseCode") + "");
+            courseTitle = b.get("courseTitle")+"";
+            courseFav = Integer.parseInt(b.get("courseFav")+"");
         }
         loadData();
     }
@@ -212,7 +216,14 @@ public class CoursePostActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     Toast.makeText(CoursePostActivity.this, "Posted Successfully!", Toast.LENGTH_LONG).show();
                     Intent i = new Intent(context, CourseViewActivity.class);
+//                    courseCodeTV.setText(b.get("courseCode")+"");
+//                    courseTitleTV.setText(b.get("courseTitle")+"");
+//                    courseFav = Integer.parseInt(b.get("courseFav")+"");
+                    i.putExtra("courseCode", courseCodeTextView.getText()+ "");
+                    i.putExtra("courseTitle",courseTitle);
+                    i.putExtra("courseFav",courseFav);
                     startActivity(i);
+                    finish();
 
                     try {
                         Thread.sleep(2000);

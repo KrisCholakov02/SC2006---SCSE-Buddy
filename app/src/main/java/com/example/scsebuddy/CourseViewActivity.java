@@ -148,6 +148,8 @@ public class CourseViewActivity extends AppCompatActivity {
     public void addReview(View v){
         Intent intent = new Intent(this, CoursePostActivity.class);
         intent.putExtra("courseCode", courseCodeTV.getText());
+        intent.putExtra("courseFav", courseFav);
+        intent.putExtra("courseTitle", courseTitleTV.getText());
         startActivity(intent);
 
     }

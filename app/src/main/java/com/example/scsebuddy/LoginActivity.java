@@ -79,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             Intent intent = new Intent(v.getContext(), MapActivity.class);
                             startActivity(intent);
+                            finish();
                         } else if (response.code() == 404) {
                             Toast.makeText(LoginActivity.this, "Wrong Credential", Toast.LENGTH_LONG).show();
                             AlertDialog.Builder builder1 = new AlertDialog.Builder(LoginActivity.this);
