@@ -68,12 +68,12 @@ private int postID;
         Intent ii = getIntent();
         Bundle b = ii.getExtras();
         if(b!=null) {
-            Log.e("TEST", "I CREATED3");
+            //Log.e("TEST", "I CREATED3");
             titleTextView.setText(b.get("topicTitle")+"");
             postByTextView.setText(b.get("postBy")+"");
             contentTextView.setText(b.get("forumPost")+"");
             postID = Integer.parseInt(b.get("postID")+"");
-            Log.e("TEST", "I CREATED2");
+            //Log.e("TEST", "I CREATED2");
         }
 
         SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
