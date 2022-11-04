@@ -45,13 +45,13 @@ public class CourseActivity extends AppCompatActivity {
     Context context;
     Spinner sortOrderSpinner,sortBySpinner;
     String email;
-//    @Override
-//    protected void onRestart(){
-//        super.onRestart();
-//        Intent i = new Intent(this,CourseActivity.class);
-//        startActivity(i);
-//        //finish();
-//    }
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        Intent i = new Intent(this,CourseActivity.class);
+        startActivity(i);
+        //finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
