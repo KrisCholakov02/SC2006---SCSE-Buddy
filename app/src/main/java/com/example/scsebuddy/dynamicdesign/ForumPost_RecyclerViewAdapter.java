@@ -2,6 +2,7 @@ package com.example.scsebuddy.dynamicdesign;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,17 +21,31 @@ import com.example.scsebuddy.ForumPostActivity;
 import com.example.scsebuddy.ForumViewCommentsActivity;
 import com.example.scsebuddy.MapActivity;
 import com.example.scsebuddy.R;
+import com.example.scsebuddy.requestsresults.ConstantVariables;
 import com.example.scsebuddy.requestsresults.CourseReview;
 import com.example.scsebuddy.requestsresults.ForumComment;
 import com.example.scsebuddy.requestsresults.ForumPost;
+import com.example.scsebuddy.requestsresults.RetrofitInterface;
 
 import java.io.Console;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ForumPost_RecyclerViewAdapter extends RecyclerView.Adapter<ForumPost_RecyclerViewAdapter.MyViewHolder> {
     Context context;
     ArrayList<ForumPost> posts;
     static Context context1;
+    int btnLike = 0;
+
+    private Retrofit retrofit;
+    private RetrofitInterface retrofitInterface;
+
     public ForumPost_RecyclerViewAdapter(Context context, ArrayList<ForumPost> posts) {
         this.context = context;
         this.posts = posts;
@@ -70,11 +86,76 @@ public class ForumPost_RecyclerViewAdapter extends RecyclerView.Adapter<ForumPos
         }
         if(posts.get(position).getFavorite() == 1){
             holder.btnForumLike.setImageResource(R.drawable.thumb_up_24_red);
+            btnLike = 1;
         }
         else {
             holder.btnForumLike.setImageResource(R.drawable.thumb_up_24);
+            btnLike = 0;
         }
         holder.iDTextView.setText(posts.get(position).getID()+"");
+
+        holder.btnForumLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Log.e("TEST", "CLICKED");
+                retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
+                retrofitInterface = retrofit.create(RetrofitInterface.class);
+                HashMap<String, String> map = new HashMap<>();
+                // map.put("lName", lName);
+                if(btnLike == 1) {
+                    //courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_outline);
+                    btnLike = 0;
+                }
+                else {
+                    //courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_yellow);
+                    btnLike = 1;
+                }
+                SharedPreferences sp = context.getSharedPreferences("UserPreferences", Context.MODE_WORLD_READABLE);
+                String email = sp.getString("USER_EMAIL", "");
+
+                map.put("postFav", btnLike + "");
+                map.put("postID", holder.iDTextView.getText()+"");
+                map.put("email", email);
+                Call<Void> call = retrofitInterface.executeForumPostLike(map);
+
+                call.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.code() == 200) {
+                            //Toast.makeText(CourseViewActivity.this, "Favorite Updated Successfully!", Toast.LENGTH_LONG).show();
+                            if(btnLike == 1) {
+                                holder.btnForumLike.setImageResource(R.drawable.thumb_up_24_red);
+                                //courseFav = 0;
+                            }
+                            else {
+                                holder.btnForumLike.setImageResource(R.drawable.thumb_up_24);
+                                //courseFav = 1;
+                            }
+                            try {
+                                Thread.sleep(2000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        } else if (response.code() == 400) {
+                            //Toast.makeText(CourseViewActivity.this, "Wrong Credentials!", Toast.LENGTH_LONG).show();
+                            if(btnLike == 1) {
+                                //courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_outline);
+                                btnLike = 0;
+                            }
+                            else {
+                                //courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_yellow);
+                                btnLike = 1;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        //Toast.makeText(ForumPostActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
     }
 
     @Override

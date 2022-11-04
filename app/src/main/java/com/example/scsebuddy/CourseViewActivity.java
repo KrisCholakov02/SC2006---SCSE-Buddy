@@ -129,11 +129,6 @@ public class CourseViewActivity extends AppCompatActivity {
                     CourseReview_RecyclerViewAdapter adapter = new CourseReview_RecyclerViewAdapter(context,reviews);
                     courseReviewRecycleView.setAdapter(adapter);
                     courseReviewRecycleView.setLayoutManager(new LinearLayoutManager(context));
-
-
-
-
-
                 } else if (response.code() == 404) {
                     Toast.makeText(CourseViewActivity.this, "No Data", Toast.LENGTH_LONG).show();
                 }
@@ -229,9 +224,5 @@ public class CourseViewActivity extends AppCompatActivity {
                 Toast.makeText(CourseViewActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
-
-
-
     }
 }
