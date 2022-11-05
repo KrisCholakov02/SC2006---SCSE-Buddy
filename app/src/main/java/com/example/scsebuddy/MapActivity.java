@@ -57,7 +57,7 @@ public class MapActivity extends AppCompatActivity {
          txtStartSearch = this.findViewById(R.id.txtStartSearch);
          txtEndSearch = this.findViewById(R.id.txtEndSearch);
 
-        loadData();
+        //loadData();
         if (email == null) {
             this.findViewById(R.id.btnForum).setVisibility(View.GONE);
             this.findViewById(R.id.btnCourse).setVisibility(View.GONE);
@@ -99,7 +99,7 @@ public class MapActivity extends AppCompatActivity {
                 }
             });
         }
-
+        loadData();
         Intent intent = getIntent();
         String destination = "";
         try {
@@ -109,6 +109,7 @@ public class MapActivity extends AppCompatActivity {
         }
         txtEndSearch.setText(destination);
     }
+
     private void loadData(){
         retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
         retrofitInterface = retrofit.create(RetrofitInterface.class);
