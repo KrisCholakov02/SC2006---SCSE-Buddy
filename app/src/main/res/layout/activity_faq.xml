@@ -48,7 +48,7 @@
                     android:layout_weight="5"/>
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/faqTextView"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:text="FAQ"
@@ -89,12 +89,12 @@
                     android:textSize="17sp" />
 
                 <ImageView
-                    android:id="@+id/imageView3"
+                    android:id="@+id/faqImageView"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="40"
                     android:background="@drawable/profile"
-                    android:visibility="gone"/>
+                    android:visibility="invisible"/>
 
 
             </LinearLayout>
