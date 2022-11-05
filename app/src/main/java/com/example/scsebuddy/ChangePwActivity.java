@@ -66,6 +66,7 @@ public class ChangePwActivity extends AppCompatActivity {
                         }
                         Intent intent = new Intent(v.getContext(), LoginActivity.class);
                         startActivity(intent);
+                        finish();
 
                     } else if (response.code() == 404) {
                         Toast.makeText(ChangePwActivity.this, "Wrong Password!", Toast.LENGTH_LONG).show();
