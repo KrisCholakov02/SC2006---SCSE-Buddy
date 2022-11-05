@@ -2,6 +2,7 @@ package com.example.scsebuddy;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -99,9 +100,10 @@ public class ForumPostCommentActivity extends AppCompatActivity {
                     intent.putExtra("forumPost", content);
                     intent.putExtra("postBy", postBy);
                     intent.putExtra("topicTitle",title);
-                    startActivity(intent);
+//                    startActivity(intent);
+//                    finish();
+                    setResult(Activity.RESULT_OK,intent);
                     finish();
-
                     try {
                         Thread.sleep(2000);
                     } catch (InterruptedException e) {

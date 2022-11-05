@@ -4,6 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -145,8 +151,44 @@ public class CourseViewActivity extends AppCompatActivity {
         intent.putExtra("courseCode", courseCodeTV.getText());
         intent.putExtra("courseFav", courseFav);
         intent.putExtra("courseTitle", courseTitleTV.getText());
-        startActivity(intent);
-        finish();
+//        startActivity(intent);
+//        finish();
+
+        //THEO TEST
+        startActivityForResult(intent,1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+                Bundle b = data.getExtras();
+                courseFavImageView = this.findViewById(R.id.courseFavImageView);
+                if (b != null) {
+                    courseCodeTV.setText(b.get("courseCode") + "");
+                    courseTitleTV.setText(b.get("courseTitle") + "");
+                    courseFav = Integer.parseInt(b.get("courseFav") + "");
+                    if (courseFav == 1) {
+                        courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_yellow);
+                    } else {
+                        courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_outline);
+                    }
+                    //default load
+                    HashMap<String, String> map = new HashMap<>();
+                    String courseCode = courseCodeTV.getText().toString();
+                    map.put("courseCode", courseCode);
+                    map.put("orderBy", "desc");
+                    map.put("sortBy", "Date_Published");
+                    updateRV(map);
+
+                }
+                if (resultCode == Activity.RESULT_CANCELED) {
+                    // Write your code if there's no result
+                }
+            }
+        } //onActivityResult
     }
 
     public void sortByButton(View v){

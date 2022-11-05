@@ -3,6 +3,7 @@ package com.example.scsebuddy;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -213,9 +214,10 @@ public class ForumPostActivity extends AppCompatActivity {
                     Toast.makeText(ForumPostActivity.this, "Posted Successfully!", Toast.LENGTH_LONG).show();
                     Intent i = new Intent(context, ForumViewActivity.class);
                     i.putExtra("topicTitle",topicSpinner.getSelectedItem().toString() + "");
-                    startActivity(i);
+//                    startActivity(i);
+//                    finish();
+                    setResult(Activity.RESULT_OK,i);
                     finish();
-
                     try {
                         Thread.sleep(2000);
                     } catch (InterruptedException e) {

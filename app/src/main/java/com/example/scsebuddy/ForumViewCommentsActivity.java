@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -40,6 +41,7 @@ private int postID;
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
     FloatingActionButton mAddFab;
+    Context context;
 //    protected void onRestart(){
 //        super.onRestart();
 //        Intent i = new Intent(this,ForumViewCommentsActivity.class);
@@ -51,7 +53,7 @@ private int postID;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forum_view_comments);
 
-        Context context = this;
+         context = this;
         retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
         retrofitInterface = retrofit.create(RetrofitInterface.class);
 //        intent.putExtra("postID", iDTextView.getText()+"");
@@ -121,7 +123,64 @@ private int postID;
         i.putExtra("topicTitle", titleTextView.getText().toString());
         i.putExtra("forumPost", contentTextView.getText().toString());
         i.putExtra("postBy", postByTextView.getText().toString());
-        startActivity(i);
-        finish();
+//        startActivity(i);
+//        finish();
+        startActivityForResult(i,1);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                //String result=data.getStringExtra("result");
+                Bundle b = data.getExtras();
+                if(b!=null) {
+                    //Log.e("TEST", "I CREATED3");
+                    titleTextView.setText(b.get("topicTitle")+"");
+                    postByTextView.setText(b.get("postBy")+"");
+                    contentTextView.setText(b.get("forumPost")+"");
+                    postID = Integer.parseInt(b.get("postID")+"");
+                    //Log.e("TEST", "I CREATED2");
+                }
+
+                SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+
+                HashMap<String, String> map = new HashMap<>();
+                //String topicID = titleTextView.getText().toString();
+                map.put("postID", postID+"");
+                map.put("email", sp.getString("USER_EMAIL",""));
+
+                Call<ForumCommentResult> executeForumComment = retrofitInterface.executeForumComment(map);
+
+                executeForumComment.enqueue(new Callback<ForumCommentResult>() {
+                    @Override
+                    public void onResponse(Call<ForumCommentResult> call, Response<ForumCommentResult> response) {
+                        if (response.code() == 200) {
+                            ForumCommentResult forumV = response.body();
+                            ArrayList<ForumComment> comments = new ArrayList<>(Arrays.asList(forumV.getForumComments()));
+                            RecyclerView forumCommentRecyclerView = findViewById(R.id.forumCommentRecyclerView);
+
+                            ForumComment_RecyclerViewAdapter adapter = new ForumComment_RecyclerViewAdapter(context,comments);
+                            forumCommentRecyclerView.setAdapter(adapter);
+                            forumCommentRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+
+                        } else if (response.code() == 404) {
+                            Toast.makeText(ForumViewCommentsActivity.this, "No Data", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ForumCommentResult> call, Throwable t) {
+                        Toast.makeText(ForumViewCommentsActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                // Write your code if there's no result
+            }
+        }
+    } //onActivityResult
 }

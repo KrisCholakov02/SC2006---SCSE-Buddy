@@ -3,6 +3,7 @@ package com.example.scsebuddy;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -229,7 +230,9 @@ public class CoursePostActivity extends AppCompatActivity {
                     i.putExtra("courseCode", courseCodeTextView.getText()+ "");
                     i.putExtra("courseTitle",courseTitle);
                     i.putExtra("courseFav",courseFav);
-                    startActivity(i);
+//                    startActivity(i);
+//                    finish();
+                    setResult(Activity.RESULT_OK, i);
                     finish();
 
                     try {

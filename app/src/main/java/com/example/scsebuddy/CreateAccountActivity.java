@@ -177,5 +177,6 @@ public class CreateAccountActivity extends AppCompatActivity {
     public void loginTextView(View v) {
         Intent intent = new Intent(v.getContext(), LoginActivity.class);
         startActivity(intent);
+        finish();
     }
 }
