@@ -177,77 +177,86 @@ public class ForumPostActivity extends AppCompatActivity {
     }
 
     public void addForumPost(View v){
+        if(!(titleEditText.getText().toString().isEmpty()) && !(contentEditText.getText().toString().isEmpty())){
+            SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_WORLD_READABLE);
+            String email = sp.getString("USER_EMAIL", "");
+            int noOfPosts = sp.getInt("noOfPosts", 0)+1;
 
-        SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_WORLD_READABLE);
-        String email = sp.getString("USER_EMAIL", "");
-        int noOfPosts = sp.getInt("noOfPosts", 0)+1;
-
-        if(annoymousCb.isChecked()){
-            email = "Anonymous";
-        }
-
-
-        String tagsString = "";
-        LinearLayout tagsLayout = findViewById(R.id.postTagsLayout);
-        int n = tagsLayout.getChildCount();
-        int cnt = 0;
-        for (int i = 0; i < n; i++) {
-            if (tagsLayout.getChildAt(i) instanceof Button) {
-                Button tag = (Button) tagsLayout.getChildAt(i);
-                String tagString = tag.getText().toString();
-                if (cnt == 0) tagsString += tagString;
-                else {
-                    tagsString += "," + tagString;
-                }
-                cnt++;
+            if(annoymousCb.isChecked()){
+                email = "Anonymous";
             }
-        }
 
-        Calendar calendar = Calendar.getInstance();
-        Date date = (Date) calendar.getTime();
+
+            String tagsString = "";
+            LinearLayout tagsLayout = findViewById(R.id.postTagsLayout);
+            int n = tagsLayout.getChildCount();
+            int cnt = 0;
+            for (int i = 0; i < n; i++) {
+                if (tagsLayout.getChildAt(i) instanceof Button) {
+                    Button tag = (Button) tagsLayout.getChildAt(i);
+                    String tagString = tag.getText().toString();
+                    if (cnt == 0) tagsString += tagString;
+                    else {
+                        tagsString += "," + tagString;
+                    }
+                    cnt++;
+                }
+            }
+
+            Calendar calendar = Calendar.getInstance();
+            Date date = (Date) calendar.getTime();
 //        System.out.println("AAA" + date);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //        System.out.println("AAAA" +sdf.format(date));
 
 
-        HashMap<String, String> map = new HashMap<>();
-        map.put("email", email);
-        map.put("title", titleEditText.getText()+"");
-        map.put("topic", topicSpinner.getSelectedItem().toString());
-        map.put("dateTime", sdf.format(date));
-        map.put("content", contentEditText.getText()+"");
-        map.put("noOfPosts", noOfPosts + "");
-        map.put("tags", tagsString);
+            HashMap<String, String> map = new HashMap<>();
+            map.put("email", email);
+            map.put("title", titleEditText.getText()+"");
+            map.put("topic", topicSpinner.getSelectedItem().toString());
+            map.put("dateTime", sdf.format(date));
+            map.put("content", contentEditText.getText()+"");
+            map.put("noOfPosts", noOfPosts + "");
+            map.put("tags", tagsString);
 
-        Call<Void> call = retrofitInterface.executeForumPost(map);
+            Call<Void> call = retrofitInterface.executeForumPost(map);
 
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.code() == 200) {
-                    Toast.makeText(ForumPostActivity.this, "Posted Successfully!", Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(context, ForumViewActivity.class);
-                    i.putExtra("topicTitle",topicSpinner.getSelectedItem().toString() + "");
+            call.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.code() == 200) {
+                        Toast.makeText(ForumPostActivity.this, "Posted Successfully!", Toast.LENGTH_LONG).show();
+                        Intent i = new Intent(context, ForumViewActivity.class);
+                        i.putExtra("topicTitle",topicSpinner.getSelectedItem().toString() + "");
 //                    startActivity(i);
 //                    finish();
-                    setResult(Activity.RESULT_OK,i);
-                    finish();
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        setResult(Activity.RESULT_OK,i);
+                        finish();
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    } else if (response.code() == 400) {
+                        Toast.makeText(ForumPostActivity.this, "Wrong Credentials!", Toast.LENGTH_LONG).show();
+
                     }
-                } else if (response.code() == 400) {
-                    Toast.makeText(ForumPostActivity.this, "Wrong Credentials!", Toast.LENGTH_LONG).show();
-
                 }
-            }
 
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(ForumPostActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Toast.makeText(ForumPostActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+        else{
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(ForumPostActivity.this);
+            builder1.setMessage("Post requires title and descriptions to be filled.");
+            builder1.setCancelable(true);
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        }
+
     }
     private void selectValue(Spinner spinner, Object value) {
         for (int i = 0; i < spinner.getCount(); i++) {
