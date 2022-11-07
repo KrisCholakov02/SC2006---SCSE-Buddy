@@ -19,6 +19,8 @@ import com.example.scsebuddy.requestsresults.LoginResult;
 
 import java.util.HashMap;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -82,6 +84,8 @@ public class CreateAccountActivity extends AppCompatActivity {
             } // end of TextWatcher (email)
         });
 
+
+
         this.findViewById(R.id.createAccountButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,22 +99,24 @@ public class CreateAccountActivity extends AppCompatActivity {
                     String lName = lNameInput.getText().toString().trim();
                     Random ran = new Random();
 
+                    //password
                     if (!fName.isEmpty()) {
                         if (!lName.isEmpty()) {
-                            int codeVerify = ran.nextInt(899999)+100000;
+                            if(isValidPassword(password)){
+                                int codeVerify = ran.nextInt(899999)+100000;
 
-                            map.put("email", email);
-                            map.put("password", password);
-                            map.put("fName", fName);
-                            map.put("lName", lName);
-                            map.put("codeVerify", codeVerify+"");
+                                map.put("email", email);
+                                map.put("password", password);
+                                map.put("fName", fName);
+                                map.put("lName", lName);
+                                map.put("codeVerify", codeVerify+"");
 
-                            Call<Void> call = retrofitInterface.executeSignup(map);
+                                Call<Void> call = retrofitInterface.executeSignup(map);
 
-                            call.enqueue(new Callback<Void>() {
-                                @Override
-                                public void onResponse(Call<Void> call, Response<Void> response) {
-                                    if (response.code() == 200) {
+                                call.enqueue(new Callback<Void>() {
+                                    @Override
+                                    public void onResponse(Call<Void> call, Response<Void> response) {
+                                        if (response.code() == 200) {
 //                                        Toast.makeText(CreateAccountActivity.this, "Signed up successfully!", Toast.LENGTH_LONG).show();
 //                                        try {
 //                                            Thread.sleep(2000);
@@ -119,28 +125,39 @@ public class CreateAccountActivity extends AppCompatActivity {
 //                                        }
 //                                        Random ran = new Random();
 //                                        int codeVerify = ran.nextInt(9999999);
-                                        Intent intent = new Intent(v.getContext(), VerificationActivity.class);
-                                        intent.putExtra("codeVerify", codeVerify);
-                                        intent.putExtra("email", email);
-                                        intent.putExtra("password", password);
-                                        intent.putExtra("fName", fName);
-                                        intent.putExtra("lName", lName);
-                                        startActivity(intent);
-                                    } else if (response.code() == 404) {
-                                        //Toast.makeText(CreateAccountActivity.this, "Wrong Credentials!", Toast.LENGTH_LONG).show();
-                                        AlertDialog.Builder builder1 = new AlertDialog.Builder(CreateAccountActivity.this);
-                                        builder1.setMessage(valid_email + " is used.");
-                                        builder1.setCancelable(true);
-                                        AlertDialog alert11 = builder1.create();
-                                        alert11.show();
+                                            Intent intent = new Intent(v.getContext(), VerificationActivity.class);
+                                            intent.putExtra("codeVerify", codeVerify);
+                                            intent.putExtra("email", email);
+                                            intent.putExtra("password", password);
+                                            intent.putExtra("fName", fName);
+                                            intent.putExtra("lName", lName);
+                                            startActivity(intent);
+                                        } else if (response.code() == 404) {
+                                            //Toast.makeText(CreateAccountActivity.this, "Wrong Credentials!", Toast.LENGTH_LONG).show();
+                                            AlertDialog.Builder builder1 = new AlertDialog.Builder(CreateAccountActivity.this);
+                                            builder1.setMessage(valid_email + " is used.");
+                                            builder1.setCancelable(true);
+                                            AlertDialog alert11 = builder1.create();
+                                            alert11.show();
+                                        }
                                     }
-                                }
 
-                                @Override
-                                public void onFailure(Call<Void> call, Throwable t) {
-                                    Toast.makeText(CreateAccountActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-                                }
-                            });
+                                    @Override
+                                    public void onFailure(Call<Void> call, Throwable t) {
+                                        Toast.makeText(CreateAccountActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
+                            else {
+                                AlertDialog.Builder builder4 = new AlertDialog.Builder(CreateAccountActivity.this);
+                                builder4.setMessage("Password does not contain 1 digit or 1 lower or 1 upper or 1 special character.\n"+
+                                        "or\n" +
+                                        "It does not have 8 characters.");
+                                builder4.setCancelable(true);
+                                AlertDialog alert4 = builder4.create();
+                                alert4.show();
+                            }
+
                         } else {
                             AlertDialog.Builder builder3 = new AlertDialog.Builder(CreateAccountActivity.this);
                             builder3.setMessage("Empty Last Name");
@@ -172,6 +189,20 @@ public class CreateAccountActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public boolean isValidPassword(final String password) {
+
+        Pattern pattern;
+        Matcher matcher;
+
+        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$";
+
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+
+        return matcher.matches();
+
     }
 
     public void loginTextView(View v) {
