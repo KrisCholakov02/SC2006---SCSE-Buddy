@@ -7,7 +7,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.Random;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -20,10 +23,13 @@ public class ProfileActivity extends AppCompatActivity {
 
         TextView fullNameField = this.findViewById(R.id.fullNameTextViews);
         TextView emailField = this.findViewById(R.id.emailTextView);
-
+        ImageView imgProfile = this.findViewById(R.id.imgProfile);
         String fName = sp.getString("USER_F_NAME", "");
         String lName = sp.getString("USER_L_NAME", "");
         String email = sp.getString("USER_EMAIL", "");
+        Random ran = new Random();
+        int ranImage = ran.nextInt(7);
+        imgProfile.setImageResource(getImage(ranImage));
 
         fullNameField.setText(fName + " " + lName);
         emailField.setText(email);
@@ -53,6 +59,35 @@ public class ProfileActivity extends AppCompatActivity {
 
         Intent intent = new Intent(v.getContext(),LoginActivity.class);
         startActivity(intent);
+    }
+
+    public int getImage(int number){
+        switch (number){
+            case 1:
+                return R.drawable.default1;
+//                break;
+            case 2:
+                return R.drawable.default2;
+//                break;
+            case 3:
+                return R.drawable.default3;
+//                break;
+            case 4:
+                return R.drawable.default4;
+//                break;
+            case 5:
+                return R.drawable.default5;
+//                break;
+            case 6:
+                return R.drawable.default6;
+//                break;
+            case 0:
+                return R.drawable.default7;
+//                break;
+            default:
+                break;
+        }
+        return -1;
     }
 
     //Bottom buttons
