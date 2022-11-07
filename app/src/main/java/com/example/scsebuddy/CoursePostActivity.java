@@ -54,7 +54,7 @@ public class CoursePostActivity extends AppCompatActivity {
     EditText courseReviewEditText;
     CheckBox annoymousCb;
     AutoCompleteTextView tagSearchTextView;
-
+    private String[] mapName;
     Context context;
 
 //    protected void onRestart(){
@@ -103,7 +103,7 @@ public class CoursePostActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     PathResult pathR = response.body();
                     ArrayList<Location> locations = new ArrayList<>(Arrays.asList(pathR.getLocations()));
-                    String[] mapName= new String[locations.size()];
+                    mapName= new String[locations.size()];
                     for(int i = 0; i < locations.size(); i++){
                         Location location = locations.get(i);
                         mapName[i] = location.getName();
@@ -126,55 +126,69 @@ public class CoursePostActivity extends AppCompatActivity {
     }
 
     public void courseAddTag(View v) {
+
         String textSearch = tagSearchTextView.getText().toString();
+        boolean isValid = false;
+        for(String mapName1 : mapName){
+            if(tagSearchTextView.getText().toString().equals(mapName1))
+                isValid = true;
+        }
+        if(isValid){
+            LinearLayout tagsLayout = findViewById(R.id.reviewTagsLayout);
 
-        LinearLayout tagsLayout = findViewById(R.id.reviewTagsLayout);
-
-        // make button look like example one TODO
-        Button newTagButton = new Button(this);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-        newTagButton.setLayoutParams(params);
-        newTagButton.setBackground(ContextCompat.getDrawable(context,R.drawable.rounded_button_black));
-        newTagButton.setTextColor(ContextCompat.getColor(context, R.color.white));
-        newTagButton.setAllCaps(false);
-        newTagButton.setTextSize(13);
-        newTagButton.setText(textSearch);
-        newTagButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Make new window appear with delete TODO
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(CoursePostActivity.this);
-                builder1.setMessage("Do you want to delete this button?");
-                builder1.setCancelable(true);
+            // make button look like example one TODO
+            Button newTagButton = new Button(this);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            newTagButton.setLayoutParams(params);
+            newTagButton.setBackground(ContextCompat.getDrawable(context,R.drawable.rounded_button_black));
+            newTagButton.setTextColor(ContextCompat.getColor(context, R.color.white));
+            newTagButton.setAllCaps(false);
+            newTagButton.setTextSize(13);
+            newTagButton.setText(textSearch);
+            newTagButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Make new window appear with delete TODO
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(CoursePostActivity.this);
+                    builder1.setMessage("Do you want to delete this button?");
+                    builder1.setCancelable(true);
 
 
-                builder1.setPositiveButton(
-                        "Yes",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                newTagButton.setVisibility(View.GONE);
-                            }
-                        });
+                    builder1.setPositiveButton(
+                            "Yes",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    newTagButton.setVisibility(View.GONE);
+                                }
+                            });
 
-                builder1.setNegativeButton(
-                        "No",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
+                    builder1.setNegativeButton(
+                            "No",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
 
-                AlertDialog alert11 = builder1.create();
-                alert11.show();
-            }
-        });
-        tagsLayout.addView(newTagButton);
-        FrameLayout frameLayout = new FrameLayout(this);
-        LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(5,
-                LinearLayout.LayoutParams.MATCH_PARENT);
-        frameLayout.setLayoutParams(params1);
-        tagsLayout.addView(frameLayout);
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                }
+            });
+            tagsLayout.addView(newTagButton);
+            FrameLayout frameLayout = new FrameLayout(this);
+            LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(5,
+                    LinearLayout.LayoutParams.MATCH_PARENT);
+            frameLayout.setLayoutParams(params1);
+            tagsLayout.addView(frameLayout);
+        }
+        else {
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(CoursePostActivity.this);
+            builder1.setMessage("Location does not exist.");
+            builder1.setCancelable(true);
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        }
     }
 
     public void addReviewPost (View v){

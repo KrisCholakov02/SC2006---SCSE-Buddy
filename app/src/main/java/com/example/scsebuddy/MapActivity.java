@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -44,6 +45,7 @@ public class MapActivity extends AppCompatActivity {
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
     private String[] path;
+    private String[] mapName;
     Context context;
     private AutoCompleteTextView txtStartSearch, txtEndSearch;
     @Override
@@ -121,7 +123,7 @@ public class MapActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     PathResult pathR = response.body();
                     ArrayList<Location> locations = new ArrayList<>(Arrays.asList(pathR.getLocations()));
-                    String[] mapName= new String[locations.size()];
+                    mapName= new String[locations.size()];
                     for(int i = 0; i < locations.size(); i++){
                         Location location = locations.get(i);
                         mapName[i] = location.getName();
@@ -146,36 +148,55 @@ public class MapActivity extends AppCompatActivity {
 
         retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
         retrofitInterface = retrofit.create(RetrofitInterface.class);
+        boolean startValid = false, endValid = false;
+        //Log.e("TEST", mapName[1]);
+        for(int i = 0; i < mapName.length; i ++){
+            //Log.e("HHH", "xxx"+i);
+            if(txtStartSearch.getText().toString().equals(mapName[i])){
+                startValid = true;
+                //Log.e("HHH", "xxx");
+                break;
+            }
+        }
 
-        String start = txtStartSearch.getText().toString();
-        String destination = txtEndSearch.getText().toString();
+        for(String mapName1 : mapName){
+            if(txtEndSearch.getText().toString().equals(mapName1)){
+                endValid = true;
+                //Log.e("HHH", "xxx1");
+                break;
+            }
 
-        HashMap<String, String> map = new HashMap<>();
-        map.put("start", start);
-        map.put("destination", destination);
-        Log.e("HHH", map.toString());
+        }
+        if(startValid && endValid){
+            String start = txtStartSearch.getText().toString();
+            String destination = txtEndSearch.getText().toString();
 
-        Call<PathResult> getPath = retrofitInterface.executeGetPath(map);
+            HashMap<String, String> map = new HashMap<>();
+            map.put("start", start);
+            map.put("destination", destination);
+            Log.e("HHH", map.toString());
 
-        getPath.enqueue(new Callback<PathResult>() {
-            @Override
-            public void onResponse(Call<PathResult> call, Response<PathResult> response) {
-                if (response.code() == 200) {
-                    PathResult pathR = response.body();
-                    ArrayList<Location> locations = new ArrayList<>(Arrays.asList(pathR.getLocations()));
-                    path = new String[locations.size()];
-                    for(int i = 0; i <locations.size(); i++){
-                        Location location = locations.get(i);
-                        System.out.println(location.getPhotoId());
-                        path[i] = location.getPhotoId();
-                    }
+            Call<PathResult> getPath = retrofitInterface.executeGetPath(map);
 
-                    ArrayList<Direction> directions = new ArrayList<>(Arrays.asList(pathR.getDirections()));
-                    RecyclerView mapDirectionRecycleView = findViewById(R.id.mapDirectionRecycleView);
-                    mapDirectionRecycleView.setVisibility(View.VISIBLE);
-                    MapDirection_RecyclerViewAdapter adapter = new MapDirection_RecyclerViewAdapter(context, directions);
-                    mapDirectionRecycleView.setAdapter(adapter);
-                    mapDirectionRecycleView.setLayoutManager(new LinearLayoutManager(context));
+            getPath.enqueue(new Callback<PathResult>() {
+                @Override
+                public void onResponse(Call<PathResult> call, Response<PathResult> response) {
+                    if (response.code() == 200) {
+                        PathResult pathR = response.body();
+                        ArrayList<Location> locations = new ArrayList<>(Arrays.asList(pathR.getLocations()));
+                        path = new String[locations.size()];
+                        for(int i = 0; i <locations.size(); i++){
+                            Location location = locations.get(i);
+                            System.out.println(location.getPhotoId());
+                            path[i] = location.getPhotoId();
+                        }
+
+                        ArrayList<Direction> directions = new ArrayList<>(Arrays.asList(pathR.getDirections()));
+                        RecyclerView mapDirectionRecycleView = findViewById(R.id.mapDirectionRecycleView);
+                        mapDirectionRecycleView.setVisibility(View.VISIBLE);
+                        MapDirection_RecyclerViewAdapter adapter = new MapDirection_RecyclerViewAdapter(context, directions);
+                        mapDirectionRecycleView.setAdapter(adapter);
+                        mapDirectionRecycleView.setLayoutManager(new LinearLayoutManager(context));
 //                        for (int i = 0; i < locations.size(); i++) {
 //                        Location location = locations.get(i);
 //                        System.out.println(location.getName());
@@ -185,16 +206,26 @@ public class MapActivity extends AppCompatActivity {
 //                        System.out.println("");
 //                    }
 
-                } else if (response.code() == 404){
-                    Log.e("HHH", "No such start/destination");
+                    } else if (response.code() == 404){
+                        Log.e("HHH", "No such start/destination");
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<PathResult> call, Throwable t) {
+                @Override
+                public void onFailure(Call<PathResult> call, Throwable t) {
 
-            }
-        });
+                }
+            });
+        }
+        else {
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(MapActivity.this);
+            builder1.setMessage("Start or End location does not exist.");
+            builder1.setCancelable(true);
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        }
+
+
     }
 
 
