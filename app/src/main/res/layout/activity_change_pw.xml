@@ -76,7 +76,7 @@
                     android:background="@drawable/text_input_design"
                     android:ems="10"
                     android:paddingLeft="3pt"
-                    android:text="email"
+                    android:hint="Password"
                     android:fontFamily="@font/poppins_medium"
                     android:inputType="textPassword" />
                 <TextView
@@ -96,7 +96,7 @@
                     android:background="@drawable/text_input_design"
                     android:ems="10"
                     android:paddingLeft="3pt"
-                    android:text="email"
+                    android:hint="Password"
                     android:fontFamily="@font/poppins_medium"
                     android:inputType="textPassword" />
 
@@ -117,7 +117,7 @@
                     android:background="@drawable/text_input_design"
                     android:ems="10"
                     android:paddingLeft="3pt"
-                    android:text="email"
+                    android:hint="Password"
                     android:fontFamily="@font/poppins_medium"
                     android:inputType="textPassword" />
                 <FrameLayout

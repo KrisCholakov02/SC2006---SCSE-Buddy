@@ -126,7 +126,7 @@
                         android:background="@drawable/text_input_design"
                         android:ems="10"
                         android:paddingLeft="3pt"
-                        android:text="email"
+                        android:hint="email"
                         android:fontFamily="@font/poppins_medium"
                         android:inputType="textEmailAddress" />
 
@@ -150,7 +150,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="10"
                         android:paddingLeft="3pt"
-                        android:text="password"
+                        android:hint="password"
                         android:background="@drawable/text_input_design"
                         android:ems="10"
                         android:fontFamily="@font/poppins_medium"
