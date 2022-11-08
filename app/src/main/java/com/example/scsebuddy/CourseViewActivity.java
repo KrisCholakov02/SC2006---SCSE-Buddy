@@ -4,36 +4,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.scsebuddy.dynamicdesign.CourseReview_RecyclerViewAdapter;
-import com.example.scsebuddy.dynamicdesign.Topics_RecyclerViewAdapter;
 import com.example.scsebuddy.requestsresults.ConstantVariables;
 import com.example.scsebuddy.requestsresults.CourseReview;
 import com.example.scsebuddy.requestsresults.CourseReviewResult;
 import com.example.scsebuddy.requestsresults.RetrofitInterface;
-import com.example.scsebuddy.requestsresults.Topic;
-import com.example.scsebuddy.requestsresults.TopicsResult;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,13 +40,10 @@ public class CourseViewActivity extends AppCompatActivity {
     private int courseFav;
     ImageView courseFavImageView;
 
-    TextView courseCodeTV,courseTitleTV;
+    TextView courseCodeTV, courseTitleTV;
     Context context;
 
-    Spinner sortOrderSpinner,sortBySpinner;
-
-    //RecyclerView courseReviewRecycleView;
-
+    Spinner sortOrderSpinner, sortBySpinner;
 
 
     @Override
@@ -88,14 +73,13 @@ public class CourseViewActivity extends AppCompatActivity {
         Intent ii = getIntent();
         Bundle b = ii.getExtras();
         courseFavImageView = this.findViewById(R.id.courseFavImageView);
-        if(b!=null){
-            courseCodeTV.setText(b.get("courseCode")+"");
-            courseTitleTV.setText(b.get("courseTitle")+"");
-            courseFav = Integer.parseInt(b.get("courseFav")+"");
-            if (courseFav ==1){
+        if (b != null) {
+            courseCodeTV.setText(b.get("courseCode") + "");
+            courseTitleTV.setText(b.get("courseTitle") + "");
+            courseFav = Integer.parseInt(b.get("courseFav") + "");
+            if (courseFav == 1) {
                 courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_yellow);
-            }
-            else{
+            } else {
                 courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_outline);
             }
             //default load
@@ -110,29 +94,19 @@ public class CourseViewActivity extends AppCompatActivity {
         }
     }
 
-    public void updateRV(HashMap map){
+    public void updateRV(HashMap map) {
         Call<CourseReviewResult> executeAllCourseReview = retrofitInterface.executeAllCourseReview(map);
 
         executeAllCourseReview.enqueue(new Callback<CourseReviewResult>() {
             @Override
             public void onResponse(Call<CourseReviewResult> call, Response<CourseReviewResult> response) {
                 if (response.code() == 200) {
-//                        TopicsResult topicR = response.body();
-//
-//                        ArrayList<Topic> topics = new ArrayList<>(Arrays.asList(topicR.getTopics()));
-//
-//                        RecyclerView topicsRecyclerView = findViewById(R.id.topicsRecycleView);
-//
-//                        Topics_RecyclerViewAdapter adapter = new Topics_RecyclerViewAdapter(context, topics);
-//                        topicsRecyclerView.setAdapter(adapter);
-//                        topicsRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-
                     CourseReviewResult courseR = response.body();
                     ArrayList<CourseReview> reviews = new ArrayList<>(Arrays.asList(courseR.getCoursesReview()));
-                    Log.e("TEST", courseR.getCoursesReview()[0].getGrade()+"");
+                    Log.e("TEST", courseR.getCoursesReview()[0].getGrade() + "");
                     RecyclerView courseReviewRecycleView = findViewById(R.id.courseReviewRecycleView);
 
-                    CourseReview_RecyclerViewAdapter adapter = new CourseReview_RecyclerViewAdapter(context,reviews);
+                    CourseReview_RecyclerViewAdapter adapter = new CourseReview_RecyclerViewAdapter(context, reviews);
                     courseReviewRecycleView.setAdapter(adapter);
                     courseReviewRecycleView.setLayoutManager(new LinearLayoutManager(context));
                 } else if (response.code() == 404) {
@@ -146,16 +120,15 @@ public class CourseViewActivity extends AppCompatActivity {
             }
         });
     }
-    public void addReview(View v){
+
+    public void addReview(View v) {
         Intent intent = new Intent(this, CoursePostActivity.class);
         intent.putExtra("courseCode", courseCodeTV.getText());
         intent.putExtra("courseFav", courseFav);
         intent.putExtra("courseTitle", courseTitleTV.getText());
-//        startActivity(intent);
-//        finish();
 
         //THEO TEST
-        startActivityForResult(intent,1);
+        startActivityForResult(intent, 1);
     }
 
     @Override
@@ -191,10 +164,10 @@ public class CourseViewActivity extends AppCompatActivity {
         } //onActivityResult
     }
 
-    public void sortByButton(View v){
+    public void sortByButton(View v) {
         String orderBy = sortOrderSpinner.getSelectedItem().toString();
         String sortBy = sortBySpinner.getSelectedItem().toString();
-        switch(sortBy){
+        switch (sortBy) {
             case "Date":
                 sortBy = "Date_Published";
                 break;
@@ -211,22 +184,18 @@ public class CourseViewActivity extends AppCompatActivity {
     }
 
 
-    public void addFav(View v){
+    public void addFav(View v) {
         HashMap<String, String> map = new HashMap<>();
-       // map.put("lName", lName);
-        if(courseFav == 1) {
-            //courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_outline);
+        if (courseFav == 1) {
             courseFav = 0;
-        }
-        else {
-            //courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_yellow);
+        } else {
             courseFav = 1;
         }
         SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_WORLD_READABLE);
         String email = sp.getString("USER_EMAIL", "");
 
         map.put("courseFavID", courseCodeTV.getText() + "");
-        map.put("courseFav", courseFav+"");
+        map.put("courseFav", courseFav + "");
         map.put("email", email);
         Call<Void> call = retrofitInterface.executeCourseFav(map);
 
@@ -235,13 +204,10 @@ public class CourseViewActivity extends AppCompatActivity {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.code() == 200) {
                     Toast.makeText(CourseViewActivity.this, "Favorite Updated Successfully!", Toast.LENGTH_LONG).show();
-                    if(courseFav == 1) {
+                    if (courseFav == 1) {
                         courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_yellow);
-                        //courseFav = 0;
-                    }
-                    else {
+                    } else {
                         courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_outline);
-                        //courseFav = 1;
                     }
                     try {
                         Thread.sleep(2000);
@@ -250,12 +216,9 @@ public class CourseViewActivity extends AppCompatActivity {
                     }
                 } else if (response.code() == 400) {
                     Toast.makeText(CourseViewActivity.this, "Wrong Credentials!", Toast.LENGTH_LONG).show();
-                    if(courseFav == 1) {
-                        //courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_outline);
+                    if (courseFav == 1) {
                         courseFav = 0;
-                    }
-                    else {
-                        //courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_yellow);
+                    } else {
                         courseFav = 1;
                     }
                 }

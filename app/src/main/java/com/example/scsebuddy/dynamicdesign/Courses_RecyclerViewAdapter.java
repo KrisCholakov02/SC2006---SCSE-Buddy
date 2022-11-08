@@ -3,7 +3,6 @@ package com.example.scsebuddy.dynamicdesign;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,33 +58,28 @@ public class Courses_RecyclerViewAdapter extends RecyclerView.Adapter<Courses_Re
         fav = courses.get(position).getFavorite();
         if (fav == 0) {
             holder.favouriteImageView.setImageResource(R.drawable.ic_course_bookmark_outline);
-            holder.courseFavTextView.setText(fav +"");
+            holder.courseFavTextView.setText(fav + "");
         } else {
             holder.favouriteImageView.setImageResource(R.drawable.ic_course_bookmark_yellow);
-            holder.courseFavTextView.setText(fav+ "");
+            holder.courseFavTextView.setText(fav + "");
         }
         holder.favouriteImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
                 retrofitInterface = retrofit.create(RetrofitInterface.class);
-                //Log.e("TEST", "HERE????");
 
                 HashMap<String, String> map = new HashMap<>();
-                // map.put("lName", lName);
-                if(fav == 1) {
-                    //courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_outline);
+                if (fav == 1) {
                     fav = 0;
-                }
-                else {
-                    //courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_yellow);
+                } else {
                     fav = 1;
                 }
                 SharedPreferences sp = context.getSharedPreferences("UserPreferences", Context.MODE_WORLD_READABLE);
                 String email = sp.getString("USER_EMAIL", "");
 
                 map.put("courseFavID", holder.courseCodeTextView.getText() + "");
-                map.put("courseFav", fav+"");
+                map.put("courseFav", fav + "");
                 map.put("email", email);
                 Call<Void> call = retrofitInterface.executeCourseFav(map);
 
@@ -94,13 +88,10 @@ public class Courses_RecyclerViewAdapter extends RecyclerView.Adapter<Courses_Re
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.code() == 200) {
                             Toast.makeText(context, "Favorite Updated Successfully!", Toast.LENGTH_LONG).show();
-                            if(fav == 1) {
+                            if (fav == 1) {
                                 holder.favouriteImageView.setImageResource(R.drawable.ic_course_bookmark_yellow);
-                                //courseFav = 0;
-                            }
-                            else {
+                            } else {
                                 holder.favouriteImageView.setImageResource(R.drawable.ic_course_bookmark_outline);
-                                //courseFav = 1;
                             }
                             try {
                                 Thread.sleep(2000);
@@ -109,12 +100,9 @@ public class Courses_RecyclerViewAdapter extends RecyclerView.Adapter<Courses_Re
                             }
                         } else if (response.code() == 400) {
                             Toast.makeText(context, "Wrong Credentials!", Toast.LENGTH_LONG).show();
-                            if(fav == 1) {
-                                //courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_outline);
+                            if (fav == 1) {
                                 fav = 0;
-                            }
-                            else {
-                                //courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_yellow);
+                            } else {
                                 fav = 1;
                             }
                         }
@@ -134,7 +122,7 @@ public class Courses_RecyclerViewAdapter extends RecyclerView.Adapter<Courses_Re
         return courses.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView courseCodeTextView, courseTitleTextView, ausTextView, courseFavTextView;
         ImageView favouriteImageView;
@@ -154,7 +142,7 @@ public class Courses_RecyclerViewAdapter extends RecyclerView.Adapter<Courses_Re
         @Override
         public void onClick(View view) {
             final Intent intent;
-            intent = new Intent(context1,CourseViewActivity.class);
+            intent = new Intent(context1, CourseViewActivity.class);
             intent.putExtra("courseCode", courseCodeTextView.getText());
             intent.putExtra("courseTitle", courseTitleTextView.getText());
             intent.putExtra("courseFav", courseFavTextView.getText());

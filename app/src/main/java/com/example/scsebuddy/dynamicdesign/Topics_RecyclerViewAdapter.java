@@ -6,16 +6,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.scsebuddy.CourseViewActivity;
 import com.example.scsebuddy.ForumViewActivity;
 import com.example.scsebuddy.R;
-import com.example.scsebuddy.requestsresults.Course;
 import com.example.scsebuddy.requestsresults.Topic;
 
 import java.util.ArrayList;
@@ -52,7 +49,7 @@ public class Topics_RecyclerViewAdapter extends RecyclerView.Adapter<Topics_Recy
         return topics.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView topicTitleTextView, topicDescriptionTextView, topicNoOfPostsTextView;
 
@@ -68,7 +65,6 @@ public class Topics_RecyclerViewAdapter extends RecyclerView.Adapter<Topics_Recy
 
         @Override
         public void onClick(View view) {
-            //Log.e("HERE", "here");
             final Intent intent;
             intent = new Intent(context1, ForumViewActivity.class);
             intent.putExtra("topicTitle", topicTitleTextView.getText().toString());

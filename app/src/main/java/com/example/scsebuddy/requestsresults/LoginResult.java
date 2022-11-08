@@ -16,6 +16,4 @@ public class LoginResult {
     public String getEmail() {
         return email;
     }
-
-
 }

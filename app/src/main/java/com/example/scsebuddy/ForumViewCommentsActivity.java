@@ -16,12 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.scsebuddy.dynamicdesign.ForumComment_RecyclerViewAdapter;
-import com.example.scsebuddy.dynamicdesign.ForumPost_RecyclerViewAdapter;
 import com.example.scsebuddy.requestsresults.ConstantVariables;
 import com.example.scsebuddy.requestsresults.ForumComment;
 import com.example.scsebuddy.requestsresults.ForumCommentResult;
-import com.example.scsebuddy.requestsresults.ForumPost;
-import com.example.scsebuddy.requestsresults.ForumPostResult;
 import com.example.scsebuddy.requestsresults.RetrofitInterface;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -36,32 +33,22 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ForumViewCommentsActivity extends AppCompatActivity {
-TextView titleTextView, postByTextView, contentTextView;
-private int postID;
+    TextView titleTextView, postByTextView, contentTextView;
+    private int postID;
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
     FloatingActionButton mAddFab;
     Context context;
-//    protected void onRestart(){
-//        super.onRestart();
-//        Intent i = new Intent(this,ForumViewCommentsActivity.class);
-//        startActivity(i);
-//        finish();
-//    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forum_view_comments);
 
-         context = this;
+        context = this;
         retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
         retrofitInterface = retrofit.create(RetrofitInterface.class);
-//        intent.putExtra("postID", iDTextView.getText()+"");
-//        intent.putExtra("forumPost", forumPostTextView.getText()+"");
-//        intent.putExtra("datePosted", datePostedTextView.getText()+"");
-//        intent.putExtra("postBy", postByTextView.getText()+"");
-//        intent.putExtra("topicTitle",topicTitleTextView.getText()+"");
-    Log.e("TEST", "I CREATED");
+        Log.e("TEST", "I CREATED");
         titleTextView = this.findViewById(R.id.titleTextView);
         postByTextView = this.findViewById(R.id.postByTextView);
         contentTextView = this.findViewById(R.id.contentTextView);
@@ -69,21 +56,18 @@ private int postID;
         contentTextView.setMovementMethod(new ScrollingMovementMethod());
         Intent ii = getIntent();
         Bundle b = ii.getExtras();
-        if(b!=null) {
-            //Log.e("TEST", "I CREATED3");
-            titleTextView.setText(b.get("topicTitle")+"");
-            postByTextView.setText(b.get("postBy")+"");
-            contentTextView.setText(b.get("forumPost")+"");
-            postID = Integer.parseInt(b.get("postID")+"");
-            //Log.e("TEST", "I CREATED2");
+        if (b != null) {
+            titleTextView.setText(b.get("topicTitle") + "");
+            postByTextView.setText(b.get("postBy") + "");
+            contentTextView.setText(b.get("forumPost") + "");
+            postID = Integer.parseInt(b.get("postID") + "");
         }
 
         SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
 
         HashMap<String, String> map = new HashMap<>();
-        //String topicID = titleTextView.getText().toString();
-        map.put("postID", postID+"");
-        map.put("email", sp.getString("USER_EMAIL",""));
+        map.put("postID", postID + "");
+        map.put("email", sp.getString("USER_EMAIL", ""));
 
         Call<ForumCommentResult> executeForumComment = retrofitInterface.executeForumComment(map);
 
@@ -91,11 +75,11 @@ private int postID;
             @Override
             public void onResponse(Call<ForumCommentResult> call, Response<ForumCommentResult> response) {
                 if (response.code() == 200) {
-                        ForumCommentResult forumV = response.body();
-                        ArrayList<ForumComment> comments = new ArrayList<>(Arrays.asList(forumV.getForumComments()));
-                        RecyclerView forumCommentRecyclerView = findViewById(R.id.forumCommentRecyclerView);
+                    ForumCommentResult forumV = response.body();
+                    ArrayList<ForumComment> comments = new ArrayList<>(Arrays.asList(forumV.getForumComments()));
+                    RecyclerView forumCommentRecyclerView = findViewById(R.id.forumCommentRecyclerView);
 
-                    ForumComment_RecyclerViewAdapter adapter = new ForumComment_RecyclerViewAdapter(context,comments);
+                    ForumComment_RecyclerViewAdapter adapter = new ForumComment_RecyclerViewAdapter(context, comments);
                     forumCommentRecyclerView.setAdapter(adapter);
                     forumCommentRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
@@ -115,17 +99,12 @@ private int postID;
 
     public void addForumComment(View view) {
         Intent i = new Intent(this, ForumPostCommentActivity.class);
-        Log.e("TEST", postID+" H");
+        Log.e("TEST", postID + " H");
         i.putExtra("postID", postID);
-//        titleTextView.setText(b.get("topicTitle")+"");
-//        postByTextView.setText(b.get("postBy")+"");
-//        contentTextView.setText(b.get("forumPost")+"");
         i.putExtra("topicTitle", titleTextView.getText().toString());
         i.putExtra("forumPost", contentTextView.getText().toString());
         i.putExtra("postBy", postByTextView.getText().toString());
-//        startActivity(i);
-//        finish();
-        startActivityForResult(i,1);
+        startActivityForResult(i, 1);
     }
 
     @Override
@@ -133,24 +112,20 @@ private int postID;
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1) {
-            if(resultCode == Activity.RESULT_OK){
-                //String result=data.getStringExtra("result");
+            if (resultCode == Activity.RESULT_OK) {
                 Bundle b = data.getExtras();
-                if(b!=null) {
-                    //Log.e("TEST", "I CREATED3");
-                    titleTextView.setText(b.get("topicTitle")+"");
-                    postByTextView.setText(b.get("postBy")+"");
-                    contentTextView.setText(b.get("forumPost")+"");
-                    postID = Integer.parseInt(b.get("postID")+"");
-                    //Log.e("TEST", "I CREATED2");
+                if (b != null) {
+                    titleTextView.setText(b.get("topicTitle") + "");
+                    postByTextView.setText(b.get("postBy") + "");
+                    contentTextView.setText(b.get("forumPost") + "");
+                    postID = Integer.parseInt(b.get("postID") + "");
                 }
 
                 SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
 
                 HashMap<String, String> map = new HashMap<>();
-                //String topicID = titleTextView.getText().toString();
-                map.put("postID", postID+"");
-                map.put("email", sp.getString("USER_EMAIL",""));
+                map.put("postID", postID + "");
+                map.put("email", sp.getString("USER_EMAIL", ""));
 
                 Call<ForumCommentResult> executeForumComment = retrofitInterface.executeForumComment(map);
 
@@ -162,7 +137,7 @@ private int postID;
                             ArrayList<ForumComment> comments = new ArrayList<>(Arrays.asList(forumV.getForumComments()));
                             RecyclerView forumCommentRecyclerView = findViewById(R.id.forumCommentRecyclerView);
 
-                            ForumComment_RecyclerViewAdapter adapter = new ForumComment_RecyclerViewAdapter(context,comments);
+                            ForumComment_RecyclerViewAdapter adapter = new ForumComment_RecyclerViewAdapter(context, comments);
                             forumCommentRecyclerView.setAdapter(adapter);
                             forumCommentRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
@@ -179,7 +154,7 @@ private int postID;
                 });
             }
             if (resultCode == Activity.RESULT_CANCELED) {
-                // Write your code if there's no result
+                Toast.makeText(ForumViewCommentsActivity.this, "Result Canceled!", Toast.LENGTH_LONG).show();
             }
         }
     } //onActivityResult

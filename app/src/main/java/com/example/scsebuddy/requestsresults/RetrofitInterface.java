@@ -1,8 +1,6 @@
 package com.example.scsebuddy.requestsresults;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.TreeMap;
 
 import retrofit2.Call;
 import retrofit2.http.*;
@@ -23,7 +21,7 @@ public interface RetrofitInterface {
     Call<Void> executeCode(@Body HashMap<String, String> map);
 
     @POST("/changeAccDetails")
-    Call<Void> executeChangeAccDetails (@Body HashMap<String, String>map);
+    Call<Void> executeChangeAccDetails(@Body HashMap<String, String> map);
 
     //Everything about Courses
     @POST("/allCourses")
@@ -44,7 +42,6 @@ public interface RetrofitInterface {
     //not done dk how do
     @POST("/sortCourseYear")
     Call<CoursesResult> executeSortCourseYear(@Body HashMap<String, String> map);
-
 
 
     //Everything About Forum
@@ -68,7 +65,7 @@ public interface RetrofitInterface {
     Call<Void> executeForumCommentPost(@Body HashMap<String, String> map);
 
     @POST("/forumPostLike")
-    Call<Void> executeForumPostLike (@Body HashMap<String, String> map);
+    Call<Void> executeForumPostLike(@Body HashMap<String, String> map);
 
     // Map
 

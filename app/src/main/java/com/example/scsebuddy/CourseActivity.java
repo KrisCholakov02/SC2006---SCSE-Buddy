@@ -11,12 +11,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +22,6 @@ import com.example.scsebuddy.dynamicdesign.Courses_RecyclerViewAdapter;
 import com.example.scsebuddy.requestsresults.ConstantVariables;
 import com.example.scsebuddy.requestsresults.Course;
 import com.example.scsebuddy.requestsresults.CoursesResult;
-import com.example.scsebuddy.requestsresults.Location;
 import com.example.scsebuddy.requestsresults.RetrofitInterface;
 
 import java.util.ArrayList;
@@ -43,12 +39,13 @@ public class CourseActivity extends AppCompatActivity {
     private RetrofitInterface retrofitInterface;
     AutoCompleteTextView txtSearchCourse;
     Context context;
-    Spinner sortOrderSpinner,sortBySpinner;
+    Spinner sortOrderSpinner, sortBySpinner;
     String email;
+
     @Override
-    protected void onRestart(){
+    protected void onRestart() {
         super.onRestart();
-        Intent i = new Intent(this,CourseActivity.class);
+        Intent i = new Intent(this, CourseActivity.class);
         startActivity(i);
         //finish();
     }
@@ -62,12 +59,12 @@ public class CourseActivity extends AppCompatActivity {
 
         SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
         //asc/desc
-         sortOrderSpinner = this.findViewById(R.id.sortOrderSpinner);
+        sortOrderSpinner = this.findViewById(R.id.sortOrderSpinner);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.sorting_order_spinner_content, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         adapter1.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         sortOrderSpinner.setAdapter(adapter1);
         //name,year,code
-         sortBySpinner = this.findViewById(R.id.sortBySpinner);
+        sortBySpinner = this.findViewById(R.id.sortBySpinner);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.sorting_course_by_spinner_content, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         adapter2.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
         sortBySpinner.setAdapter(adapter2);
@@ -86,10 +83,10 @@ public class CourseActivity extends AppCompatActivity {
 
     }
 
-    public void sortByButton(View v){
+    public void sortByButton(View v) {
         String orderBy = sortOrderSpinner.getSelectedItem().toString();
         String sortBy = sortBySpinner.getSelectedItem().toString();
-        switch(sortBy){
+        switch (sortBy) {
             case "Name":
                 sortBy = "Title";
                 break;
@@ -101,16 +98,15 @@ public class CourseActivity extends AppCompatActivity {
                 break;
         }
         HashMap<String, String> map = new HashMap<>();
-        if(txtSearchCourse.getText().toString().trim().equals("")) {
+        if (txtSearchCourse.getText().toString().trim().equals("")) {
 
             map.put("email", email);
-            map.put("orderBy",orderBy);
+            map.put("orderBy", orderBy);
             map.put("sortBy", sortBy);
             updateRV(map);
-        }
-        else {
+        } else {
             map.put("email", email);
-            map.put("orderBy",orderBy);
+            map.put("orderBy", orderBy);
             map.put("sortBy", sortBy);
             map.put("searchCourse", txtSearchCourse.getText().toString().trim());
             updateRVSearch(map);
@@ -119,7 +115,7 @@ public class CourseActivity extends AppCompatActivity {
 
     }
 
-    private void updateRVSearch(HashMap map){
+    private void updateRVSearch(HashMap map) {
         Call<CoursesResult> getSearchCourse = retrofitInterface.executeSearchCourses(map);
 
         getSearchCourse.enqueue(new Callback<CoursesResult>() {
@@ -127,7 +123,6 @@ public class CourseActivity extends AppCompatActivity {
             public void onResponse(Call<CoursesResult> call, Response<CoursesResult> response) {
                 if (response.code() == 200) {
                     CoursesResult coursesR = response.body();
-                    //Log.e("TEST", coursesR.getCourses()[0].getCode().toString());
                     ArrayList<Course> courses = new ArrayList<>(Arrays.asList(coursesR.getCourses()));
 
                     RecyclerView coursesRecyclerView = findViewById(R.id.coursesRecycleView);
@@ -155,7 +150,7 @@ public class CourseActivity extends AppCompatActivity {
         });
     }
 
-    private void updateRV(HashMap map){
+    private void updateRV(HashMap map) {
         Call<CoursesResult> getAllCourses = retrofitInterface.executeAllCourses(map);
 
         getAllCourses.enqueue(new Callback<CoursesResult>() {
@@ -163,16 +158,13 @@ public class CourseActivity extends AppCompatActivity {
             public void onResponse(Call<CoursesResult> call, Response<CoursesResult> response) {
                 if (response.code() == 200) {
                     CoursesResult coursesR = response.body();
-                    //Log.e("TEST", coursesR.getCourses()[0].getCode().toString());
                     ArrayList<Course> courses = new ArrayList<>(Arrays.asList(coursesR.getCourses()));
-//                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, mapName);
-//                    txtStartSearch.setAdapter(adapter);
-                    String[] courseName= new String[courses.size()];
-                    for(int i = 0; i < courses.size(); i++){
+                    String[] courseName = new String[courses.size()];
+                    for (int i = 0; i < courses.size(); i++) {
                         Course course = courses.get(i);
                         courseName[i] = course.getCode();
                     }
-                    ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1,courseName);
+                    ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, courseName);
                     txtSearchCourse.setAdapter(adapter1);
                     RecyclerView coursesRecyclerView = findViewById(R.id.coursesRecycleView);
                     coursesRecyclerView.setVisibility(View.VISIBLE);
@@ -198,7 +190,7 @@ public class CourseActivity extends AppCompatActivity {
 
     }
 
-    public void courseSearch (View v){
+    public void courseSearch(View v) {
         String searchCourse = txtSearchCourse.getText().toString();
 
         SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
@@ -219,23 +211,23 @@ public class CourseActivity extends AppCompatActivity {
     }
 
     //Bottom buttons
-    public void mapScreen (View v){
-        Intent intent = new Intent(v.getContext(),MapActivity.class);
+    public void mapScreen(View v) {
+        Intent intent = new Intent(v.getContext(), MapActivity.class);
         startActivity(intent);
     }
 
-    public void courseScreen(View v){
-        Intent intent = new Intent(v.getContext(),CourseActivity.class);
+    public void courseScreen(View v) {
+        Intent intent = new Intent(v.getContext(), CourseActivity.class);
         startActivity(intent);
     }
 
-    public void forumScreen (View v){
-        Intent intent = new Intent(v.getContext(),ForumActivity.class);
+    public void forumScreen(View v) {
+        Intent intent = new Intent(v.getContext(), ForumActivity.class);
         startActivity(intent);
     }
 
-    public void profileScreen (View v){
-        Intent intent = new Intent(v.getContext(),ProfileActivity.class);
+    public void profileScreen(View v) {
+        Intent intent = new Intent(v.getContext(), ProfileActivity.class);
         startActivity(intent);
     }
 }

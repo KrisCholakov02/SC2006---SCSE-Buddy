@@ -11,7 +11,9 @@ public class CourseReview {
     private String email;
     private ArrayList<String> tags;
 
-    public String getEmail() { return  email;}
+    public String getEmail() {
+        return email;
+    }
 
     public String getName() {
         return name;

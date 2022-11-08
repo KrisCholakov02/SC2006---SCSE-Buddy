@@ -35,21 +35,22 @@ public class ProfileActivity extends AppCompatActivity {
         emailField.setText(email);
     }
 
-    public void changePW (View v){
-        Intent intent = new Intent(v.getContext(),ChangePwActivity.class);
+    public void changePW(View v) {
+        Intent intent = new Intent(v.getContext(), ChangePwActivity.class);
         startActivity(intent);
     }
 
-    public void updateDetails (View v){
-        Intent intent = new Intent(v.getContext(),ChangeAccountDetailsActivity.class);
+    public void updateDetails(View v) {
+        Intent intent = new Intent(v.getContext(), ChangeAccountDetailsActivity.class);
         startActivity(intent);
     }
-    public void openFAQs (View v){
+
+    public void openFAQs(View v) {
         Intent intent = new Intent(v.getContext(), FAQActivity.class);
         startActivity(intent);
     }
 
-    public void logoutTextView (View v){
+    public void logoutTextView(View v) {
         SharedPreferences sh = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sh.edit();
         editor.putString("USER_F_NAME", null);
@@ -57,33 +58,26 @@ public class ProfileActivity extends AppCompatActivity {
         editor.putString("USER_EMAIL", null);
         editor.commit();
 
-        Intent intent = new Intent(v.getContext(),LoginActivity.class);
+        Intent intent = new Intent(v.getContext(), LoginActivity.class);
         startActivity(intent);
     }
 
-    public int getImage(int number){
-        switch (number){
+    public int getImage(int number) {
+        switch (number) {
             case 1:
                 return R.drawable.default1;
-//                break;
             case 2:
                 return R.drawable.default2;
-//                break;
             case 3:
                 return R.drawable.default3;
-//                break;
             case 4:
                 return R.drawable.default4;
-//                break;
             case 5:
                 return R.drawable.default5;
-//                break;
             case 6:
                 return R.drawable.default6;
-//                break;
             case 0:
                 return R.drawable.default7;
-//                break;
             default:
                 break;
         }
@@ -91,23 +85,23 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     //Bottom buttons
-    public void mapScreen (View v){
-        Intent intent = new Intent(v.getContext(),MapActivity.class);
+    public void mapScreen(View v) {
+        Intent intent = new Intent(v.getContext(), MapActivity.class);
         startActivity(intent);
     }
 
-    public void courseScreen(View v){
-        Intent intent = new Intent(v.getContext(),CourseActivity.class);
+    public void courseScreen(View v) {
+        Intent intent = new Intent(v.getContext(), CourseActivity.class);
         startActivity(intent);
     }
 
-    public void forumScreen (View v){
-        Intent intent = new Intent(v.getContext(),ForumActivity.class);
+    public void forumScreen(View v) {
+        Intent intent = new Intent(v.getContext(), ForumActivity.class);
         startActivity(intent);
     }
 
-    public void profileScreen (View v){
-        Intent intent = new Intent(v.getContext(),ProfileActivity.class);
+    public void profileScreen(View v) {
+        Intent intent = new Intent(v.getContext(), ProfileActivity.class);
         startActivity(intent);
     }
 }

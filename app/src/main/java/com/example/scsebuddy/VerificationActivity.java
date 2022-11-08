@@ -2,7 +2,6 @@ package com.example.scsebuddy;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +28,7 @@ public class VerificationActivity extends AppCompatActivity {
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
     Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +37,8 @@ public class VerificationActivity extends AppCompatActivity {
         verifyCodeEditText = this.findViewById(R.id.verifyCodeEditText);
         Intent ii = getIntent();
         Bundle b = ii.getExtras();
-        if(b!=null){
-            codeVerify =b.get("codeVerify") +"";
+        if (b != null) {
+            codeVerify = b.get("codeVerify") + "";
             email = b.get("email") + "";
             password = b.get("password") + "";
             fName = b.get("fName") + "";
@@ -46,10 +46,10 @@ public class VerificationActivity extends AppCompatActivity {
         }
     }
 
-    public void verifyCode (View v){
+    public void verifyCode(View v) {
         Log.e("TEST", codeVerify + "");
         Log.e("TEST", verifyCodeEditText.getText().toString() + "");
-        if(verifyCodeEditText.getText().toString().equals(codeVerify)){
+        if (verifyCodeEditText.getText().toString().equals(codeVerify)) {
             retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
             retrofitInterface = retrofit.create(RetrofitInterface.class);
 
@@ -77,7 +77,7 @@ public class VerificationActivity extends AppCompatActivity {
                     Toast.makeText(VerificationActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                 }
             });
-        }else{
+        } else {
             Toast.makeText(VerificationActivity.this, "TRY AGAIN!", Toast.LENGTH_LONG).show();
         }
     }

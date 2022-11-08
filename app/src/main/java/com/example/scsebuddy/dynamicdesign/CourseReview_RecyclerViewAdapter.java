@@ -13,19 +13,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.scsebuddy.ForumPostActivity;
 import com.example.scsebuddy.MapActivity;
 import com.example.scsebuddy.R;
 import com.example.scsebuddy.requestsresults.CourseReview;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class CourseReview_RecyclerViewAdapter extends RecyclerView.Adapter<CourseReview_RecyclerViewAdapter.MyViewHolder> {
-     Context context;
-     ArrayList<CourseReview> reviews;
+    Context context;
+    ArrayList<CourseReview> reviews;
 
     public CourseReview_RecyclerViewAdapter(Context context, ArrayList<CourseReview> reviews) {
         this.context = context;

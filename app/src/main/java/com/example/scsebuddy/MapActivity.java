@@ -16,15 +16,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.scsebuddy.dynamicdesign.Courses_RecyclerViewAdapter;
 import com.example.scsebuddy.dynamicdesign.MapDirection_RecyclerViewAdapter;
 import com.example.scsebuddy.requestsresults.ConstantVariables;
-import com.example.scsebuddy.requestsresults.Course;
-import com.example.scsebuddy.requestsresults.CoursesResult;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,6 +44,7 @@ public class MapActivity extends AppCompatActivity {
     private String[] mapName;
     Context context;
     private AutoCompleteTextView txtStartSearch, txtEndSearch;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +53,8 @@ public class MapActivity extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
 
         String email = sp.getString("USER_EMAIL", null);
-         txtStartSearch = this.findViewById(R.id.txtStartSearch);
-         txtEndSearch = this.findViewById(R.id.txtEndSearch);
+        txtStartSearch = this.findViewById(R.id.txtStartSearch);
+        txtEndSearch = this.findViewById(R.id.txtEndSearch);
 
         //loadData();
         if (email == null) {
@@ -96,7 +93,7 @@ public class MapActivity extends AppCompatActivity {
             loginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(view.getContext(),LoginActivity.class);
+                    Intent intent = new Intent(view.getContext(), LoginActivity.class);
                     startActivity(intent);
                 }
             });
@@ -112,7 +109,7 @@ public class MapActivity extends AppCompatActivity {
         txtEndSearch.setText(destination);
     }
 
-    private void loadData(){
+    private void loadData() {
         retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
         retrofitInterface = retrofit.create(RetrofitInterface.class);
         Call<PathResult> getAllPath = retrofitInterface.executeGetAllPath();
@@ -123,8 +120,8 @@ public class MapActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     PathResult pathR = response.body();
                     ArrayList<Location> locations = new ArrayList<>(Arrays.asList(pathR.getLocations()));
-                    mapName= new String[locations.size()];
-                    for(int i = 0; i < locations.size(); i++){
+                    mapName = new String[locations.size()];
+                    for (int i = 0; i < locations.size(); i++) {
                         Location location = locations.get(i);
                         mapName[i] = location.getName();
                     }
@@ -133,7 +130,7 @@ public class MapActivity extends AppCompatActivity {
                     txtEndSearch.setAdapter(adapter);
 
 
-                } else if (response.code() == 404){
+                } else if (response.code() == 404) {
                     Log.e("HHH", "No such start/destination");
                 }
             }
@@ -144,30 +141,26 @@ public class MapActivity extends AppCompatActivity {
         });
     }
 
-    public void navigateButton (View v){
+    public void navigateButton(View v) {
 
         retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
         retrofitInterface = retrofit.create(RetrofitInterface.class);
         boolean startValid = false, endValid = false;
-        //Log.e("TEST", mapName[1]);
-        for(int i = 0; i < mapName.length; i ++){
-            //Log.e("HHH", "xxx"+i);
-            if(txtStartSearch.getText().toString().equals(mapName[i])){
+        for (int i = 0; i < mapName.length; i++) {
+            if (txtStartSearch.getText().toString().equals(mapName[i])) {
                 startValid = true;
-                //Log.e("HHH", "xxx");
                 break;
             }
         }
 
-        for(String mapName1 : mapName){
-            if(txtEndSearch.getText().toString().equals(mapName1)){
+        for (String mapName1 : mapName) {
+            if (txtEndSearch.getText().toString().equals(mapName1)) {
                 endValid = true;
-                //Log.e("HHH", "xxx1");
                 break;
             }
 
         }
-        if(startValid && endValid){
+        if (startValid && endValid) {
             String start = txtStartSearch.getText().toString();
             String destination = txtEndSearch.getText().toString();
 
@@ -185,7 +178,7 @@ public class MapActivity extends AppCompatActivity {
                         PathResult pathR = response.body();
                         ArrayList<Location> locations = new ArrayList<>(Arrays.asList(pathR.getLocations()));
                         path = new String[locations.size()];
-                        for(int i = 0; i <locations.size(); i++){
+                        for (int i = 0; i < locations.size(); i++) {
                             Location location = locations.get(i);
                             System.out.println(location.getPhotoId());
                             path[i] = location.getPhotoId();
@@ -197,16 +190,9 @@ public class MapActivity extends AppCompatActivity {
                         MapDirection_RecyclerViewAdapter adapter = new MapDirection_RecyclerViewAdapter(context, directions);
                         mapDirectionRecycleView.setAdapter(adapter);
                         mapDirectionRecycleView.setLayoutManager(new LinearLayoutManager(context));
-//                        for (int i = 0; i < locations.size(); i++) {
-//                        Location location = locations.get(i);
-//                        System.out.println(location.getName());
-//                        System.out.println(location.getCode());
-//                        System.out.println(location.getLevel());
-//                        System.out.println(location.getPhotoId());
-//                        System.out.println("");
 //                    }
 
-                    } else if (response.code() == 404){
+                    } else if (response.code() == 404) {
                         Log.e("HHH", "No such start/destination");
                     }
                 }
@@ -216,8 +202,7 @@ public class MapActivity extends AppCompatActivity {
 
                 }
             });
-        }
-        else {
+        } else {
             AlertDialog.Builder builder1 = new AlertDialog.Builder(MapActivity.this);
             builder1.setMessage("Start or End location does not exist.");
             builder1.setCancelable(true);
@@ -228,26 +213,25 @@ public class MapActivity extends AppCompatActivity {
 
     }
 
-
     //Bottom buttons
-    public void mapScreen (View v){
+    public void mapScreen(View v) {
         Intent intent = new Intent(v.getContext(), PanoramaViewActivity.class);
         intent.putExtra("path", path);
         startActivity(intent);
     }
 
-    public void courseScreen(View v){
-        Intent intent = new Intent(v.getContext(),CourseActivity.class);
+    public void courseScreen(View v) {
+        Intent intent = new Intent(v.getContext(), CourseActivity.class);
         startActivity(intent);
     }
 
-    public void forumScreen (View v){
-        Intent intent = new Intent(v.getContext(),ForumActivity.class);
+    public void forumScreen(View v) {
+        Intent intent = new Intent(v.getContext(), ForumActivity.class);
         startActivity(intent);
     }
 
-    public void profileScreen (View v){
-        Intent intent = new Intent(v.getContext(),ProfileActivity.class);
+    public void profileScreen(View v) {
+        Intent intent = new Intent(v.getContext(), ProfileActivity.class);
         startActivity(intent);
     }
 }

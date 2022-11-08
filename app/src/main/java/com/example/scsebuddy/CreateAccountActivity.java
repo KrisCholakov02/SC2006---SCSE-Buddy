@@ -3,10 +3,7 @@ package com.example.scsebuddy;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,7 +12,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.scsebuddy.requestsresults.ConstantVariables;
-import com.example.scsebuddy.requestsresults.LoginResult;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -85,7 +81,6 @@ public class CreateAccountActivity extends AppCompatActivity {
         });
 
 
-
         this.findViewById(R.id.createAccountButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,7 +89,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                 if (valid_email != null && password1.equals(password)) {
                     HashMap<String, String> map = new HashMap<>();
                     String email = emailInput.getText().toString().trim();
-                    //String password = passwordInput.getText().toString().trim();
                     String fName = fNameInput.getText().toString().trim();
                     String lName = lNameInput.getText().toString().trim();
                     Random ran = new Random();
@@ -102,14 +96,14 @@ public class CreateAccountActivity extends AppCompatActivity {
                     //password
                     if (!fName.isEmpty()) {
                         if (!lName.isEmpty()) {
-                            if(isValidPassword(password)){
-                                int codeVerify = ran.nextInt(899999)+100000;
+                            if (isValidPassword(password)) {
+                                int codeVerify = ran.nextInt(899999) + 100000;
 
                                 map.put("email", email);
                                 map.put("password", password);
                                 map.put("fName", fName);
                                 map.put("lName", lName);
-                                map.put("codeVerify", codeVerify+"");
+                                map.put("codeVerify", codeVerify + "");
 
                                 Call<Void> call = retrofitInterface.executeSignup(map);
 
@@ -117,14 +111,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                                     @Override
                                     public void onResponse(Call<Void> call, Response<Void> response) {
                                         if (response.code() == 200) {
-//                                        Toast.makeText(CreateAccountActivity.this, "Signed up successfully!", Toast.LENGTH_LONG).show();
-//                                        try {
-//                                            Thread.sleep(2000);
-//                                        } catch (InterruptedException e) {
-//                                            e.printStackTrace();
-//                                        }
-//                                        Random ran = new Random();
-//                                        int codeVerify = ran.nextInt(9999999);
                                             Intent intent = new Intent(v.getContext(), VerificationActivity.class);
                                             intent.putExtra("codeVerify", codeVerify);
                                             intent.putExtra("email", email);
@@ -133,7 +119,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                                             intent.putExtra("lName", lName);
                                             startActivity(intent);
                                         } else if (response.code() == 404) {
-                                            //Toast.makeText(CreateAccountActivity.this, "Wrong Credentials!", Toast.LENGTH_LONG).show();
                                             AlertDialog.Builder builder1 = new AlertDialog.Builder(CreateAccountActivity.this);
                                             builder1.setMessage(valid_email + " is used.");
                                             builder1.setCancelable(true);
@@ -147,10 +132,9 @@ public class CreateAccountActivity extends AppCompatActivity {
                                         Toast.makeText(CreateAccountActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                                     }
                                 });
-                            }
-                            else {
+                            } else {
                                 AlertDialog.Builder builder4 = new AlertDialog.Builder(CreateAccountActivity.this);
-                                builder4.setMessage("Password does not contain 1 digit or 1 lower or 1 upper or 1 special character.\n"+
+                                builder4.setMessage("Password does not contain 1 digit or 1 lower or 1 upper or 1 special character.\n" +
                                         "or\n" +
                                         "It does not have 8 characters.");
                                 builder4.setCancelable(true);

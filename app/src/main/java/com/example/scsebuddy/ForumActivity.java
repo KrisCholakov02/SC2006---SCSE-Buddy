@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
@@ -42,13 +41,15 @@ public class ForumActivity extends AppCompatActivity {
     private RetrofitInterface retrofitInterface;
     EditText txtSearchForum;
     Context context;
-    Spinner sortOrderSpinner,sortBySpinner;
-    protected void onRestart(){
+    Spinner sortOrderSpinner, sortBySpinner;
+
+    protected void onRestart() {
         super.onRestart();
-        Intent i = new Intent(this,ForumActivity.class);
+        Intent i = new Intent(this, ForumActivity.class);
         startActivity(i);
         //finish();
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,10 +77,10 @@ public class ForumActivity extends AppCompatActivity {
         updateRV(map);
     }
 
-    public void sortByButton (View v){
+    public void sortByButton(View v) {
         String orderBy = sortOrderSpinner.getSelectedItem().toString();
         String sortBy = sortBySpinner.getSelectedItem().toString();
-        switch(sortBy){
+        switch (sortBy) {
             case "Topic":
                 sortBy = "Title";
                 break;
@@ -90,12 +91,12 @@ public class ForumActivity extends AppCompatActivity {
         // if forum search, use different updateRV()
 
         HashMap<String, String> map = new HashMap<>();
-        map.put("orderBy",orderBy);
+        map.put("orderBy", orderBy);
         map.put("sortBy", sortBy);
         updateRV(map);
     }
 
-    public void forumSearch (View v){
+    public void forumSearch(View v) {
 
         retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
         retrofitInterface = retrofit.create(RetrofitInterface.class);
@@ -120,14 +121,9 @@ public class ForumActivity extends AppCompatActivity {
                     RecyclerView forumPostRecyclerView = findViewById(R.id.topicsRecycleView);
                     forumPostRecyclerView.setVisibility(View.VISIBLE);
 
-                    ForumPost_RecyclerViewAdapter adapter = new ForumPost_RecyclerViewAdapter(context,posts);
+                    ForumPost_RecyclerViewAdapter adapter = new ForumPost_RecyclerViewAdapter(context, posts);
                     forumPostRecyclerView.setAdapter(adapter);
                     forumPostRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-
-
-
-
-
                 } else if (response.code() == 404) {
                     Toast.makeText(ForumActivity.this, "No Data", Toast.LENGTH_LONG).show();
 
@@ -149,7 +145,7 @@ public class ForumActivity extends AppCompatActivity {
 
     }
 
-    private void updateRV(HashMap map){
+    private void updateRV(HashMap map) {
         Call<TopicsResult> getAllTopics = retrofitInterface.executeAllTopics(map);
 
         getAllTopics.enqueue(new Callback<TopicsResult>() {
@@ -179,25 +175,24 @@ public class ForumActivity extends AppCompatActivity {
     }
 
 
-
     //Bottom buttons
-    public void mapScreen (View v){
-        Intent intent = new Intent(v.getContext(),MapActivity.class);
+    public void mapScreen(View v) {
+        Intent intent = new Intent(v.getContext(), MapActivity.class);
         startActivity(intent);
     }
 
-    public void courseScreen(View v){
-        Intent intent = new Intent(v.getContext(),CourseActivity.class);
+    public void courseScreen(View v) {
+        Intent intent = new Intent(v.getContext(), CourseActivity.class);
         startActivity(intent);
     }
 
-    public void forumScreen (View v){
-        Intent intent = new Intent(v.getContext(),ForumActivity.class);
+    public void forumScreen(View v) {
+        Intent intent = new Intent(v.getContext(), ForumActivity.class);
         startActivity(intent);
     }
 
-    public void profileScreen (View v){
-        Intent intent = new Intent(v.getContext(),ProfileActivity.class);
+    public void profileScreen(View v) {
+        Intent intent = new Intent(v.getContext(), ProfileActivity.class);
         startActivity(intent);
     }
 }

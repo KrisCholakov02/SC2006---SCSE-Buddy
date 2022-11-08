@@ -1,7 +1,5 @@
 package com.example.scsebuddy.requestsresults;
 
-import com.example.scsebuddy.R;
-
 public class ConstantVariables {
     private static final String SERVER_URL = "http://42.61.232.186:3000";
 

@@ -9,17 +9,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.scsebuddy.dynamicdesign.CourseReview_RecyclerViewAdapter;
 import com.example.scsebuddy.dynamicdesign.ForumPost_RecyclerViewAdapter;
 import com.example.scsebuddy.requestsresults.ConstantVariables;
-import com.example.scsebuddy.requestsresults.CourseReview;
-import com.example.scsebuddy.requestsresults.CourseReviewResult;
 import com.example.scsebuddy.requestsresults.ForumPost;
 import com.example.scsebuddy.requestsresults.ForumPostResult;
 import com.example.scsebuddy.requestsresults.RetrofitInterface;
@@ -41,12 +36,7 @@ public class ForumViewActivity extends AppCompatActivity {
     private RetrofitInterface retrofitInterface;
     Context context;
     TextView titleTextView;
-//    protected void onRestart(){
-//        super.onRestart();
-//        Intent i = new Intent(this,ForumViewActivity.class);
-//        startActivity(i);
-//        //finish();
-//    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +54,6 @@ public class ForumViewActivity extends AppCompatActivity {
         Bundle b = ii.getExtras();
         if (b != null) {
             titleTextView.setText(b.get("topicTitle") + "");
-            //Log.e("HELLO", b.get("topicTitle")+"");
         }
         SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
 
@@ -100,11 +89,9 @@ public class ForumViewActivity extends AppCompatActivity {
         });
     }
 
-    public void addPost(View v){
-        Intent intent = new Intent(v.getContext(),ForumPostActivity.class);
+    public void addPost(View v) {
+        Intent intent = new Intent(v.getContext(), ForumPostActivity.class);
         intent.putExtra("forumTopic", titleTextView.getText().toString());
-//        startActivity(intent);
-        //THEO TEST
         startActivityForResult(intent, 1);
     }
 
@@ -113,19 +100,17 @@ public class ForumViewActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1) {
-            if(resultCode == Activity.RESULT_OK){
-                //String result=data.getStringExtra("result");
+            if (resultCode == Activity.RESULT_OK) {
                 Bundle b = data.getExtras();
-                if(b!=null){
-                    titleTextView.setText(b.get("topicTitle")+"");
-                    //Log.e("HELLO", b.get("topicTitle")+"");
+                if (b != null) {
+                    titleTextView.setText(b.get("topicTitle") + "");
                 }
                 SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
 
                 HashMap<String, String> map = new HashMap<>();
                 String topicID = titleTextView.getText().toString();
                 map.put("topicID", topicID);
-                map.put("email", sp.getString("USER_EMAIL",""));
+                map.put("email", sp.getString("USER_EMAIL", ""));
 
                 Call<ForumPostResult> executeAllForumPost = retrofitInterface.executeAllForumPost(map);
 
@@ -138,7 +123,7 @@ public class ForumViewActivity extends AppCompatActivity {
                             ArrayList<ForumPost> posts = new ArrayList<>(Arrays.asList(forumR.getForumPost()));
                             RecyclerView forumPostRecyclerView = findViewById(R.id.forumPostRecyclerView);
 
-                            ForumPost_RecyclerViewAdapter adapter = new ForumPost_RecyclerViewAdapter(context,posts);
+                            ForumPost_RecyclerViewAdapter adapter = new ForumPost_RecyclerViewAdapter(context, posts);
                             forumPostRecyclerView.setAdapter(adapter);
                             forumPostRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
@@ -154,7 +139,6 @@ public class ForumViewActivity extends AppCompatActivity {
                 });
             }
             if (resultCode == Activity.RESULT_CANCELED) {
-                // Write your code if there's no result
             }
         }
     } //onActivityResult

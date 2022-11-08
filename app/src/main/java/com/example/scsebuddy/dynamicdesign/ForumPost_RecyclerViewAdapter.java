@@ -11,23 +11,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.scsebuddy.CourseViewActivity;
-import com.example.scsebuddy.ForumPostActivity;
 import com.example.scsebuddy.ForumViewCommentsActivity;
 import com.example.scsebuddy.MapActivity;
 import com.example.scsebuddy.R;
 import com.example.scsebuddy.requestsresults.ConstantVariables;
-import com.example.scsebuddy.requestsresults.CourseReview;
-import com.example.scsebuddy.requestsresults.ForumComment;
 import com.example.scsebuddy.requestsresults.ForumPost;
 import com.example.scsebuddy.requestsresults.RetrofitInterface;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -84,37 +78,31 @@ public class ForumPost_RecyclerViewAdapter extends RecyclerView.Adapter<ForumPos
             });
             holder.postRowLayout.addView(tag);
         }
-        if(posts.get(position).getFavorite() == 1){
+        if (posts.get(position).getFavorite() == 1) {
             holder.btnForumLike.setImageResource(R.drawable.thumb_up_24_red);
             btnLike = 1;
-        }
-        else {
+        } else {
             holder.btnForumLike.setImageResource(R.drawable.thumb_up_24);
             btnLike = 0;
         }
-        holder.iDTextView.setText(posts.get(position).getID()+"");
+        holder.iDTextView.setText(posts.get(position).getID() + "");
 
         holder.btnForumLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Log.e("TEST", "CLICKED");
                 retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
                 retrofitInterface = retrofit.create(RetrofitInterface.class);
                 HashMap<String, String> map = new HashMap<>();
-                // map.put("lName", lName);
-                if(btnLike == 1) {
-                    //courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_outline);
+                if (btnLike == 1) {
                     btnLike = 0;
-                }
-                else {
-                    //courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_yellow);
+                } else {
                     btnLike = 1;
                 }
                 SharedPreferences sp = context.getSharedPreferences("UserPreferences", Context.MODE_WORLD_READABLE);
                 String email = sp.getString("USER_EMAIL", "");
 
                 map.put("postFav", btnLike + "");
-                map.put("postID", holder.iDTextView.getText()+"");
+                map.put("postID", holder.iDTextView.getText() + "");
                 map.put("email", email);
                 Call<Void> call = retrofitInterface.executeForumPostLike(map);
 
@@ -122,14 +110,10 @@ public class ForumPost_RecyclerViewAdapter extends RecyclerView.Adapter<ForumPos
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.code() == 200) {
-                            //Toast.makeText(CourseViewActivity.this, "Favorite Updated Successfully!", Toast.LENGTH_LONG).show();
-                            if(btnLike == 1) {
+                            if (btnLike == 1) {
                                 holder.btnForumLike.setImageResource(R.drawable.thumb_up_24_red);
-                                //courseFav = 0;
-                            }
-                            else {
+                            } else {
                                 holder.btnForumLike.setImageResource(R.drawable.thumb_up_24);
-                                //courseFav = 1;
                             }
                             try {
                                 Thread.sleep(2000);
@@ -137,13 +121,9 @@ public class ForumPost_RecyclerViewAdapter extends RecyclerView.Adapter<ForumPos
                                 e.printStackTrace();
                             }
                         } else if (response.code() == 400) {
-                            //Toast.makeText(CourseViewActivity.this, "Wrong Credentials!", Toast.LENGTH_LONG).show();
-                            if(btnLike == 1) {
-                                //courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_outline);
+                            if (btnLike == 1) {
                                 btnLike = 0;
-                            }
-                            else {
-                                //courseFavImageView.setImageResource(R.drawable.ic_course_bookmark_yellow);
+                            } else {
                                 btnLike = 1;
                             }
                         }
@@ -151,7 +131,6 @@ public class ForumPost_RecyclerViewAdapter extends RecyclerView.Adapter<ForumPos
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        //Toast.makeText(ForumPostActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -163,8 +142,8 @@ public class ForumPost_RecyclerViewAdapter extends RecyclerView.Adapter<ForumPos
         return posts.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        TextView topicTitleTextView, postByTextView, datePostedTextView,forumPostTextView, iDTextView;
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        TextView topicTitleTextView, postByTextView, datePostedTextView, forumPostTextView, iDTextView;
         LinearLayout postRowLayout;
         ImageView btnForumLike;
 
@@ -184,18 +163,13 @@ public class ForumPost_RecyclerViewAdapter extends RecyclerView.Adapter<ForumPos
         @Override
         public void onClick(View view) {
             final Intent intent;
-//            intent = new Intent(context1, CourseViewActivity.class);
-//            intent.putExtra("courseCode", courseCodeTextView.getText());
-//            intent.putExtra("courseTitle", courseTitleTextView.getText());
-//            intent.putExtra("courseFav", courseFavTextView.getText());
-//            context1.startActivity(intent);
             Log.e("TEST", "HERE?");
             intent = new Intent(context1, ForumViewCommentsActivity.class);
-            intent.putExtra("postID", iDTextView.getText()+"");
-            intent.putExtra("forumPost", forumPostTextView.getText()+"");
-            intent.putExtra("datePosted", datePostedTextView.getText()+"");
-            intent.putExtra("postBy", postByTextView.getText()+"");
-            intent.putExtra("topicTitle",topicTitleTextView.getText()+"");
+            intent.putExtra("postID", iDTextView.getText() + "");
+            intent.putExtra("forumPost", forumPostTextView.getText() + "");
+            intent.putExtra("datePosted", datePostedTextView.getText() + "");
+            intent.putExtra("postBy", postByTextView.getText() + "");
+            intent.putExtra("topicTitle", topicTitleTextView.getText() + "");
             context1.startActivity(intent);
         }
     }

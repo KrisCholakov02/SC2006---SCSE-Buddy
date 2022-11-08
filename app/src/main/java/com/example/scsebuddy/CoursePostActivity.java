@@ -50,19 +50,13 @@ public class CoursePostActivity extends AppCompatActivity {
     private int courseFav;
     private String courseTitle;
 
-    TextView courseCodeTextView ;
+    TextView courseCodeTextView;
     EditText courseReviewEditText;
     CheckBox annoymousCb;
     AutoCompleteTextView tagSearchTextView;
     private String[] mapName;
     Context context;
 
-//    protected void onRestart(){
-//        super.onRestart();
-//        Intent i = new Intent(this,CoursePostActivity.class);
-//        startActivity(i);
-//        //finish();
-//    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,15 +78,15 @@ public class CoursePostActivity extends AppCompatActivity {
 
         Intent ii = getIntent();
         Bundle b = ii.getExtras();
-        if(b!=null) {
+        if (b != null) {
             courseCodeTextView.setText(b.get("courseCode") + "");
-            courseTitle = b.get("courseTitle")+"";
-            courseFav = Integer.parseInt(b.get("courseFav")+"");
+            courseTitle = b.get("courseTitle") + "";
+            courseFav = Integer.parseInt(b.get("courseFav") + "");
         }
         loadData();
     }
 
-    private void loadData(){
+    private void loadData() {
         retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
         retrofitInterface = retrofit.create(RetrofitInterface.class);
         Call<PathResult> getAllPath = retrofitInterface.executeGetAllPath();
@@ -103,8 +97,8 @@ public class CoursePostActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     PathResult pathR = response.body();
                     ArrayList<Location> locations = new ArrayList<>(Arrays.asList(pathR.getLocations()));
-                    mapName= new String[locations.size()];
-                    for(int i = 0; i < locations.size(); i++){
+                    mapName = new String[locations.size()];
+                    for (int i = 0; i < locations.size(); i++) {
                         Location location = locations.get(i);
                         mapName[i] = location.getName();
                     }
@@ -112,7 +106,7 @@ public class CoursePostActivity extends AppCompatActivity {
                     tagSearchTextView.setAdapter(adapter);
 
 
-                } else if (response.code() == 404){
+                } else if (response.code() == 404) {
                     Log.e("HHH", "No such start/destination");
                 }
             }
@@ -129,11 +123,11 @@ public class CoursePostActivity extends AppCompatActivity {
 
         String textSearch = tagSearchTextView.getText().toString();
         boolean isValid = false;
-        for(String mapName1 : mapName){
-            if(tagSearchTextView.getText().toString().equals(mapName1))
+        for (String mapName1 : mapName) {
+            if (tagSearchTextView.getText().toString().equals(mapName1))
                 isValid = true;
         }
-        if(isValid){
+        if (isValid) {
             LinearLayout tagsLayout = findViewById(R.id.reviewTagsLayout);
 
             // make button look like example one TODO
@@ -141,7 +135,7 @@ public class CoursePostActivity extends AppCompatActivity {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT);
             newTagButton.setLayoutParams(params);
-            newTagButton.setBackground(ContextCompat.getDrawable(context,R.drawable.rounded_button_black));
+            newTagButton.setBackground(ContextCompat.getDrawable(context, R.drawable.rounded_button_black));
             newTagButton.setTextColor(ContextCompat.getColor(context, R.color.white));
             newTagButton.setAllCaps(false);
             newTagButton.setTextSize(13);
@@ -149,7 +143,6 @@ public class CoursePostActivity extends AppCompatActivity {
             newTagButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // Make new window appear with delete TODO
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(CoursePostActivity.this);
                     builder1.setMessage("Do you want to delete this button?");
                     builder1.setCancelable(true);
@@ -181,8 +174,7 @@ public class CoursePostActivity extends AppCompatActivity {
                     LinearLayout.LayoutParams.MATCH_PARENT);
             frameLayout.setLayoutParams(params1);
             tagsLayout.addView(frameLayout);
-        }
-        else {
+        } else {
             AlertDialog.Builder builder1 = new AlertDialog.Builder(CoursePostActivity.this);
             builder1.setMessage("Location does not exist.");
             builder1.setCancelable(true);
@@ -191,11 +183,11 @@ public class CoursePostActivity extends AppCompatActivity {
         }
     }
 
-    public void addReviewPost (View v){
+    public void addReviewPost(View v) {
         SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_WORLD_READABLE);
         String email = sp.getString("USER_EMAIL", "");
 
-        if(annoymousCb.isChecked()){
+        if (annoymousCb.isChecked()) {
             email = "Anonymous";
         }
 
@@ -217,16 +209,14 @@ public class CoursePostActivity extends AppCompatActivity {
 
         Calendar calendar = Calendar.getInstance();
         Date date = (Date) calendar.getTime();
-//        System.out.println("AAA" + date);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        System.out.println("AAAA" +sdf.format(date));
 
         HashMap<String, String> map = new HashMap<>();
         map.put("email", email);
-        map.put("courseCode", courseCodeTextView.getText()+"");
+        map.put("courseCode", courseCodeTextView.getText() + "");
         map.put("grade", gradeSpinner.getSelectedItem().toString());
         map.put("dateTime", sdf.format(date));
-        map.put("content", courseReviewEditText.getText()+"");
+        map.put("content", courseReviewEditText.getText() + "");
         map.put("tags", tagsString);
 
 
@@ -238,14 +228,9 @@ public class CoursePostActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     Toast.makeText(CoursePostActivity.this, "Posted Successfully!", Toast.LENGTH_LONG).show();
                     Intent i = new Intent(context, CourseViewActivity.class);
-//                    courseCodeTV.setText(b.get("courseCode")+"");
-//                    courseTitleTV.setText(b.get("courseTitle")+"");
-//                    courseFav = Integer.parseInt(b.get("courseFav")+"");
-                    i.putExtra("courseCode", courseCodeTextView.getText()+ "");
-                    i.putExtra("courseTitle",courseTitle);
-                    i.putExtra("courseFav",courseFav);
-//                    startActivity(i);
-//                    finish();
+                    i.putExtra("courseCode", courseCodeTextView.getText() + "");
+                    i.putExtra("courseTitle", courseTitle);
+                    i.putExtra("courseFav", courseFav);
                     setResult(Activity.RESULT_OK, i);
                     finish();
 

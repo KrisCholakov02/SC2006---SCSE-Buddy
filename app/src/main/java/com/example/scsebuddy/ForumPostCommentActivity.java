@@ -9,10 +9,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.scsebuddy.requestsresults.ConstantVariables;
@@ -37,6 +35,7 @@ public class ForumPostCommentActivity extends AppCompatActivity {
     CheckBox annoymousCb;
     Context context;
     String title, postBy, content;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,12 +46,11 @@ public class ForumPostCommentActivity extends AppCompatActivity {
 
         Intent ii = getIntent();
         Bundle b = ii.getExtras();
-        if(b!=null) {
-            //Log.e("TEST",b.getString("postID") );
-            postID = Integer.parseInt(b.getInt("postID")+"");
-            title=b.get("topicTitle")+"";
-            postBy=b.get("postBy")+"";
-            content=b.get("forumPost")+"";
+        if (b != null) {
+            postID = Integer.parseInt(b.getInt("postID") + "");
+            title = b.get("topicTitle") + "";
+            postBy = b.get("postBy") + "";
+            content = b.get("forumPost") + "";
             Log.e("TEST", title + postBy + content);
         }
 
@@ -66,21 +64,19 @@ public class ForumPostCommentActivity extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_WORLD_READABLE);
         String email = sp.getString("USER_EMAIL", "");
 
-        if(annoymousCb.isChecked()){
+        if (annoymousCb.isChecked()) {
             email = "Anonymous";
         }
 
         Calendar calendar = Calendar.getInstance();
         Date date = (Date) calendar.getTime();
-//        System.out.println("AAA" + date);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        System.out.println("AAAA" +sdf.format(date));
 
         HashMap<String, String> map = new HashMap<>();
         map.put("email", email);
         map.put("comments", contentEditText.getText().toString());
         map.put("dateTime", sdf.format(date));
-        map.put("postID", postID+"");
+        map.put("postID", postID + "");
 
         Call<Void> call = retrofitInterface.executeForumCommentPost(map);
 
@@ -90,19 +86,11 @@ public class ForumPostCommentActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     Toast.makeText(ForumPostCommentActivity.this, "Posted Successfully!", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(context, ForumViewCommentsActivity.class);
-//                    courseCodeTV.setText(b.get("courseCode")+"");
-//                    courseTitleTV.setText(b.get("courseTitle")+"");
-//                    courseFav = Integer.parseInt(b.get("courseFav")+"");
-//                    i.putExtra("courseCode", courseCodeTextView.getText()+ "");
-//                    i.putExtra("courseTitle",courseTitle);
-//                    i.putExtra("courseFav",courseFav);
-                    intent.putExtra("postID", postID+"");
+                    intent.putExtra("postID", postID + "");
                     intent.putExtra("forumPost", content);
                     intent.putExtra("postBy", postBy);
-                    intent.putExtra("topicTitle",title);
-//                    startActivity(intent);
-//                    finish();
-                    setResult(Activity.RESULT_OK,intent);
+                    intent.putExtra("topicTitle", title);
+                    setResult(Activity.RESULT_OK, intent);
                     finish();
                     try {
                         Thread.sleep(2000);

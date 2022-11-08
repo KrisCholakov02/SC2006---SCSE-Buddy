@@ -38,12 +38,6 @@
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".TopicAcceptActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TopicSuggestActivity"
-            android:exported="false" />
-        <activity
             android:name=".ForumViewActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />

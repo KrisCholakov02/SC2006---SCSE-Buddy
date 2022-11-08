@@ -3,12 +3,6 @@ package com.example.scsebuddy.requestsresults;
 import java.util.ArrayList;
 
 public class ForumPost {
-    //    private String code;
-//    private String title; //change
-//    private String aus;
-//    private int favorite;
-//    private int year;
-
     private String datePublished;
     private String title;
     private String description;
@@ -16,9 +10,9 @@ public class ForumPost {
     private String topicID;
     private String email;
     private int ID;
-    private ArrayList <String> tags;
+    private ArrayList<String> tags;
 
-    public int getID(){
+    public int getID() {
         return ID;
     }
 

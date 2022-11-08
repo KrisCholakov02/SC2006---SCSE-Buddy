@@ -1,27 +1,18 @@
 package com.example.scsebuddy;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.scsebuddy.dynamicdesign.Courses_RecyclerViewAdapter;
 import com.example.scsebuddy.requestsresults.ConstantVariables;
-import com.example.scsebuddy.requestsresults.Course;
-import com.example.scsebuddy.requestsresults.CoursesResult;
 import com.example.scsebuddy.requestsresults.RetrofitInterface;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import retrofit2.Call;
@@ -37,6 +28,7 @@ public class ChangeAccountDetailsActivity extends AppCompatActivity {
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
     SharedPreferences sp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,17 +38,9 @@ public class ChangeAccountDetailsActivity extends AppCompatActivity {
         context = this;
         sp = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
 
-         fName = sp.getString("USER_F_NAME", "");
-         lName = sp.getString("USER_L_NAME", "");
-         email = sp.getString("USER_EMAIL", "");
-
-//        SharedPreferences.Editor editor = sp.edit();
-//        editor.putString("USER_F_NAME", fName);
-//        editor.putString("USER_L_NAME", lName);
-//        editor.putString("USER_EMAIL", email);
-//        editor.commit();
-
-
+        fName = sp.getString("USER_F_NAME", "");
+        lName = sp.getString("USER_L_NAME", "");
+        email = sp.getString("USER_EMAIL", "");
     }
 
     public void updateDetails(View v) {
@@ -64,18 +48,16 @@ public class ChangeAccountDetailsActivity extends AppCompatActivity {
         retrofitInterface = retrofit.create(RetrofitInterface.class);
 
         HashMap<String, String> map = new HashMap<>();
-        if(!firstNameEditText.getText().toString().isEmpty()){
+        if (!firstNameEditText.getText().toString().isEmpty()) {
             map.put("fName", firstNameEditText.getText().toString().trim());
             fName = firstNameEditText.getText().toString().trim();
-        }
-        else {
+        } else {
             map.put("fName", fName);
         }
-        if(!lastNameEditTest.getText().toString().isEmpty()){
+        if (!lastNameEditTest.getText().toString().isEmpty()) {
             map.put("lName", lastNameEditTest.getText().toString().trim());
             lName = lastNameEditTest.getText().toString().trim();
-        }
-        else {
+        } else {
             map.put("lName", lName);
         }
         //default loading
@@ -85,22 +67,22 @@ public class ChangeAccountDetailsActivity extends AppCompatActivity {
         updateRV(map);
     }
 
-    private void updateRV(HashMap map){
+    private void updateRV(HashMap map) {
         Call<Void> call = retrofitInterface.executeChangeAccDetails(map);
 
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.code() == 200) {
-                   SharedPreferences.Editor editor = sp.edit();
-                   editor.putString("USER_F_NAME", fName);
-                   editor.putString("USER_L_NAME", lName);
-                   editor.putString("USER_EMAIL", email);
-                   editor.commit();
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString("USER_F_NAME", fName);
+                    editor.putString("USER_L_NAME", lName);
+                    editor.putString("USER_EMAIL", email);
+                    editor.commit();
 
-                   Intent i = new Intent(context, ProfileActivity.class);
-                   startActivity(i);
-                   finish();
+                    Intent i = new Intent(context, ProfileActivity.class);
+                    startActivity(i);
+                    finish();
 
                 } else if (response.code() == 404) {
                     Toast.makeText(ChangeAccountDetailsActivity.this, "Wrong Credentials!", Toast.LENGTH_LONG).show();

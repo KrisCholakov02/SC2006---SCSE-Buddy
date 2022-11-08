@@ -2,7 +2,7 @@ package com.example.scsebuddy.requestsresults;
 
 public class Course {
     private String code;
-    private String title; //change
+    private String title;
     private String aus;
     private int favorite;
     private int year;

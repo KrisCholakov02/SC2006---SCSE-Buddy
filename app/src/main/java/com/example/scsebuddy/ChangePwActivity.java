@@ -49,7 +49,7 @@ public class ChangePwActivity extends AppCompatActivity {
         String email = sp.getString("USER_EMAIL", "");
 
         if (txtNewPw.getText().toString().trim().equals(txtReNewPw.getText().toString().trim())) {
-            if(isValidPassword(txtNewPw.getText().toString().trim())){
+            if (isValidPassword(txtNewPw.getText().toString().trim())) {
                 System.out.println("HERE?");
                 HashMap<String, String> map = new HashMap<>();
                 map.put("oldPW", txtOldPW.getText().toString().trim());
@@ -82,10 +82,9 @@ public class ChangePwActivity extends AppCompatActivity {
                         Toast.makeText(ChangePwActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
-            }
-            else{
+            } else {
                 AlertDialog.Builder builder4 = new AlertDialog.Builder(ChangePwActivity.this);
-                builder4.setMessage("Password does not contain 1 digit or 1 lower or 1 upper or 1 special character.\n"+
+                builder4.setMessage("Password does not contain 1 digit or 1 lower or 1 upper or 1 special character.\n" +
                         "or\n" +
                         "It does not have 8 characters.");
                 builder4.setCancelable(true);

@@ -25,7 +25,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.*;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -54,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
                 String password = passwordInput.getText().toString();
                 map.put("email", email);
                 map.put("password", password);
-                Log.e("TEST1", map+"");
+                Log.e("TEST1", map + "");
 
                 Call<LoginResult> call = retrofitInterface.executeLogin(map);
 
@@ -116,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void skipLogin (View v) {
+    public void skipLogin(View v) {
         AlertDialog.Builder builder1 = new AlertDialog.Builder(LoginActivity.this);
         builder1.setMessage("Are you sure you don't want to log in?");
         builder1.setCancelable(true);

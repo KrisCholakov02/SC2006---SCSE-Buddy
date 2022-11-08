@@ -72,14 +72,13 @@ public class ForumPostActivity extends AppCompatActivity {
 
         Intent ii = getIntent();
         Bundle b = ii.getExtras();
-        if(b!=null){
-            selectValue(topicSpinner,b.get("forumTopic")+"");
-            //Log.e("HELLO", b.get("topicTitle")+"");
+        if (b != null) {
+            selectValue(topicSpinner, b.get("forumTopic") + "");
         }
         loadData();
     }
 
-    private void loadData(){
+    private void loadData() {
         retrofit = new Retrofit.Builder().baseUrl(ConstantVariables.getSERVER_URL()).addConverterFactory(GsonConverterFactory.create()).build();
         retrofitInterface = retrofit.create(RetrofitInterface.class);
         Call<PathResult> getAllPath = retrofitInterface.executeGetAllPath();
@@ -90,8 +89,8 @@ public class ForumPostActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     PathResult pathR = response.body();
                     ArrayList<Location> locations = new ArrayList<>(Arrays.asList(pathR.getLocations()));
-                    mapName= new String[locations.size()];
-                    for(int i = 0; i < locations.size(); i++){
+                    mapName = new String[locations.size()];
+                    for (int i = 0; i < locations.size(); i++) {
                         Location location = locations.get(i);
                         mapName[i] = location.getName();
                     }
@@ -99,7 +98,7 @@ public class ForumPostActivity extends AppCompatActivity {
                     tagSearchTextView.setAdapter(adapter);
 
 
-                } else if (response.code() == 404){
+                } else if (response.code() == 404) {
                     Log.e("HHH", "No such start/destination");
                 }
             }
@@ -113,19 +112,18 @@ public class ForumPostActivity extends AppCompatActivity {
     public void postAddTag(View v) {
         String textSearch = tagSearchTextView.getText().toString();
         boolean isValid = false;
-        for(String mapName1 : mapName){
-            if(tagSearchTextView.getText().toString().equals(mapName1))
+        for (String mapName1 : mapName) {
+            if (tagSearchTextView.getText().toString().equals(mapName1))
                 isValid = true;
         }
-        if(isValid){
+        if (isValid) {
             LinearLayout tagsLayout = findViewById(R.id.postTagsLayout);
 
-            // make button look like example one TODO
             Button newTagButton = new Button(this);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT);
             newTagButton.setLayoutParams(params);
-            newTagButton.setBackground(ContextCompat.getDrawable(context,R.drawable.rounded_button_black));
+            newTagButton.setBackground(ContextCompat.getDrawable(context, R.drawable.rounded_button_black));
             newTagButton.setTextColor(ContextCompat.getColor(context, R.color.white));
             newTagButton.setAllCaps(false);
             newTagButton.setTextSize(13);
@@ -133,7 +131,6 @@ public class ForumPostActivity extends AppCompatActivity {
             newTagButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // Make new window appear with delete TODO
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(ForumPostActivity.this);
                     builder1.setMessage("Do you want to delete this button?");
                     builder1.setCancelable(true);
@@ -165,8 +162,7 @@ public class ForumPostActivity extends AppCompatActivity {
                     LinearLayout.LayoutParams.MATCH_PARENT);
             frameLayout.setLayoutParams(params1);
             tagsLayout.addView(frameLayout);
-        }
-        else {
+        } else {
             AlertDialog.Builder builder1 = new AlertDialog.Builder(ForumPostActivity.this);
             builder1.setMessage("Location does not exist.");
             builder1.setCancelable(true);
@@ -176,13 +172,13 @@ public class ForumPostActivity extends AppCompatActivity {
 
     }
 
-    public void addForumPost(View v){
-        if(!(titleEditText.getText().toString().isEmpty()) && !(contentEditText.getText().toString().isEmpty())){
+    public void addForumPost(View v) {
+        if (!(titleEditText.getText().toString().isEmpty()) && !(contentEditText.getText().toString().isEmpty())) {
             SharedPreferences sp = getSharedPreferences("UserPreferences", Context.MODE_WORLD_READABLE);
             String email = sp.getString("USER_EMAIL", "");
-            int noOfPosts = sp.getInt("noOfPosts", 0)+1;
+            int noOfPosts = sp.getInt("noOfPosts", 0) + 1;
 
-            if(annoymousCb.isChecked()){
+            if (annoymousCb.isChecked()) {
                 email = "Anonymous";
             }
 
@@ -205,17 +201,14 @@ public class ForumPostActivity extends AppCompatActivity {
 
             Calendar calendar = Calendar.getInstance();
             Date date = (Date) calendar.getTime();
-//        System.out.println("AAA" + date);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        System.out.println("AAAA" +sdf.format(date));
-
 
             HashMap<String, String> map = new HashMap<>();
             map.put("email", email);
-            map.put("title", titleEditText.getText()+"");
+            map.put("title", titleEditText.getText() + "");
             map.put("topic", topicSpinner.getSelectedItem().toString());
             map.put("dateTime", sdf.format(date));
-            map.put("content", contentEditText.getText()+"");
+            map.put("content", contentEditText.getText() + "");
             map.put("noOfPosts", noOfPosts + "");
             map.put("tags", tagsString);
 
@@ -227,10 +220,8 @@ public class ForumPostActivity extends AppCompatActivity {
                     if (response.code() == 200) {
                         Toast.makeText(ForumPostActivity.this, "Posted Successfully!", Toast.LENGTH_LONG).show();
                         Intent i = new Intent(context, ForumViewActivity.class);
-                        i.putExtra("topicTitle",topicSpinner.getSelectedItem().toString() + "");
-//                    startActivity(i);
-//                    finish();
-                        setResult(Activity.RESULT_OK,i);
+                        i.putExtra("topicTitle", topicSpinner.getSelectedItem().toString() + "");
+                        setResult(Activity.RESULT_OK, i);
                         finish();
                         try {
                             Thread.sleep(2000);
@@ -248,8 +239,7 @@ public class ForumPostActivity extends AppCompatActivity {
                     Toast.makeText(ForumPostActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                 }
             });
-        }
-        else{
+        } else {
             AlertDialog.Builder builder1 = new AlertDialog.Builder(ForumPostActivity.this);
             builder1.setMessage("Post requires title and descriptions to be filled.");
             builder1.setCancelable(true);
@@ -258,6 +248,7 @@ public class ForumPostActivity extends AppCompatActivity {
         }
 
     }
+
     private void selectValue(Spinner spinner, Object value) {
         for (int i = 0; i < spinner.getCount(); i++) {
             if (spinner.getItemAtPosition(i).equals(value)) {
