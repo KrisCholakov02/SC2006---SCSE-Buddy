@@ -10,6 +10,7 @@ SCSEBuddy is an innovative Android application designed specifically for SCSE st
 - [Features](#features)
 - [Testing](#testing)
 - [Team](#team)
+- [Demonstration](#demo)
 
 ## Introduction
 SCSEBuddy was conceived to address the challenges of navigating complex indoor environments such as the SCSE building. With a focus on precision and user experience, the app combines cutting-edge navigation technology with rich visual guides to help users find their way seamlessly.
@@ -68,3 +69,11 @@ SCSEBuddy has undergone comprehensive testing to ensure a smooth user experience
 - **Theodore Tan Wan Li** – U2122077E  
 - **Julian Wong Wei Sheng** – U2123563J  
 - **Gupta Tushar Sandeep** – U2123144E
+
+## Demonstration
+
+For a quick overview and demonstration of SCSEBuddy, check out our videos:
+
+- **Trailer Video:** [Watch on YouTube](https://youtu.be/3LJqkY7j-Qs)
+- **Demonstration Video:** [Watch on YouTube](https://youtu.be/If7BrzpTVg4)
+
