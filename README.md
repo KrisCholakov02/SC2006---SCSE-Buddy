@@ -10,7 +10,7 @@ SCSEBuddy is an innovative Android application designed specifically for SCSE st
 - [Features](#features)
 - [Testing](#testing)
 - [Team](#team)
-- [Demonstration](#demo)
+- [Demonstration](#demonstration)
 
 ## Introduction
 SCSEBuddy was conceived to address the challenges of navigating complex indoor environments such as the SCSE building. With a focus on precision and user experience, the app combines cutting-edge navigation technology with rich visual guides to help users find their way seamlessly.
